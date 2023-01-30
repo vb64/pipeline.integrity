@@ -2,6 +2,8 @@
 
 Source: https://law.resource.org/pub/us/cfr/ibr/002/asme.b31g.1991.pdf
 
+Extended: https://edu.truboprovod.ru/kbase/doc/start/WebHelp_ru/ASMEB31G.htm
+
 ## PART 1 INTRODUCTION
 
 ### FOREWORD

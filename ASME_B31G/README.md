@@ -264,3 +264,91 @@ Depth d, in | 0.083 | 0.109   | 0.125   | 0.141   | 0.154   | 0.172   | 0.188   
 0.03        | 1/2   |  7/8    | 1+1/8   | 1+1/2   | 1+15/16 | 2+7/8   | 3       | 3+1/4
 0.04        | 3/8   |  5/8    | 3/4     | 15/16   | 1+1/8   | 1+3/8   | 1+3/4   | 2+3/4
 0.05        | 5/16  |  7/16   | 9/16    | 11/16   | 13/16   | 1       | 1+3/16  | 1+5/8
+
+TABLE 3-2 VALUES OF L FOR PIPE SIZES >= NPS 6 AND < NPS 10
+
+TABLE 3-3 VALUES OF L FOR PIPE SIZES >= NPS 10 AND < NPS 16
+
+TABLE 3-4 VALUES OF L FOR PIPE SIZES >= NPS 16 AND < NPS 20
+
+TABLE 3-5 VALUES OF L FOR PIPE SIZES >= NPS 20 AND < NPS 24
+
+TABLE 3-6 VALUES OF L FOR PIPE SIZES >= NPS 24 AND < NPS 30
+
+TABLE 3-7 VALUES OF L FOR PIPE SIZES >= NPS 30 AND < NPS 36
+
+TABLE 3-8 VALUES OF L FOR PIPE SIZES >= NPS 36 AND < NPS 42
+
+TABLE 3-9 VALUES OF L FOR PIPE SIZES >= NPS 42 AND < NPS 48
+
+TABLE 3-10 VALUES OF L FOR PIPE SIZES >= NPS 48 AND < NPS 52
+
+TABLE 3-11 VALUES OF L FOR PIPE SIZES >= NPS 52 AND < NPS 56
+
+TABLE 3-12 VALUES OF L FOR PIPE SIZES >= NPS 56 AND < NPS 60
+
+## PART 4 EVALUATION OF MAOP IN CORRODED AREAS
+
+### COMPUTATION OF A
+
+If the measured maximum depth of the corroded area is greater than 10% of the nominal waH thickness but less than 80% of the nominal wall thickness
+and the measured longitudinal extent of the corroded area is greater than the value determined by Eq.(2) of Part 2, calculate
+
+```python
+A = 0.893 * (Lm / sqrt(D * t))
+```
+
+where
+
+- Lm = measured longitudinal extent of the corroded area, in.
+- D = nominal outside diameter of the pipe, in.
+- t = nominal wall thickness of the pipe, in. Additional wall thickness required for concurrent external loads shall not be included in the calculations.
+
+### COMPUTATION OF Ps
+
+#### For Values of A Less Than or Equal to 4.0.
+
+A and d/t detennine a unique point on Fig.4-1 corresponding to an acceptable pressure level Ps.
+Ps is obtained by interpolation between the curves for P, O.95P, O.90P, O.85P, O.80P, O.75P, O.70P, O.65P, O.60P.
+
+- d = measured maximum depth of corroded area, in.
+- Ps = the safe maximum pressure for the corroded area. Curves for various values of Ps are given in Fig.4-1 per
+
+![Ps](img/frml_4_1.png)
+
+except that Ps may not exceed P.
+
+- P = the greater of either the established MAOP or
+- P = 2 * S * t * F * T / D
+
+where
+
+- S = specified minimum yield strength (SMYS), psi
+- F = appropriate design factor from ASME B31.4, ASME B31.8 t or ASME B31.11
+- T = temperature derating factor from the appropriate B31 Code (if none listed, T = 1)
+- D = nominal outside diameter of the pipe, in.
+- t = nominal wall thickness of the pipe, in. Additional wall thickness required for concurrent external loads shall not be included in the calculations.
+
+![FIG.4-1 CURVE FOR OBTAINING Ps AS A FUNCTION OF d/t FOR VALUES OF A LESS THAN OR EOUAl TO 4.0](img/fig_4_1.png)
+
+_FIG.4-1 CURVE FOR OBTAINING Ps AS A FUNCTION OF d/t FOR VALUES OF A LESS THAN OR EOUAl TO 4.0_
+
+![FIG.4-2 Ps AS A FUNCTION OF d/t FOR VALUES Of A GREATER THAN 4.0](img/fig_4_2.png)
+
+_FIG.4-2 Ps AS A FUNCTION OF d/t FOR VALUES Of A GREATER THAN 4.0_
+
+#### For Values of A Greater Than 4.0
+
+Ps = the safe maximum pressure for the corroded area.
+Curves for various values of Ps are given in Fig. 4-2 per
+
+```python
+Ps = 1.1 * P * (1 - d / t)
+```
+
+except that Ps may not exceed P.
+
+### MAOP AND Ps
+
+If the established MAOP is equal to or less than Ps, the corroded region may be used for service at that MAOP.
+If it is greater than Ps, then a lower MAOP should be established not to exceed Ps, or the corroded region should be repaired or replaced.

@@ -94,6 +94,7 @@ The experiments on corroded pipe indicated that line pipe steels have adequate t
 The failure of blunt corrosion flaws is controlled by their size and the flow stress or yield stress of the material.
 
 ![FIG.1-1 PARABOLIC CRITERIA FOR CLASSIFYING CORROSION DEFECTS ACCORDING TO PREDICTED FAILURE STRESS](img/fig_1_1.png)
+
 _FIG.1-1 PARABOLIC CRITERIA FOR CLASSIFYING CORROSION DEFECTS ACCORDING TO PREDICTED FAILURE STRESS_
 
 Figure 1-1 shows the relationship between the full-size test failures and the criterion for acceptance of corrosion pits in line pipe.
@@ -144,6 +145,7 @@ Regardless of which alternative is chosen, in all cases where the corroded regio
 Such measures should include coating the corroded region and, if indicated, increasing the cathodic protection level.
 
 ![FIG.1-2 PROCEDURE FOR ANALYSIS OF CORRODED PIPE STRENGTH](img/fig_1_2.png)
+
 _FIG.1-2 PROCEDURE FOR ANALYSIS OF CORRODED PIPE STRENGTH_
 
 Figure 1-2, Procedure for Analysis of Corroded Pipe Strength, shows the steps necessary to proceed through the evaluation of a corroded area

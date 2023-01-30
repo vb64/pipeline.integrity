@@ -193,3 +193,38 @@ However, minor modifications may be necessary for use on other equipment or for 
 These computer programs are reproduced herein solely for the convenience of the Manual user, and ASME and the auther make no claims as to their accuracy or effectiveness.
 
 ## PART 2 DETERMINATION OF MAXIMUM ALLOWABLE LONGITUDINAL EXTENT OF CORROSION
+
+The depth of a corrosion pit may be expressed as a percent of the nominal wallthickness of the pipe by:
+
+![% pit depth = 100 * d / t](img/frml_2_1.png)
+
+where
+
+- d = measured maximum depth of the corroded area, in., as shown in Fig.2-1
+- t = nominal wall thickness of the pipe, in. Additional wall thickness required for concurrent external loads shaH not be included in the calculations.
+
+A contiguous corroded area having a maximum depth of more than 10% but less than 80% of the nominal wall thickness of the pipe
+should not extend along the longitudinal axis of the pipe for a distance greater than that calculated from:
+
+![L = 1.12 * B sqrt(D * t)](img/frml_2_2.png)
+
+L may also be determined from Tables 3-1 through 3-12 in Part 3.
+
+where
+
+- L = maximum allowable longitudinal extent of the corroded area, in., collinear with Lm in Fig.2-1
+- D = nominal outside diameter of the pipe, in.
+- B = a value which may be determined from the curve in Fig.2-2 or from:
+
+![B = sqrt( ((d / t) / (1.1 * (d / t) - 0.15))^2 - 1 ) ](img/frml_2_3.png)
+
+except that B may not exceed the value 4.
+If the corrosion depth is between 10% and 17.5%, use B = 4.0 in Eq.(2).
+
+![FIG.2-1 CORROSION PARAMETERS USED IN ANALYSIS](img/fig_2_1.png)
+
+_FIG.2-1 CORROSION PARAMETERS USED IN ANALYSIS_
+
+![FIG.2-2 CURVE FOR DETERMINING THE VALUE B](img/fig_2_2.png)
+
+_FIG.2-2 CURVE FOR DETERMINING THE VALUE B_

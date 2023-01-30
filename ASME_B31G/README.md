@@ -111,3 +111,79 @@ The acceptable region in the plot is the shaded region below and to the left of 
 The Tables in Part 3 are based on corrosion depths and lengths determined by this solid line.
 Corrosion pits that have depths and lengths that fall above the curve are not acceptable, in accordance with the criteria presented herein,
 and the operating pressure either has to be reduced, or the corrosion pit removed or repaired.
+
+## HOW TO USE THE MANUAL
+
+Part 2, Determination of Maximum Allowable Longitudinal Extent of Corrosion, sets forth the equations for determining the severity of the corroded areas.
+It tells the operator how to measure the longitudinal extent and maximum depth of the corroded areas.
+One can then use Eq.(2) of Part 2 to determine if the corroded area is serious.
+
+However, it is recognized that most field operators will prefer a simpler method of evaluating a corroded area.
+Therefore, Part 3, Tables for Corrosion Limits, evaluates Eq.(2) and places the results in tabular form.
+This allows the field operator to make decisions simply by going to a table after measuring the longitudinal extent and maximum depth of the corroded area and making a choice.
+
+Locate the table appropriate for the pipe O.D. and wall thickness.
+Look down the left column and find the depth of corrosion that is equal to or the next number larger than the measured maximum depth of the corroded area.
+Read across to the column headed by the wall thickness or next number lower than the pipe's nominal wall thickness
+to determine the maximum allowable longitudinal extent of the corroded area for the depth of corrosion.
+If the measured longitudinal extent of the corroded area is equal to or less than the maximum allowable longitudinal extent of the corroded area
+determined from the Table, the pipe strength is suitable for the present MAOP and is capable of containing a test pressure that win produce a stress of 100% SMYS of the pipe material.
+
+As used in this manual, the term MAOP shall represent maximum steady state operating pressure for pipelines within the scope
+of ASME B31.4 and ASME B31.11 and maximum allowable operating pressure for pipelines within the scope of ASME B31.8.
+
+The tables produce results which may be more conservative than Eq.(2) of Part 2.
+The tables could show that the corroded area is unsuitable for the current MAOP, but Eq. (2) may show that it is.
+Therefore, it is possible for the corroded region to be rejected by the tables, but found suitable by using Eq.(2).
+
+If the tables and Eq.(2) both show the corroded region to be unsuitabe, it may still be possible to establish suitability by one of the methods mentioned in para. 1.7.
+Another alternative would be to lower the MAOP of the pipeline, if permitted by operating conditions.
+Part 4 can be used to determine a lower MAOP that has the same safety factor provided by Parts 2 and 3.
+
+Regardless of which alternative is chosen, in all cases where the corroded region is to be left in service, measures should be taken to arrest further corrosion.
+Such measures should include coating the corroded region and, if indicated, increasing the cathodic protection level.
+
+![FIG.1-2 PROCEDURE FOR ANALYSIS OF CORRODED PIPE STRENGTH](img/fig_1_2.png)
+_FIG.1-2 PROCEDURE FOR ANALYSIS OF CORRODED PIPE STRENGTH_
+
+Figure 1-2, Procedure for Analysis of Corroded Pipe Strength, shows the steps necessary to proceed through the evaluation of a corroded area
+on a pipeline in order to determine if any corrective action is needed.
+The steps shown in the dashed boxes are valid means of determining a safe operating pressure (or MAOP),
+but the procedures for conducting these steps or the acceptance levels are not in this Manual.
+
+## THE MEANING OF ACCEPTANCE
+
+(a) Any corroded region indicated as acceptable by the criteria of this Manual for service at the established MAOP is capable of withstanding
+a hydrostatic pressure test that will produce a stress of 100% of the pipe SMYS.
+
+(b) Any corroded region indicated as acceptable for service at a reduced MAOP is capable of withstanding a hydrostatic pressure test
+at a ratio above the MAOP equal to the ratio of a 100% SMYS test to 72% SMYS operation (1.39:1).
+If a larger ratio is desired, the reduced MAOP can be adjusted accordingly.
+
+## OTHER MEANS OF DETERMINING SAFE PIPELINE OPERATING PRESSURE
+
+(a) The operator can make a more rigorous analysis of the corroded area to determine the remaining strength by performing a fracture mechanics
+analysis based upon established principles and practices using the actual profile of the corroded region.
+
+(b) The operator can reestablish the MAOP by a complete hydrostatic pressure test that produces a minimum stress of 100% SMYS,
+or establish a lower MAOP based on the pressure of a successful test conducted at a lower pressure.
+
+(e) The procedures and acceptance criteria for conducting these alternative acceptance tests, either fracture mechanics analysis or hydrostatic tests,
+are not included in this Manual.
+
+## COMPUTER PROGRAMS
+
+Appendix A is a BASIC computer program, CRVL.BAS, developed by Mr. Richard L. Seifert and is based on the equations in Parts 2 and 4.
+It can be used to expedite the evaluation procedure. Several examples of the program output are shown.
+
+Appendix B is a BASIC computer program, CRLGTHU.BAS by Mr. Seifert, which is an upgrade of CRLGTH.BAS, which was contained in the first printing of this Manual.
+CRLGTH.BAS was used to produce some of the tables in Part 3.
+It required that the BASIC program be modified slightly each time it was used.
+The new program CRLGTHU.BAS does not require modification.
+It will produce a printed table of maximum acceptable corrosion lengths for a given pipe diameter, and up to ten wall thicknesses of that diameter.
+An example of a printed table by this program is included at the end of Appendix B.
+
+Both CRVL.BAS and CRLGTHU.BAS were written in BASIC for a specific computer/printer combination and can be utilized by most state-of-the-art microprocessors.
+However, minor modifications may be necessary for use on other equipment or for other purposes.
+
+These computer programs are reproduced herein solely for the convenience of the Manual user, and ASME and the auther make no claims as to their accuracy or effectiveness.

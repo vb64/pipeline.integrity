@@ -94,6 +94,7 @@ The experiments on corroded pipe indicated that line pipe steels have adequate t
 The failure of blunt corrosion flaws is controlled by their size and the flow stress or yield stress of the material.
 
 ![FIG.1-1 PARABOLIC CRITERIA FOR CLASSIFYING CORROSION DEFECTS ACCORDING TO PREDICTED FAILURE STRESS](img/fig_1_1.png)
+_FIG.1-1 PARABOLIC CRITERIA FOR CLASSIFYING CORROSION DEFECTS ACCORDING TO PREDICTED FAILURE STRESS_
 
 Figure 1-1 shows the relationship between the full-size test failures and the criterion for acceptance of corrosion pits in line pipe.
 The criterion is that they shall withstand a pressure equal to a stress level of 100% of the specified minimum yield stress (SMYS).

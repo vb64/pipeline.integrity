@@ -228,3 +228,39 @@ _FIG.2-1 CORROSION PARAMETERS USED IN ANALYSIS_
 ![FIG.2-2 CURVE FOR DETERMINING THE VALUE B](img/fig_2_2.png)
 
 _FIG.2-2 CURVE FOR DETERMINING THE VALUE B_
+
+## PART 3 TABLES FOR CORROSION LIMITS
+
+The tables in this Part are calculated from the equations in Part 2.
+They provide a ready reference of maximum corrosion lengths for a spectrum of pipe diameters, wallthicknesses, and pit depths.
+These Tables may be used to determine the maximum allowable longitudinal extent of a contiguous area of corrosion as given in Part 2.
+
+(a) The corroded area must be clean to bare metal. Care should be taken when cleaning corroded areas of a pressurized pipeline.
+
+(b) Measure the maximum depth of the corroded area d and the longitudinal extent of the corroded area as shown in Fig.2-1.
+
+(e) Determine the size (NPS) of the pipe and nominal wall thickness.
+
+(d) Turn to the page in the Table corresponding to the size (NPS) of the pipe.
+
+(e) Locate the row showing a depth equal to the measured maximum depth of the corroded area.
+If the exact measured value is not listed, choose the row showing the NEXT GREATER DEPTH.
+
+(f) Scan across to the column showing the waIl thickness of the pipe.
+If the nominal wall thickness is not listed, use the column for the NEXT THINNER WALL.
+The value L found at the intersection of the wall thickness column and depth row is the maximum allowable longitudinal extent of such a corroded area.
+
+(g) The tables in Part 3 produce results which may be more conservative than those obtained from the equations in Part 2.
+Therefore, the tables could show that a given corroded area is unsuitable for the current MAOP, but the use of the equations in Part 2 may show that it is acceptable.
+
+TABLE 3-1 VALUES OF L FOR PIPE SIZES >= NPS 2 AND < NPS 6
+
+Wall Thickness t, in.
+
+Depth d, in | 0.083 | 0.109   | 0.125   | 0.141   | 0.154   | 0.172   | 0.188   | 0.218
+:---        | ---:  | ---:    | ---:    | ---:    | ---:    | ---:    | ---:    | ---:
+0.01        | 2     |  -      | -       | -       | -       | -       | -       | -
+0.02        | 15/16 |  1+15/16| 2+7/16  | 2+9/16  | 2+11/16 | 2+7/8   | 3       | -
+0.03        | 1/2   |  7/8    | 1+1/8   | 1+1/2   | 1+15/16 | 2+7/8   | 3       | 3+1/4
+0.04        | 3/8   |  5/8    | 3/4     | 15/16   | 1+1/8   | 1+3/8   | 1+3/4   | 2+3/4
+0.05        | 5/16  |  7/16   | 9/16    | 11/16   | 13/16   | 1       | 1+3/16  | 1+5/8

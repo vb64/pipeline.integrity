@@ -2,7 +2,9 @@
 
 Source: https://law.resource.org/pub/us/cfr/ibr/002/asme.b31g.1991.pdf
 
-## FOREWORD
+## PART 1 INTRODUCTION
+
+### FOREWORD
 
 It is recognized by pipeline companies that some sections of high pressure pipelines particularly those installed a number of years ago, have experienced some corrosion.
 Where corrosion is found, pipeline operators have been deeply concerned about the need for a method of determining the remaining strength of these corroded areas.
@@ -26,7 +28,7 @@ and up to ten wall thicknesses of that diameter, was upgraded.
 This Manual was approved by ASME and subsequently by the American National
 Standards Institute on May 20, 1991.
 
-## SCOPE
+### SCOPE
 
 The scope of this Manual includes all pipelines within the scope of the pipeline codes that are part of ASME B31 Code for Pressure Piping,
 i.e., ASME B31.4, Liquid Transportation Systems for Hydrocarbons, Liquid Petroleum Gas, Anhydrous Ammonia, and Alcohols;
@@ -38,7 +40,7 @@ That is, it is not intended that this Manual be used to establish acceptance sta
 This Manual is intended solely for the purpose of providing guideline information for the designer/owner/operator.
 Thus, the specific use of this Manual is the responsibility of the designer/owner/operator.
 
-## LIMITATIONS
+### LIMITATIONS
 
 (a) This Manual is limited to corrosion on weldable pipeline steels categorized as carbon steels or high strength low alloy steels.
 Typical of these materials are those described in ASTM A 53, A 106, and A 381, and API SL. (The current API SL includes all Grades formerly in API 5LX and 5LS.)
@@ -54,7 +56,7 @@ It should not be the sole criterion when the pipe is subject to significant seco
 
 (e) This procedure does not predict leaks or rupture failures.
 
-## INITIAL DEVELOPMENT
+### INITIAL DEVELOPMENT
 
 In the late 1960s, a major long-lines gas transmission pipeline company in conjunction with the Battelle Memorial Institute in Columbus,
 Ohio 7 began a research effort to examine the fracture initiation behavior of various kinds of corrosion defects in line pipe.
@@ -70,7 +72,7 @@ and began developing methods for predicting the pressure strength of line pipe c
 The overall objective of these experiments was to examine the fracture initiation behavior of various sizes of corrosion defects by determining
 the relationship between the size of a defect and the level of internal pressure that would cause a leak or rupture.
 
-## METHODOLOGY AND RESEARCH PROCEDURES
+### METHODOLOGY AND RESEARCH PROCEDURES
 
 The procedure contained in this Manual is based upon pressuring actual corroded pipe to failure in an extensive series of full-size tests.
 Since there was pipe available that had been removed from service and that had sustained corrosion damage, it seemed more logical to test these full-size,
@@ -113,7 +115,7 @@ The Tables in Part 3 are based on corrosion depths and lengths determined by thi
 Corrosion pits that have depths and lengths that fall above the curve are not acceptable, in accordance with the criteria presented herein,
 and the operating pressure either has to be reduced, or the corrosion pit removed or repaired.
 
-## HOW TO USE THE MANUAL
+### HOW TO USE THE MANUAL
 
 Part 2, Determination of Maximum Allowable Longitudinal Extent of Corrosion, sets forth the equations for determining the severity of the corroded areas.
 It tells the operator how to measure the longitudinal extent and maximum depth of the corroded areas.
@@ -153,7 +155,7 @@ on a pipeline in order to determine if any corrective action is needed.
 The steps shown in the dashed boxes are valid means of determining a safe operating pressure (or MAOP),
 but the procedures for conducting these steps or the acceptance levels are not in this Manual.
 
-## THE MEANING OF ACCEPTANCE
+### THE MEANING OF ACCEPTANCE
 
 (a) Any corroded region indicated as acceptable by the criteria of this Manual for service at the established MAOP is capable of withstanding
 a hydrostatic pressure test that will produce a stress of 100% of the pipe SMYS.
@@ -162,7 +164,7 @@ a hydrostatic pressure test that will produce a stress of 100% of the pipe SMYS.
 at a ratio above the MAOP equal to the ratio of a 100% SMYS test to 72% SMYS operation (1.39:1).
 If a larger ratio is desired, the reduced MAOP can be adjusted accordingly.
 
-## OTHER MEANS OF DETERMINING SAFE PIPELINE OPERATING PRESSURE
+### OTHER MEANS OF DETERMINING SAFE PIPELINE OPERATING PRESSURE
 
 (a) The operator can make a more rigorous analysis of the corroded area to determine the remaining strength by performing a fracture mechanics
 analysis based upon established principles and practices using the actual profile of the corroded region.
@@ -173,7 +175,7 @@ or establish a lower MAOP based on the pressure of a successful test conducted a
 (e) The procedures and acceptance criteria for conducting these alternative acceptance tests, either fracture mechanics analysis or hydrostatic tests,
 are not included in this Manual.
 
-## COMPUTER PROGRAMS
+### COMPUTER PROGRAMS
 
 Appendix A is a BASIC computer program, CRVL.BAS, developed by Mr. Richard L. Seifert and is based on the equations in Parts 2 and 4.
 It can be used to expedite the evaluation procedure. Several examples of the program output are shown.
@@ -189,3 +191,5 @@ Both CRVL.BAS and CRLGTHU.BAS were written in BASIC for a specific computer/prin
 However, minor modifications may be necessary for use on other equipment or for other purposes.
 
 These computer programs are reproduced herein solely for the convenience of the Manual user, and ASME and the auther make no claims as to their accuracy or effectiveness.
+
+## PART 2 DETERMINATION OF MAXIMUM ALLOWABLE LONGITUDINAL EXTENT OF CORROSION

@@ -1,0 +1,16 @@
+"""Metal loss defect."""
+from . import Type, Base
+
+
+class Item(Base):
+    """Metal loss defect class."""
+
+    def __init__(self, pipe, start, length, orient_start, orient_length, depth):
+        """New defect."""
+        super().__init__(Type.MetalLoss)
+        self.pipe = pipe
+        self.start = start  # mm
+        self.length = length  # mm
+        self.orient_start = orient_start  # minutes
+        self.orient_length = orient_length  # minutes
+        self.depth = depth  # mm

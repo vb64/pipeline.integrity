@@ -18,7 +18,7 @@ class Pipe:
 
     def add_metal_loss(self, start, length, orient_start, orient_length, depth):
         """Add and return metal loss defect at the pipe."""
-        from defect.metal_loss import Item
+        from .defect.metal_loss import Item
 
         self.metal_loss.append(Item(self, start, length, orient_start, orient_length, depth))
         return self.metal_loss[-1]

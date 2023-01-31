@@ -1,0 +1,1 @@
+"""Pipeline defects danger calculation."""

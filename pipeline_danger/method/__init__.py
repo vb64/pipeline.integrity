@@ -1,0 +1,1 @@
+"""Danger calculation methods."""

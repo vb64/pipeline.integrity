@@ -324,7 +324,7 @@ except that Ps may not exceed P.
 where
 
 - S = specified minimum yield strength (SMYS), psi
-- F = appropriate design factor from ASME B31.4, ASME B31.8 t or ASME B31.11
+- F = appropriate [design factor](DesignFactors.md) from ASME B31.4, ASME B31.8 t or ASME B31.11
 - T = temperature derating factor from the appropriate B31 Code (if none listed, T = 1)
 - D = nominal outside diameter of the pipe, in.
 - t = nominal wall thickness of the pipe, in. Additional wall thickness required for concurrent external loads shall not be included in the calculations.

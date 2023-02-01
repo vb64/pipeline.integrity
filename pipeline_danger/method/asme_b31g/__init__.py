@@ -13,3 +13,4 @@ class Context(ContextBase):
 
     valid_defect_types = [Type.MetalLoss]
     name = "ASME B31G"
+    design_factor = 0.72  # DesignFactors.md

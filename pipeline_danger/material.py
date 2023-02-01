@@ -10,4 +10,3 @@ class Material:
         self.yield_strength = yield_strength  # текучесть
         self.durability = None  # прочность
         self.toughness = None  # вязкость
-        self.design_factor = 1  # from ASME B31.4, ASME B31.8 t or ASME B31.11

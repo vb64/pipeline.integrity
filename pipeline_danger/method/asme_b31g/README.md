@@ -352,3 +352,10 @@ except that Ps may not exceed P.
 
 If the established MAOP is equal to or less than Ps, the corroded region may be used for service at that MAOP.
 If it is greater than Ps, then a lower MAOP should be established not to exceed Ps, or the corroded region should be repaired or replaced.
+
+## APPENDIX A
+
+BASIC Computer Program, [CRVL.BAS](CRVL_BAS.md), for Determining Allowable Length L (Part 2)
+or Alternative Maximum Allowable Operating Pressure (Part 4) 
+
+Enter program and input as indicated. The examples should be used to verify correct entry of the program. 

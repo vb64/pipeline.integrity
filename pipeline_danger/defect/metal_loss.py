@@ -7,8 +7,7 @@ class Item(Base):
 
     def __init__(self, pipe, start, length, orient_start, orient_length, depth):
         """New defect."""
-        super().__init__(Type.MetalLoss)
-        self.pipe = pipe
+        super().__init__(Type.MetalLoss, pipe)
         self.start = start  # mm
         self.length = length  # mm
         self.orient_start = orient_start  # minutes

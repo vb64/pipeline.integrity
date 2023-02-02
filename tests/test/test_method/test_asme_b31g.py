@@ -76,3 +76,13 @@ class TestsAsme(TestMethod):
         with pytest.raises(ErrNotCalc) as err:
             asme_b31g.defect_max_length()
         assert 'not applied.' in str(err.value)
+
+    def test_explain(self):
+        """Function explain."""
+        from pipeline_danger.method.asme_b31g import Context
+
+        defect = self.pipe.add_metal_loss(10, 100, 10, 20, 1.5)
+        asme_b31g = Context(defect)
+        assert asme_b31g.explain() == ''
+        asme_b31g.explain_text = ['xx', 'yy']
+        assert asme_b31g.explain() == 'xx\nyy'

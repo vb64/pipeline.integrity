@@ -20,3 +20,9 @@ class Context:
             ))
 
         self.anomaly = defect
+        self.explain_text = []
+        self.is_explain = False
+
+    def explain(self):
+        """Return text with explanation for calculation."""
+        return '\n'.join(self.explain_text)

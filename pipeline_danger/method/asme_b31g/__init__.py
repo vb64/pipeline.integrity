@@ -38,8 +38,6 @@ class Context(ContextBase):
         """New context ASME B31G."""
         super().__init__(defect)
         self.relative_depth = 100.0 * self.anomaly.depth / self.anomaly.pipe.wallthickness
-        self.explain_text = []
-        self.is_explain = False
 
     @property
     def is_ok(self):

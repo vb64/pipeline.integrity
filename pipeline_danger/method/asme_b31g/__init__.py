@@ -22,8 +22,10 @@ class State:
     """State of pipe with defect."""
 
     Ok = 0
-    Replace = 1
+    Safe = 1
     Defected = 2
+    Repair = 3
+    Replace = 100
 
 
 class Context(ContextBase):
@@ -54,11 +56,20 @@ class Context(ContextBase):
         self.is_explain = is_explain
         self.explain_text = []
 
-        result = State.Defected
+        result = State.Repair
+
         if self.is_ok:
             result = State.Ok
         elif self.is_replace:
             result = State.Replace
+        else:
+            length = self.defect_max_length()
+            if length <= self.anomaly.length:
+                result = State.Safe
+            else:
+                p_s = 666
+                if p_s < self.anomaly.pipe.maop:
+                    result = State.Defected
 
         return result
 

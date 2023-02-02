@@ -5,7 +5,10 @@ from . import Type, Base
 class Item(Base):
     """Metal loss defect class."""
 
-    def __init__(self, pipe, start, length, orient_start, orient_length, depth):
+    def __init__(
+      self, pipe, start, length, orient_start, orient_length, depth,
+      max_depth_start=None, max_depth_orient=None
+    ):
         """New defect."""
         super().__init__(Type.MetalLoss, pipe)
         self.start = start  # mm
@@ -13,3 +16,5 @@ class Item(Base):
         self.orient_start = orient_start  # minutes
         self.orient_length = orient_length  # minutes
         self.depth = depth  # mm
+        self.max_depth_start = max_depth_start
+        self.max_depth_orient = max_depth_orient

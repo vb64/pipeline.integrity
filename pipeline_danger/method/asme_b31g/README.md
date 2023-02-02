@@ -359,3 +359,20 @@ BASIC Computer Program, [CRVL.BAS](CRVL_BAS.md), for Determining Allowable Lengt
 or Alternative Maximum Allowable Operating Pressure (Part 4) 
 
 Enter program and input as indicated. The examples should be used to verify correct entry of the program. 
+
+## APPENDIX B
+
+BASIC Computer Program, [CRLGTHU.BAS](CRLGTHU_BAS.md), Used in Generating Tables like Those Which Are Printed in Part 3 
+
+Following is the BASIC computer program CRLGTHU.BAS, whose forerunner, CRLGTII.BAS, was used for generating
+some of the tables in Part 3 with the same computer equipment that is used in Appendix A.
+This upgraded version, CRLGTHU.BAS, does not require the BASIC program to be modified with each use as did the former version, CRLGTH.BAS,
+which was included in earlier printing(s) of this manual.
+
+Enter the BASIC program which is listed on the following pages into the computer,
+and check its operation by running it and entering the following data as prompted:
+pipe diameter = 20;
+shallowest pit depth = 0.03;
+wall thicknesses as follows: 0.406, 0.438, 0.469, 0.5, 0.562, 0.625, 0.688 0.750, 0.812, and 0.875.
+The printout should duplicate the example which is printed at the end of this Appendix.
+Printer commands in the program are for the Epson FX series and compatible printers, and could result in strange formats on other printers.

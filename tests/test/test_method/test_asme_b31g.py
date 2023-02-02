@@ -34,15 +34,15 @@ class TestsAsme(TestMethod):
         from pipeline_danger.method.asme_b31g import Context, State
 
         asme_b31g = Context(defect)
-        assert asme_b31g.pipe_state == State.Ok
+        assert asme_b31g.pipe_state() == State.Ok
 
         defect.depth = 9
         asme_b31g = Context(defect)
-        assert asme_b31g.pipe_state == State.Replace
+        assert asme_b31g.pipe_state() == State.Replace
 
         defect.depth = 5
         asme_b31g = Context(defect)
-        assert asme_b31g.pipe_state == State.Defected
+        assert asme_b31g.pipe_state() == State.Defected
 
     def test_get_b(self):
         """Function get_b."""

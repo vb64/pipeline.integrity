@@ -38,14 +38,28 @@ class Context(ContextBase):
         """New context ASME B31G."""
         super().__init__(defect)
         self.relative_depth = 100.0 * self.anomaly.depth / self.anomaly.pipe.wallthickness
+        self.explain_text = []
+        self.is_explain = False
 
     @property
-    def pipe_state(self):
+    def is_ok(self):
+        """Return True if state is ok."""
+        return self.relative_depth <= DEPTH_OK_PERCENT
+
+    @property
+    def is_replace(self):
+        """Return True if state is replace."""
+        return self.relative_depth >= DEPTH_CRITICAL_PERCENT
+
+    def pipe_state(self, is_explain=False):
         """Return state for defected pipe."""
+        self.is_explain = is_explain
+        self.explain_text = []
+
         result = State.Defected
-        if self.relative_depth <= DEPTH_OK_PERCENT:
+        if self.is_ok:
             result = State.Ok
-        elif self.relative_depth >= DEPTH_CRITICAL_PERCENT:
+        elif self.is_replace:
             result = State.Replace
 
         return result
@@ -61,7 +75,7 @@ class Context(ContextBase):
 
     def defect_max_length(self):
         """Return maximum allowable longitudinal extent of corrosion."""
-        if self.pipe_state != State.Defected:
+        if self.is_replace or self.is_ok:
             raise ErrNotCalc("Maximum allowable longitudinal extent not applied.")
 
         pipe = self.anomaly.pipe

@@ -291,7 +291,7 @@ TABLE 3-12 VALUES OF L FOR PIPE SIZES >= NPS 56 AND < NPS 60
 
 ### COMPUTATION OF A
 
-If the measured maximum depth of the corroded area is greater than 10% of the nominal waH thickness but less than 80% of the nominal wall thickness
+If the measured maximum depth of the corroded area is greater than 10% of the nominal wall thickness but less than 80% of the nominal wall thickness
 and the measured longitudinal extent of the corroded area is greater than the value determined by Eq.(2) of Part 2, calculate
 
 ```python

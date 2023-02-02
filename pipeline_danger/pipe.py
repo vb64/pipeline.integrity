@@ -21,14 +21,15 @@ class ErrDefectOrientLength(ErrorBase):
 
 
 class Pipe:
-    """Single pipe."""
+    """Single pipe under pressure (maop)."""
 
-    def __init__(self, length, diameter, wallthickness, material):
+    def __init__(self, length, diameter, wallthickness, material, maop):
         """New pipe."""
         self.length = length  # mm
         self.diameter = diameter  # mm
         self.wallthickness = wallthickness  # mm
         self.material = material
+        self.maop = maop
         self.metal_loss = []
 
     def add_metal_loss(self, start, length, orient_start, orient_length, depth):

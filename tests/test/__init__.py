@@ -12,4 +12,4 @@ class TestBase(TestCase):
         from pipeline_danger.pipe import Pipe
 
         self.material = Material("Steel", 20000)
-        self.pipe = Pipe(11200, 1420, 10, self.material)
+        self.pipe = Pipe(11200, 1420, 10, self.material, 1000)

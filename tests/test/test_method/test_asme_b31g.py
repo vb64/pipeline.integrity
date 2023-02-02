@@ -57,3 +57,22 @@ class TestsAsme(TestMethod):
         asme_b31g = Context(defect)
         assert round(asme_b31g.relative_depth, 1) == 50.0
         assert round(asme_b31g.get_b(), 1) == 0.8
+
+    def test_defect_max_length(self):
+        """Function defect_max_length."""
+        from pipeline_danger.method.asme_b31g import Context, ErrNotCalc
+
+        defect = self.pipe.add_metal_loss(10, 100, 10, 20, 1.5)
+        asme_b31g = Context(defect)
+        assert round(asme_b31g.defect_max_length(), 1) == 533.9
+
+        defect.depth = 5
+        asme_b31g = Context(defect)
+        assert round(asme_b31g.defect_max_length(), 1) == 100.1
+
+        defect.depth = 1
+        asme_b31g = Context(defect)
+
+        with pytest.raises(ErrNotCalc) as err:
+            asme_b31g.defect_max_length()
+        assert 'not applied.' in str(err.value)

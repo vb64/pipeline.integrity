@@ -55,7 +55,9 @@ class Context(ContextBase):
         if self.relative_depth < 17.5:
             return 4.0
 
-        return math.sqrt(math.pow(self.relative_depth / (1.1 * self.relative_depth - 0.15), 2) - 1)
+        rel = self.relative_depth / 100.0
+
+        return math.sqrt(math.pow(rel / (1.1 * rel - 0.15), 2) - 1)
 
     def defect_max_length(self):
         """Return maximum allowable longitudinal extent of corrosion."""

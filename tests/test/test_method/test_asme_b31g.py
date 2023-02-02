@@ -43,3 +43,17 @@ class TestsAsme(TestMethod):
         defect.depth = 5
         asme_b31g = Context(defect)
         assert asme_b31g.pipe_state == State.Defected
+
+    def test_get_b(self):
+        """Function get_b."""
+        from pipeline_danger.method.asme_b31g import Context
+
+        defect = self.pipe.add_metal_loss(10, 100, 10, 20, 1.5)
+        asme_b31g = Context(defect)
+        assert round(asme_b31g.relative_depth, 1) == 15.0
+        assert round(asme_b31g.get_b(), 1) == 4.0
+
+        defect.depth = 5
+        asme_b31g = Context(defect)
+        assert round(asme_b31g.relative_depth, 1) == 50.0
+        assert round(asme_b31g.get_b(), 1) == 0.8

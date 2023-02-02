@@ -8,14 +8,9 @@ import math
 
 from .. import Context as ContextBase
 from ...defect import Type
-from ... import Error as ErrorBase
 
 DEPTH_OK_PERCENT = 10
 DEPTH_CRITICAL_PERCENT = 80
-
-
-class ErrNotCalc(ErrorBase):
-    """Defect not need calculation."""
 
 
 class State:
@@ -84,9 +79,5 @@ class Context(ContextBase):
 
     def defect_max_length(self):
         """Return maximum allowable longitudinal extent of corrosion."""
-        if self.is_replace or self.is_ok:
-            raise ErrNotCalc("Maximum allowable longitudinal extent not applied.")
-
         pipe = self.anomaly.pipe
-
         return 1.12 * self.get_b() * math.sqrt(pipe.diameter * pipe.wallthickness)

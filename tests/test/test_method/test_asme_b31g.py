@@ -37,11 +37,9 @@ class TestsAsme(TestMethod):
         assert asme_b31g.pipe_state() == State.Ok
 
         defect.depth = 9
-        asme_b31g = Context(defect)
         assert asme_b31g.pipe_state() == State.Replace
 
         defect.depth = 5
-        asme_b31g = Context(defect)
         assert asme_b31g.pipe_state() == State.Defected
 
     def test_get_b(self):
@@ -54,7 +52,6 @@ class TestsAsme(TestMethod):
         assert round(asme_b31g.get_b(), 1) == 4.0
 
         defect.depth = 5
-        asme_b31g = Context(defect)
         assert round(asme_b31g.relative_depth, 1) == 50.0
         assert round(asme_b31g.get_b(), 1) == 0.8
 
@@ -64,10 +61,10 @@ class TestsAsme(TestMethod):
 
         defect = self.pipe.add_metal_loss(10, 100, 10, 20, 1.5)
         asme_b31g = Context(defect)
+
         assert round(asme_b31g.defect_max_length(), 1) == 533.9
 
         defect.depth = 5
-        asme_b31g = Context(defect)
         assert round(asme_b31g.defect_max_length(), 1) == 100.1
 
     def test_explain(self):

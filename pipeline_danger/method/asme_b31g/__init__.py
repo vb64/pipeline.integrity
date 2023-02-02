@@ -31,10 +31,10 @@ class Context(ContextBase):
     design_factor = 0.72  # DesignFactors.md
     temperature_factor = 1
 
-    def __init__(self, defect):
-        """New context ASME B31G."""
-        super().__init__(defect)
-        self.relative_depth = 100.0 * self.anomaly.depth / self.anomaly.pipe.wallthickness
+    @property
+    def relative_depth(self):
+        """Return defect depth as percent from pipe wall thickness."""
+        return 100.0 * self.anomaly.depth / self.anomaly.pipe.wallthickness
 
     @property
     def is_ok(self):

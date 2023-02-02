@@ -7,13 +7,16 @@ https://edu.truboprovod.ru/kbase/doc/start/WebHelp_ru/ASMEB31G.htm
 from .. import Context as ContextBase
 from ...defect import Type
 
+DEPTH_OK_PERCENT = 10
+DEPTH_CRITICAL_PERCENT = 80
+
 
 class State:
     """State of pipe with defect."""
 
     Ok = 0
     Replace = 1
-    NeedCalc = 2
+    Defected = 2
 
 
 class Context(ContextBase):
@@ -32,10 +35,10 @@ class Context(ContextBase):
     @property
     def pipe_state(self):
         """Return state for defected pipe."""
-        result = State.NeedCalc
-        if self.relative_depth <= 10:
+        result = State.Defected
+        if self.relative_depth <= DEPTH_OK_PERCENT:
             result = State.Ok
-        elif self.relative_depth >= 80:
+        elif self.relative_depth >= DEPTH_CRITICAL_PERCENT:
             result = State.Replace
 
         return result

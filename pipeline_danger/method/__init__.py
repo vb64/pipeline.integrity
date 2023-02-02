@@ -9,8 +9,8 @@ class ErrDefectTypeNotSupported(ErrorBase):
 class Context:
     """Base class for Context of the danger method."""
 
-    valid_defect_types = []
     name = "not defined"
+    valid_defect_types = []
 
     def __init__(self, defect):
         """New context instance."""

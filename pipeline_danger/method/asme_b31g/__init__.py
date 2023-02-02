@@ -4,11 +4,18 @@ https://pypi.org/project/pyintegrity/
 https://github.com/novanumeric/WebIntegrity
 https://edu.truboprovod.ru/kbase/doc/start/WebHelp_ru/ASMEB31G.htm
 """
+import math
+
 from .. import Context as ContextBase
 from ...defect import Type
+from ... import Error as ErrorBase
 
 DEPTH_OK_PERCENT = 10
 DEPTH_CRITICAL_PERCENT = 80
+
+
+class ErrNotCalc(ErrorBase):
+    """Defect not need calculation."""
 
 
 class State:
@@ -22,8 +29,8 @@ class State:
 class Context(ContextBase):
     """Context of the ASME B31G method."""
 
-    valid_defect_types = [Type.MetalLoss]
     name = "ASME B31G"
+    valid_defect_types = [Type.MetalLoss]
     design_factor = 0.72  # DesignFactors.md
     temperature_factor = 1
 
@@ -42,3 +49,19 @@ class Context(ContextBase):
             result = State.Replace
 
         return result
+
+    def get_b(self):
+        """Parameter B from method description."""
+        if self.relative_depth < 17.5:
+            return 4.0
+
+        return math.sqrt(math.pow(self.relative_depth / (1.1 * self.relative_depth - 0.15), 2) - 1)
+
+    def defect_max_length(self):
+        """Return maximum allowable longitudinal extent of corrosion."""
+        if self.pipe_state != State.Defected:
+            raise ErrNotCalc("Maximum allowable longitudinal extent not applied.")
+
+        pipe = self.anomaly.pipe
+
+        return 1.12 * self.get_b() * math.sqrt(pipe.diameter * pipe.wallthickness)

@@ -24,3 +24,22 @@ class TestsAsme(TestMethod):
         with pytest.raises(ErrDefectTypeNotSupported) as err:
             AsmeB31g(defect)
         assert 'not supported by method' in str(err.value)
+
+    def test_pipe_state(self):
+        """Property pipe_state."""
+        defect = self.pipe.add_metal_loss(10, 100, 10, 20, 1)
+        assert defect.depth == 1
+        assert defect.pipe.wallthickness == 10
+
+        from pipeline_danger.method.asme_b31g import Context, State
+
+        asme_b31g = Context(defect)
+        assert asme_b31g.pipe_state == State.Ok
+
+        defect.depth = 9
+        asme_b31g = Context(defect)
+        assert asme_b31g.pipe_state == State.Replace
+
+        defect.depth = 5
+        asme_b31g = Context(defect)
+        assert asme_b31g.pipe_state == State.Defected

@@ -11,14 +11,14 @@ class TestsAsme(TestMethod):
 
     def test_context(self):
         """Method context."""
-        from pipeline_danger.method.asme_b31g import Context as AsmeB31g
-        from pipeline_danger.method import ErrDefectTypeNotSupported
+        from pipeline_integrity.method.asme_b31g import Context as AsmeB31g
+        from pipeline_integrity.method import ErrDefectTypeNotSupported
 
         defect = self.pipe.add_metal_loss(10, 100, 10, 20, 5)
         asme_b31g = AsmeB31g(defect)
         assert asme_b31g.name == "ASME B31G"
 
-        from pipeline_danger.defect import Type
+        from pipeline_integrity.defect import Type
         defect.type = Type.Dent
 
         with pytest.raises(ErrDefectTypeNotSupported) as err:
@@ -31,7 +31,7 @@ class TestsAsme(TestMethod):
         assert defect.depth == 1
         assert defect.pipe.wallthickness == 10
 
-        from pipeline_danger.method.asme_b31g import Context, State
+        from pipeline_integrity.method.asme_b31g import Context, State
 
         asme_b31g = Context(defect)
         assert asme_b31g.pipe_state() == State.Ok
@@ -44,7 +44,7 @@ class TestsAsme(TestMethod):
 
     def test_get_b(self):
         """Function get_b."""
-        from pipeline_danger.method.asme_b31g import Context
+        from pipeline_integrity.method.asme_b31g import Context
 
         defect = self.pipe.add_metal_loss(10, 100, 10, 20, 1.5)
         asme_b31g = Context(defect)
@@ -57,7 +57,7 @@ class TestsAsme(TestMethod):
 
     def test_defect_max_length(self):
         """Function defect_max_length."""
-        from pipeline_danger.method.asme_b31g import Context
+        from pipeline_integrity.method.asme_b31g import Context
 
         defect = self.pipe.add_metal_loss(10, 100, 10, 20, 1.5)
         asme_b31g = Context(defect)
@@ -69,7 +69,7 @@ class TestsAsme(TestMethod):
 
     def test_explain(self):
         """Function explain."""
-        from pipeline_danger.method.asme_b31g import Context
+        from pipeline_integrity.method.asme_b31g import Context
 
         defect = self.pipe.add_metal_loss(10, 100, 10, 20, 1.5)
         asme_b31g = Context(defect)

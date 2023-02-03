@@ -1,1 +1,1 @@
-recursive-include pipeline_danger *
+recursive-include pipeline_integrity *

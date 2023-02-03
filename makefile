@@ -10,7 +10,7 @@ PTEST = ./venv/bin/pytest
 COVERAGE = ./venv/bin/coverage
 endif
 
-SOURCE = pipeline_danger
+SOURCE = pipeline_integrity
 TESTS = tests
 
 FLAKE8 = $(PYTHON) -m flake8 --max-line-length=120

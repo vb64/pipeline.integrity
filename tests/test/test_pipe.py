@@ -11,8 +11,8 @@ class TestsPipe(TestBase):
 
     def test_add_metal_loss(self):
         """Method add_metal_loss."""
-        from pipeline_danger.defect import Type
-        from pipeline_danger.pipe import (
+        from pipeline_integrity.defect import Type
+        from pipeline_integrity.pipe import (
           CIRCLE_MINUTES, ErrDefectSize, ErrDefectDepth, ErrDefectOrientStart, ErrDefectOrientLength,
         )
 

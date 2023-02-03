@@ -31,6 +31,11 @@ class Context(ContextBase):
     design_factor = 0.72  # DesignFactors.md
     temperature_factor = 1
 
+    def __init__(self, defect):
+        """New defect."""
+        super().__init__(defect)
+        self.safe_pressure = None
+
     @property
     def relative_depth(self):
         """Return defect depth as percent from pipe wall thickness."""
@@ -58,12 +63,12 @@ class Context(ContextBase):
         elif self.is_replace:
             result = State.Replace
         else:
-            length = self.defect_max_length()
-            if length <= self.anomaly.length:
+            max_length = self.defect_max_length()
+            if max_length <= self.anomaly.length:
                 result = State.Safe
             else:
-                p_s = 666
-                if p_s < self.anomaly.pipe.maop:
+                self.safe_pressure = self.get_safe_pressure(max_length)
+                if self.safe_pressure < self.anomaly.pipe.maop:
                     result = State.Defected
 
         return result
@@ -77,7 +82,38 @@ class Context(ContextBase):
 
         return math.sqrt(math.pow(rel / (1.1 * rel - 0.15), 2) - 1)
 
+    def get_a(self, max_length):
+        """Parameter A from method description."""
+        return 0.823 * max_length * self.diam_wall
+
+    @property
+    def diam_wall(self):
+        """Intermediate parameter."""
+        pipe = self.anomaly.pipe
+        return math.sqrt(pipe.diameter * pipe.wallthickness)
+
     def defect_max_length(self):
         """Return maximum allowable longitudinal extent of corrosion."""
+        return 1.12 * self.get_b() * self.diam_wall
+
+    def get_safe_pressure(self, max_length):
+        """Return acceptable pressure level."""
         pipe = self.anomaly.pipe
-        return 1.12 * self.get_b() * math.sqrt(pipe.diameter * pipe.wallthickness)
+        smys = pipe.material.yield_strength
+
+        a_val = self.get_a(max_length)
+        p_val = 2.0 * smys * pipe.wallthickness * self.design_factor * self.temperature_factor / pipe.diameter
+        d_t = self.relative_depth / 100.0
+        tmp = 1.1 * p_val
+
+        if a_val > 4.0:
+            p_s = tmp * (1 - d_t)
+        else:
+            v23 = 2.0 / 3.0
+            a_pow = math.sqrt(math.pow(a_val, 2) + 1)
+            p_s = tmp * ((1 - v23 * d_t) / (1 - v23 * d_t / a_pow))
+
+        if p_s > p_val:
+            return p_val
+
+        return p_s

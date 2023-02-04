@@ -36,7 +36,7 @@ class TestsCrvlBas(TestMethod):
         asme = self.get_asme_b31g(defect)
         assert not asme.is_ok
         assert not asme.is_replace
-        # assert asme.get_a(length) == 1.847
+        assert round(asme.get_a(length), 3) == 1.703  # 1.847
 
 
 class TestsAsme(TestMethod):

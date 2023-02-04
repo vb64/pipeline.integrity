@@ -84,7 +84,7 @@ class Context(ContextBase):
 
     def get_a(self, max_length):
         """Parameter A from method description."""
-        return 0.823 * max_length * self.diam_wall
+        return 0.823 * max_length / self.diam_wall
 
     @property
     def diam_wall(self):

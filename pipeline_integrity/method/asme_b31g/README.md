@@ -295,7 +295,7 @@ If the measured maximum depth of the corroded area is greater than 10% of the no
 and the measured longitudinal extent of the corroded area is greater than the value determined by Eq.(2) of Part 2, calculate
 
 ```python
-A = 0.893 * (Lm / sqrt(D * t))
+A = 0.893 * Lm / sqrt(D * t)
 ```
 
 where

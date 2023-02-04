@@ -50,6 +50,8 @@ pypi: package
 
 setup: setup_python setup_pip
 
+setup2: setup_python2 setup_pip
+
 setup_pip:
 	$(PIP) --upgrade pip
 	$(PIP) -r $(TESTS)/requirements.txt
@@ -57,3 +59,7 @@ setup_pip:
 
 setup_python:
 	$(PYTHON_BIN) -m venv ./venv
+
+setup_python2:
+	$(PYTHON_BIN) -m pip install virtualenv
+	$(PYTHON_BIN) -m virtualenv ./venv

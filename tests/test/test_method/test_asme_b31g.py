@@ -6,6 +6,39 @@ import pytest
 from . import TestMethod
 
 
+class TestsCrvlBas(TestMethod):
+    """Examples from CRVL.BAS."""
+
+    def setUp(self):
+        """All units as inches."""
+        super().setUp()
+        from pipeline_integrity.material import Material
+        from pipeline_integrity.pipe import Pipe
+
+        maop = 910  # Lbs/sq.in.
+        diam = 30  # Inches
+        wallthick = 0.438  # Inches
+        smys = 52000  # Lbs/sq.in.
+
+        self.pipe = Pipe(50, diam, wallthick, Material("Steel", smys), maop)
+
+    def get_asme_b31g(self, defect):
+        """Create method context."""
+        from pipeline_integrity.method.asme_b31g import Context
+        return Context(defect)
+
+    def test_example1(self):
+        """Example 1."""
+        depth = 0.1  # Inches
+        length = 7.5  # Inches
+
+        defect = self.pipe.add_metal_loss(10, length, 10, 20, depth)
+        asme = self.get_asme_b31g(defect)
+        assert not asme.is_ok
+        assert not asme.is_replace
+        # assert asme.get_a(length) == 1.847
+
+
 class TestsAsme(TestMethod):
     """Method asme b31g."""
 

@@ -36,7 +36,7 @@ class TestsCrvlBas(TestMethod):
         assert not self.asme.is_ok
         assert not self.asme.is_replace
         assert round(self.asme.get_a(self.defect.length), 3) == 1.703  # 1.847
-        assert round(self.asme.get_safe_pressure(self.defect.length)) == 1093
+        assert round(self.asme.get_safe_pressure()) == 1093
         assert round(self.asme.defect_max_length(), 3) == 8.216
         assert self.asme.pipe_state() == self.state.Safe
 
@@ -59,7 +59,7 @@ class TestsCrvlBas(TestMethod):
         assert round(self.asme.defect_max_length(), 3) == 1.271
         assert round(self.asme.get_a(self.defect.length), 3) == 3.681  # 3.993
         assert round(self.asme.get_design_pressure()) == 438
-        assert round(self.asme.get_safe_pressure(self.defect.length)) == 286  # 284
+        assert round(self.asme.get_safe_pressure()) == 286  # 284
         assert self.asme.pipe_state() == self.state.Repair
 
         self.pipe.maop = 500
@@ -76,7 +76,7 @@ class TestsCrvlBas(TestMethod):
 
         assert round(self.asme.get_a(self.defect.length), 3) == 7.668  # 8.320
         assert round(self.asme.get_design_pressure()) == 1348
-        assert round(self.asme.get_safe_pressure(self.defect.length)) == 1036  # 1037
+        assert round(self.asme.get_safe_pressure()) == 1036  # 1037
         assert round(self.asme.defect_max_length(), 3) == 4.789  # INFINITY ?
 
         self.defect.depth = 0.167
@@ -92,7 +92,7 @@ class TestsCrvlBas(TestMethod):
 
         assert round(self.asme.get_a(self.defect.length), 3) == 7.668  # 8.320
         assert round(self.asme.get_design_pressure()) == 1348
-        assert round(self.asme.get_safe_pressure(self.defect.length)) == 453
+        assert round(self.asme.get_safe_pressure()) == 453
         assert round(self.asme.defect_max_length(), 3) == 1.907
 
         assert self.asme.pipe_state() == self.state.Repair

@@ -66,7 +66,7 @@ class Context(ContextBase):
             if self.defect_max_length() > self.anomaly.length:
                 result = State.Safe
             else:
-                self.safe_pressure = self.get_safe_pressure(self.anomaly.length)
+                self.safe_pressure = self.get_safe_pressure()
                 if self.safe_pressure > self.anomaly.pipe.maop:
                     result = State.Defected
 
@@ -106,9 +106,9 @@ class Context(ContextBase):
 
         return 2.0 * smys * pipe.wallthickness * self.design_factor * self.temperature_factor / pipe.diameter
 
-    def get_safe_pressure(self, max_length):
+    def get_safe_pressure(self):
         """Return acceptable pressure level."""
-        a_val = self.get_a(max_length)
+        a_val = self.get_a(self.anomaly.length)
         p_val = self.get_design_pressure()
         d_t = self.relative_depth / 100.0
         tmp = 1.1 * p_val

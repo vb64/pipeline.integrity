@@ -75,12 +75,16 @@ class Context(ContextBase):
 
     def get_b(self):
         """Parameter B from method description."""
+        b_max = 4.0
         if self.relative_depth < 17.5:
-            return 4.0
+            return b_max
 
         rel = self.relative_depth / 100.0
+        b_val = math.sqrt(math.pow(rel / (1.1 * rel - 0.15), 2) - 1)
+        if b_val > b_max:
+            return b_max
 
-        return math.sqrt(math.pow(rel / (1.1 * rel - 0.15), 2) - 1)
+        return b_val
 
     def get_a(self, max_length):
         """Parameter A from method description."""

@@ -14,7 +14,9 @@ class TestsCrvlBas(TestMethod):
         super().setUp()
         from pipeline_integrity.material import Material
         from pipeline_integrity.pipe import Pipe
-        from pipeline_integrity.method.asme_b31g import Context
+        from pipeline_integrity.method.asme_b31g import Context, State
+
+        self.state = State
 
         maop = 910  # Lbs/sq.in.
         diam = 30  # Inches
@@ -36,8 +38,11 @@ class TestsCrvlBas(TestMethod):
         assert round(self.asme.get_a(self.defect.length), 3) == 1.703  # 1.847
         assert round(self.asme.get_safe_pressure(self.defect.length)) == 1093
         assert round(self.asme.defect_max_length(), 3) == 8.216
+        assert self.asme.pipe_state() == self.state.Safe
+
         self.defect.depth = 0.249  # Inches
         assert round(self.asme.defect_max_length(), 3) == 2.663  # 7.5
+        assert self.asme.pipe_state() == self.state.Defected
 
     def test_example2(self):
         """Example 2."""
@@ -51,9 +56,14 @@ class TestsCrvlBas(TestMethod):
 
         assert not self.asme.is_ok
         assert not self.asme.is_replace
+        assert round(self.asme.defect_max_length(), 3) == 1.271
         assert round(self.asme.get_a(self.defect.length), 3) == 3.681  # 3.993
         assert round(self.asme.get_design_pressure()) == 438
         assert round(self.asme.get_safe_pressure(self.defect.length)) == 286  # 284
+        assert self.asme.pipe_state() == self.state.Defected
+
+        self.pipe.maop = 500
+        assert self.asme.pipe_state() == self.state.Repair
 
 
 class TestsAsme(TestMethod):
@@ -90,7 +100,7 @@ class TestsAsme(TestMethod):
         assert asme_b31g.pipe_state() == State.Replace
 
         defect.depth = 5
-        assert asme_b31g.pipe_state() == State.Defected
+        assert asme_b31g.pipe_state() == State.Safe
 
     def test_get_b(self):
         """Function get_b."""

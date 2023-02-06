@@ -39,6 +39,22 @@ class TestsCrvlBas(TestMethod):
         self.defect.depth = 0.249  # Inches
         assert round(self.asme.defect_max_length(), 3) == 2.663  # 7.5
 
+    def test_example2(self):
+        """Example 2."""
+        self.pipe.material.yield_strength = 35000
+        self.pipe.diameter = 20
+        self.pipe.wallthickness = 0.25
+        self.pipe.maop = 400
+        self.defect.depth = 0.18
+        self.defect.length = 10.0
+        self.asme.design_factor = 0.5
+
+        assert not self.asme.is_ok
+        assert not self.asme.is_replace
+        assert round(self.asme.get_a(self.defect.length), 3) == 3.681  # 3.993
+        assert round(self.asme.get_design_pressure()) == 438
+        assert round(self.asme.get_safe_pressure(self.defect.length)) == 286  # 284
+
 
 class TestsAsme(TestMethod):
     """Method asme b31g."""

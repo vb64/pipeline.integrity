@@ -64,6 +64,7 @@ class TestsCrvlBas(TestMethod):
 
         self.pipe.maop = 500
         assert self.asme.pipe_state() == self.state.Repair
+        assert round(self.asme.safe_pressure) == 438
 
 
 class TestsAsme(TestMethod):

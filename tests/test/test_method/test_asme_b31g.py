@@ -14,6 +14,7 @@ class TestsCrvlBas(TestMethod):
         super().setUp()
         from pipeline_integrity.material import Material
         from pipeline_integrity.pipe import Pipe
+        from pipeline_integrity.method.asme_b31g import Context
 
         maop = 910  # Lbs/sq.in.
         diam = 30  # Inches
@@ -22,21 +23,21 @@ class TestsCrvlBas(TestMethod):
 
         self.pipe = Pipe(50, diam, wallthick, Material("Steel", smys), maop)
 
-    def get_asme_b31g(self, defect):
-        """Create method context."""
-        from pipeline_integrity.method.asme_b31g import Context
-        return Context(defect)
-
-    def test_example1(self):
-        """Example 1."""
         depth = 0.1  # Inches
         length = 7.5  # Inches
 
-        defect = self.pipe.add_metal_loss(10, length, 10, 20, depth)
-        asme = self.get_asme_b31g(defect)
-        assert not asme.is_ok
-        assert not asme.is_replace
-        assert round(asme.get_a(length), 3) == 1.703  # 1.847
+        self.defect = self.pipe.add_metal_loss(10, length, 10, 20, depth)
+        self.asme = Context(self.defect)
+
+    def test_example1(self):
+        """Example 1."""
+        assert not self.asme.is_ok
+        assert not self.asme.is_replace
+        assert round(self.asme.get_a(self.defect.length), 3) == 1.703  # 1.847
+        assert round(self.asme.get_safe_pressure(self.defect.length)) == 1093
+        assert round(self.asme.defect_max_length(), 3) == 8.216
+        self.defect.depth = 0.249  # Inches
+        assert round(self.asme.defect_max_length(), 3) == 2.663  # 7.5
 
 
 class TestsAsme(TestMethod):

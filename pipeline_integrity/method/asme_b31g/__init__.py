@@ -81,8 +81,8 @@ class Context(ContextBase):
 
         rel = self.relative_depth / 100.0
         b_val = math.sqrt(math.pow(rel / (1.1 * rel - 0.15), 2) - 1)
-        if b_val > b_max:
-            return b_max
+        # if b_val > b_max:
+        #     return b_max
 
         return b_val
 

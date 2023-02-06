@@ -96,13 +96,17 @@ class Context(ContextBase):
         """Return maximum allowable longitudinal extent of corrosion."""
         return 1.12 * self.get_b() * self.diam_wall
 
-    def get_safe_pressure(self, max_length):
+    def get_design_pressure(self):
         """Return acceptable pressure level."""
         pipe = self.anomaly.pipe
         smys = pipe.material.yield_strength
 
+        return 2.0 * smys * pipe.wallthickness * self.design_factor * self.temperature_factor / pipe.diameter
+
+    def get_safe_pressure(self, max_length):
+        """Return acceptable pressure level."""
         a_val = self.get_a(max_length)
-        p_val = 2.0 * smys * pipe.wallthickness * self.design_factor * self.temperature_factor / pipe.diameter
+        p_val = self.get_design_pressure()
         d_t = self.relative_depth / 100.0
         tmp = 1.1 * p_val
 

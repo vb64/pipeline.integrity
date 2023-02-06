@@ -63,11 +63,10 @@ class Context(ContextBase):
         elif self.is_replace:
             result = State.Replace
         else:
-            max_length = self.defect_max_length()
-            if max_length > self.anomaly.length:
+            if self.defect_max_length() > self.anomaly.length:
                 result = State.Safe
             else:
-                self.safe_pressure = self.get_safe_pressure(max_length)
+                self.safe_pressure = self.get_safe_pressure(self.anomaly.length)
                 if self.safe_pressure > self.anomaly.pipe.maop:
                     result = State.Defected
 

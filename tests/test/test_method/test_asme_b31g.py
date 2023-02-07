@@ -116,6 +116,42 @@ class TestsCrvlBas(TestMethod):
         assert self.asme.pipe_state() == self.state.Repair
         assert round(self.asme.safe_pressure) == 690
 
+    def test_example6(self):
+        """Example 6."""
+        self.pipe.maop = 1000
+        self.pipe.diameter = 36
+        self.pipe.wallthickness = 0.5
+        self.defect.depth = 0.41
+        self.defect.length = 100.0
+
+        assert self.asme.is_replace
+        assert self.asme.pipe_state() == self.state.Replace
+
+    def test_example7(self):
+        """Example 7."""
+        self.pipe.maop = 877
+        self.pipe.diameter = 12.625
+        self.pipe.wallthickness = 0.5
+        self.pipe.material.yield_strength = 35000
+        self.asme.design_factor = 0.4
+        self.defect.depth = 0.035
+        self.defect.length = 3.0
+
+        assert self.asme.is_ok
+        assert self.asme.pipe_state() == self.state.Ok
+
+    def test_example8(self):
+        """Example 8."""
+        self.pipe.diameter = 24
+        self.pipe.wallthickness = 0.5
+        self.pipe.material.yield_strength = 42000
+        self.asme.design_factor = 0.5
+        self.defect.depth = 0.125
+        self.defect.length = 12.0
+        self.pipe.maop = 790
+
+        assert round(self.asme.get_a(self.defect.length), 3) == 2.851  # 3.093
+
 
 class TestsAsme(TestMethod):
     """Method asme b31g."""

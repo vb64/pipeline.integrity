@@ -6,6 +6,60 @@ import pytest
 from . import TestMethod
 
 
+class TestsReadme(TestMethod):
+    """Code from readme files."""
+
+    def test_ru(self):  # pylint: disable=too-many-locals
+        """Code from READMEru.md."""
+        from pipeline_integrity.material import Material
+
+        material = Material("Сталь", 52000)
+
+        from pipeline_integrity.pipe import Pipe
+
+        pipe_length = 11200
+        diameter = 1420
+        wall_thickness = 16
+        work_pressure = 900
+
+        pipe = Pipe(pipe_length, diameter, wall_thickness, material, work_pressure)
+
+        start = 1000  # дефект начинается на расстоянии 1 метра от начала трубы
+        length = 100  # длина дефекта 100 мм
+        orient_start = 10  # по окружности трубы дефект начинается на 10 угловых минут от верхней точки трубы
+        orient_length = 20  # размер дефекта по окружности составляет 20 угловых минут
+        depth = 1  # глубина дефекта 1 мм
+
+        defect = pipe.add_metal_loss(start, length, orient_start, orient_length, depth)
+
+        from pipeline_integrity.method.asme_b31g import Context, State
+
+        asme = Context(defect)
+
+        # глубина дефекта менее 10% толщины стенки трубы, опасности нет.
+        assert asme.pipe_state() == State.Ok
+
+        # глубина дефекта более 80% толщины стенки трубы, необходим ремонт или замена трубы.
+        defect.depth = 15
+        assert asme.pipe_state() == State.Replace
+
+        # глубина дефекта 50% от толщины стенки трубы, но длина дефекта не превышает его
+        # максимально допустимую длину.
+        # дефект не представляет опасности.
+        defect.depth = 8
+        assert asme.pipe_state() == State.Safe
+
+        # дефект длиной 500 мм и глубиной 50% от толщины стенки трубы
+        # требует ремонта при указанном рабочем давлении в трубе.
+        defect.length = 500
+        assert asme.pipe_state() == State.Repair
+
+        # при снижении рабочего давления до безопасной величины дефект не требует ремонта.
+        assert round(asme.safe_pressure) == 699
+        pipe.maop = 698
+        assert asme.pipe_state() == State.Defected
+
+
 class TestsCrvlBas(TestMethod):
     """Examples from CRVL.BAS."""
 

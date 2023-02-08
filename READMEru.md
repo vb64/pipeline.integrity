@@ -27,12 +27,12 @@ material = Material("Сталь", 52000)
 ```python
 from pipeline_integrity.pipe import Pipe
 
-length = 11200
+pipe_length = 11200
 diameter = 1420
 wall_thickness = 16
 work_pressure = 900
 
-pipe = Pipe(length, diameter, wall_thickness, material, work_pressure)
+pipe = Pipe(pipe_length, diameter, wall_thickness, material, work_pressure)
 ```
 
 Дефект потери металла с указанным положением на трубе и заданной глубиной.

@@ -9,28 +9,29 @@ from . import TestMethod
 class TestsReadme(TestMethod):
     """Code from readme files."""
 
-    def test_ru(self):  # pylint: disable=too-many-locals
+    def test_ru(self):
         """Code from READMEru.md."""
         from pipeline_integrity.material import Material
-
-        material = Material("Сталь", 52000)
-
         from pipeline_integrity.pipe import Pipe
 
-        pipe_length = 11200
-        diameter = 1420
-        wall_thickness = 16
-        work_pressure = 900
+        pipe = Pipe(
+          11200,  # длина 11.2 метра
+          1420,  # диаметр 1420 мм
+          16,  # толщина стенки 16 мм
+          Material(  # материал трубы
+            "Сталь",
+            52000  # предел текучести
+          ),
+          900  # рабочее давление
+        )
 
-        pipe = Pipe(pipe_length, diameter, wall_thickness, material, work_pressure)
-
-        start = 1000  # дефект начинается на расстоянии 1 метра от начала трубы
-        length = 100  # длина дефекта 100 мм
-        orient_start = 10  # по окружности трубы дефект начинается на 10 угловых минут от верхней точки трубы
-        orient_length = 20  # размер дефекта по окружности составляет 20 угловых минут
-        depth = 1  # глубина дефекта 1 мм
-
-        defect = pipe.add_metal_loss(start, length, orient_start, orient_length, depth)
+        defect = pipe.add_metal_loss(
+          1000,  # дефект начинается на расстоянии 1 метра от начала трубы
+          100,  # длина дефекта 100 мм
+          10,  # по окружности трубы дефект начинается на 10 угловых минут от верхней точки трубы
+          20,  # размер дефекта по окружности составляет 20 угловых минут
+          1  # глубина дефекта 1 мм
+        )
 
         from pipeline_integrity.method.asme_b31g import Context, State
 

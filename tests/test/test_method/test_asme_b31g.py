@@ -56,6 +56,7 @@ class TestsReadme(TestMethod):
         assert asme.pipe_state() == State.Repair
 
         # при снижении рабочего давления до безопасной величины дефект не требует ремонта.
+        assert pipe.maop == 900
         assert round(asme.safe_pressure) == 699
         pipe.maop = 698
         assert asme.pipe_state() == State.Defected

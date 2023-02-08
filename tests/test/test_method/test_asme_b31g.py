@@ -20,9 +20,9 @@ class TestsReadme(TestMethod):
           16,  # толщина стенки 16 мм
           Material(  # материал трубы
             "Сталь",
-            52000  # предел текучести
+            295  # предел текучести Мпа
           ),
-          900  # рабочее давление
+          7  # рабочее давление Мпа
         )
 
         defect = pipe.add_metal_loss(
@@ -56,9 +56,9 @@ class TestsReadme(TestMethod):
         assert asme.pipe_state() == State.Repair
 
         # при снижении рабочего давления до безопасной величины дефект не требует ремонта.
-        assert pipe.maop == 900
-        assert round(asme.safe_pressure) == 699
-        pipe.maop = 698
+        assert pipe.maop == 7
+        assert round(asme.safe_pressure, 2) == 3.96
+        pipe.maop = 3.95
         assert asme.pipe_state() == State.Defected
 
 

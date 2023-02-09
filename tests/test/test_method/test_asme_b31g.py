@@ -9,6 +9,60 @@ from . import TestMethod
 class TestsReadme(TestMethod):
     """Code from readme files."""
 
+    def test_en(self):
+        """Code from README.md."""
+        from pipeline_integrity.material import Material
+        from pipeline_integrity.pipe import Pipe
+
+        pipe = Pipe(
+          440,  # length inches
+          56,  # diameter 56 inches
+          0.63,  # wall thickness inches
+          Material(  # pipe material
+            "Steel",
+            52000  # SMYS psi
+          ),
+          900  # pressure psi
+        )
+
+        defect = pipe.add_metal_loss(
+          40,  # the defect starts at a distance of 40 inches from the beginning of the pipe
+          4,  # defect length 4 inches
+          10,  # along the circumference of the pipe, the defect begins
+               # at 10 arc minutes from the top of the pipe
+          20,  # the size of the defect along the circumference is 20 arc minutes
+          0.039  # defect depth 0.039 inches
+        )
+
+        from pipeline_integrity.method.asme_b31g import Context, State
+
+        asme = Context(defect)
+
+        # defect depth less than 10% wall thickness, no danger.
+        assert asme.pipe_state() == State.Ok
+
+        # the depth of the defect is more than 80% of the pipe wall thickness,
+        # repair or replacement of the pipe is necessary.
+        defect.depth = 0.6
+        assert asme.pipe_state() == State.Replace
+
+        # the depth of the defect is 50% of the pipe wall thickness, but the length of the defect
+        # does not exceed its maximum allowable length.
+        # the defect is not dangerous.
+        defect.depth = 0.31
+        assert asme.pipe_state() == State.Safe
+
+        # a defect with a length of 20 inches and a depth of 50% of the pipe wall thickness
+        # requires repair at the specified working pressure in the pipe.
+        defect.length = 20
+        assert asme.pipe_state() == State.Repair
+
+        # when the operating pressure is reduced to a safe value, the defect does not require repair.
+        assert pipe.maop == 900
+        assert round(asme.safe_pressure, 2) == 700.68
+        pipe.maop = 700
+        assert asme.pipe_state() == State.Defected
+
     def test_ru(self):
         """Code from READMEru.md."""
         from pipeline_integrity.material import Material

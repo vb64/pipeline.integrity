@@ -9,7 +9,8 @@ from . import TestMethod
 class TestsReadme(TestMethod):
     """Code from readme files."""
 
-    def test_en(self):
+    @staticmethod
+    def test_en():
         """Code from README.md."""
         from pipeline_integrity.material import Material
         from pipeline_integrity.pipe import Pipe
@@ -63,7 +64,8 @@ class TestsReadme(TestMethod):
         pipe.maop = 700
         assert asme.pipe_state() == State.Defected
 
-    def test_ru(self):
+    @staticmethod
+    def test_ru():
         """Code from READMEru.md."""
         from pipeline_integrity.material import Material
         from pipeline_integrity.pipe import Pipe

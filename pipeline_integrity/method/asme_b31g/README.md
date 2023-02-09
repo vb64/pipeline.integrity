@@ -200,8 +200,8 @@ The depth of a corrosion pit may be expressed as a percent of the nominal wallth
 
 where
 
-- d = measured maximum depth of the corroded area, in., as shown in Fig.2-1
-- t = nominal wall thickness of the pipe, in. Additional wall thickness required for concurrent external loads shaH not be included in the calculations.
+-   d = measured maximum depth of the corroded area, in., as shown in Fig.2-1
+-   t = nominal wall thickness of the pipe, in. Additional wall thickness required for concurrent external loads shaH not be included in the calculations.
 
 A contiguous corroded area having a maximum depth of more than 10% but less than 80% of the nominal wall thickness of the pipe
 should not extend along the longitudinal axis of the pipe for a distance greater than that calculated from:
@@ -212,9 +212,9 @@ L may also be determined from Tables 3-1 through 3-12 in Part 3.
 
 where
 
-- L = maximum allowable longitudinal extent of the corroded area, in., collinear with Lm in Fig.2-1
-- D = nominal outside diameter of the pipe, in.
-- B = a value which may be determined from the curve in Fig.2-2 or from:
+-   L = maximum allowable longitudinal extent of the corroded area, in., collinear with Lm in Fig.2-1
+-   D = nominal outside diameter of the pipe, in.
+-   B = a value which may be determined from the curve in Fig.2-2 or from:
 
 ![B = sqrt( ((d / t) / (1.1 * (d / t) - 0.15))^2 - 1 ) ](img/frml_2_3.png)
 
@@ -300,9 +300,9 @@ A = 0.893 * Lm / sqrt(D * t)
 
 where
 
-- Lm = measured longitudinal extent of the corroded area, in.
-- D = nominal outside diameter of the pipe, in.
-- t = nominal wall thickness of the pipe, in. Additional wall thickness required for concurrent external loads shall not be included in the calculations.
+-   Lm = measured longitudinal extent of the corroded area, in.
+-   D = nominal outside diameter of the pipe, in.
+-   t = nominal wall thickness of the pipe, in. Additional wall thickness required for concurrent external loads shall not be included in the calculations.
 
 ### COMPUTATION OF Ps
 
@@ -311,23 +311,23 @@ where
 A and d/t detennine a unique point on Fig.4-1 corresponding to an acceptable pressure level Ps.
 Ps is obtained by interpolation between the curves for P, O.95P, O.90P, O.85P, O.80P, O.75P, O.70P, O.65P, O.60P.
 
-- d = measured maximum depth of corroded area, in.
-- Ps = the safe maximum pressure for the corroded area. Curves for various values of Ps are given in Fig.4-1 per
+-   d = measured maximum depth of corroded area, in.
+-   Ps = the safe maximum pressure for the corroded area. Curves for various values of Ps are given in Fig.4-1 per
 
 ![Ps](img/frml_4_1.png)
 
 except that Ps may not exceed P.
 
-- P = the greater of either the established MAOP or
-- P = 2 * S * t * F * T / D
+-   P = the greater of either the established MAOP or
+-   P = 2 * S * t * F * T / D
 
 where
 
-- S = specified minimum yield strength (SMYS), psi
-- F = appropriate [design factor](DesignFactors.md) from ASME B31.4, ASME B31.8 t or ASME B31.11
-- T = temperature derating factor from the appropriate B31 Code (if none listed, T = 1)
-- D = nominal outside diameter of the pipe, in.
-- t = nominal wall thickness of the pipe, in. Additional wall thickness required for concurrent external loads shall not be included in the calculations.
+-   S = specified minimum yield strength (SMYS), psi
+-   F = appropriate [design factor](DesignFactors.md) from ASME B31.4, ASME B31.8 t or ASME B31.11
+-   T = temperature derating factor from the appropriate B31 Code (if none listed, T = 1)
+-   D = nominal outside diameter of the pipe, in.
+-   t = nominal wall thickness of the pipe, in. Additional wall thickness required for concurrent external loads shall not be included in the calculations.
 
 ![FIG.4-1 CURVE FOR OBTAINING Ps AS A FUNCTION OF d/t FOR VALUES OF A LESS THAN OR EOUAl TO 4.0](img/fig_4_1.png)
 

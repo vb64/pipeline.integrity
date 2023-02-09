@@ -1,4 +1,4 @@
-.PHONY: all setup
+.PHONY: all setup package pypitest pypi
 # make tests >debug.log 2>&1
 ifeq ($(OS),Windows_NT)
 PYTHON = venv/Scripts/python.exe

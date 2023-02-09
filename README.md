@@ -22,14 +22,14 @@ from pipeline_integrity.material import Material
 from pipeline_integrity.pipe import Pipe
 
 pipe = Pipe(
-  440,  # length inches
-  56,  # diameter 56 inches
-  0.63,  # wall thickness inches
+  440,  # length, inches
+  56,  # diameter, inches
+  0.63,  # wall thickness, inches
   Material(  # pipe material
     "Steel",
-    52000  # SMYS psi
+    52000  # SMYS, psi
   ),
-  900  # pressure psi
+  900  # pressure, psi
 )
 )
 ```

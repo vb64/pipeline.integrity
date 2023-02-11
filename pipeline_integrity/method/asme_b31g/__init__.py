@@ -33,7 +33,7 @@ class Context(ContextBase):
 
     def __init__(self, defect):
         """New defect."""
-        super().__init__(defect)
+        super(Context, self).__init__(defect)
         self.safe_pressure = None
 
     @property

@@ -7,7 +7,7 @@ class TestBase(TestCase):
 
     def setUp(self):
         """Set up test data."""
-        super().setUp()
+        super(TestBase, self).setUp()
         from pipeline_integrity.material import Material
         from pipeline_integrity.pipe import Pipe
 

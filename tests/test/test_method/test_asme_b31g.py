@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Test asme_b31g.py module.
 
 make test T=test_method/test_asme_b31g.py
@@ -123,7 +124,7 @@ class TestsCrvlBas(TestMethod):
 
     def setUp(self):
         """All units as inches."""
-        super().setUp()
+        super(TestsCrvlBas, self).setUp()
         from pipeline_integrity.material import Material
         from pipeline_integrity.pipe import Pipe
         from pipeline_integrity.method.asme_b31g import Context, State

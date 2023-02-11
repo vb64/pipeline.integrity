@@ -9,7 +9,7 @@ class Type:
     Crack = "crack"
 
 
-class Base:
+class Base(object):
     """Base class for different defect types."""
 
     def __init__(self, defect_type, pipe):

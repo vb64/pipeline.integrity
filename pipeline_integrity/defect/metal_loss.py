@@ -10,7 +10,7 @@ class Item(Base):
       max_depth_start=None, max_depth_orient=None
     ):
         """New defect."""
-        super().__init__(Type.MetalLoss, pipe)
+        super(Item, self).__init__(Type.MetalLoss, pipe)
         self.start = start  # mm
         self.length = length  # mm
         self.orient_start = orient_start  # minutes

@@ -4,7 +4,7 @@
 
 Бесплатная, с открытым исходным кодом библиотека PipelineIntegrity
 предназначена для расчета степени опасности дефектов потери металла трубопровода
-по методике ASME B31G.
+по [методике ASME B31G](https://law.resource.org/pub/us/cfr/ibr/002/asme.b31g.1991.pdf).
 
 ![методика ASME B31G](pipeline_integrity/method/asme_b31g/img/fig_1_1.png)
 
@@ -59,6 +59,8 @@ asme = Context(defect)
 ```python
 from pipeline_integrity.method.asme_b31g import State
 
+assert defect.depth == 1
+assert pipe.wallthickness == 16
 assert asme.pipe_state() == State.Ok
 ```
 
@@ -74,6 +76,8 @@ assert asme.pipe_state() == State.Replace
 
 ```python
 defect.depth = 8
+assert defect.length == 100
+assert round(asme.defect_max_length()) == 127
 assert asme.pipe_state() == State.Safe
 ```
 
@@ -91,4 +95,21 @@ assert pipe.maop == 7
 assert round(asme.safe_pressure, 2) == 3.96
 pipe.maop = 3.95
 assert asme.pipe_state() == State.Defected
+```
+
+## Разработка
+
+```
+$ git clone git@github.com:vb64/pipeline.integrity.git
+$ cd pipeline.integrity
+```
+С Python 3:
+```
+$ make setup PYTHON_BIN=/path/to/python3
+$ make tests
+```
+С Python 2:
+```
+$ make setup2 PYTHON_BIN=/path/to/python2
+$ make tests2
 ```

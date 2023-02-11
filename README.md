@@ -8,7 +8,7 @@
 [In Russian](READMEru.md)
 
 Free, open source PipelineIntegrity library designed to calculate the degree of danger
-of pipeline metal loss defects according to the ASME B31G method.
+of pipeline metal loss defects according to the [ASME B31G method](https://law.resource.org/pub/us/cfr/ibr/002/asme.b31g.1991.pdf).
 
 ![ASME B31G method](pipeline_integrity/method/asme_b31g/img/fig_1_1.png)
 
@@ -65,6 +65,8 @@ Defect depth less than 10% wall thickness, no danger.
 ```python
 from pipeline_integrity.method.asme_b31g import State
 
+assert defect.depth == 0.039
+assert pipe.wallthickness == 0.63
 assert asme.pipe_state() == State.Ok
 ```
 
@@ -81,6 +83,8 @@ The defect is not dangerous.
 
 ```python
 defect.depth = 0.31
+assert defect.length == 4
+assert round(asme.defect_max_length()) == 5
 assert asme.pipe_state() == State.Safe
 ```
 
@@ -99,4 +103,21 @@ assert pipe.maop == 900
 assert round(asme.safe_pressure, 2) == 700.68
 pipe.maop = 700
 assert asme.pipe_state() == State.Defected
+```
+
+## Development
+
+```
+$ git clone git@github.com:vb64/pipeline.integrity.git
+$ cd pipeline.integrity
+```
+With Python 3:
+```
+$ make setup PYTHON_BIN=/path/to/python3
+$ make tests
+```
+With Python 2:
+```
+$ make setup2 PYTHON_BIN=/path/to/python2
+$ make tests2
 ```

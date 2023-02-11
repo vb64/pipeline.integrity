@@ -41,6 +41,8 @@ class TestsReadme(TestMethod):
         asme = Context(defect)
 
         # defect depth less than 10% wall thickness, no danger.
+        assert defect.depth == 0.039
+        assert pipe.wallthickness == 0.63
         assert asme.pipe_state() == State.Ok
 
         # the depth of the defect is more than 80% of the pipe wall thickness,
@@ -52,6 +54,8 @@ class TestsReadme(TestMethod):
         # does not exceed its maximum allowable length.
         # the defect is not dangerous.
         defect.depth = 0.31
+        assert defect.length == 4
+        assert round(asme.defect_max_length()) == 5
         assert asme.pipe_state() == State.Safe
 
         # a defect with a length of 20 inches and a depth of 50% of the pipe wall thickness
@@ -95,6 +99,8 @@ class TestsReadme(TestMethod):
         asme = Context(defect)
 
         # глубина дефекта менее 10% толщины стенки трубы, опасности нет.
+        assert defect.depth == 1
+        assert pipe.wallthickness == 16
         assert asme.pipe_state() == State.Ok
 
         # глубина дефекта более 80% толщины стенки трубы, необходим ремонт или замена трубы.
@@ -105,6 +111,8 @@ class TestsReadme(TestMethod):
         # максимально допустимую длину.
         # дефект не представляет опасности.
         defect.depth = 8
+        assert defect.length == 100
+        assert round(asme.defect_max_length()) == 127
         assert asme.pipe_state() == State.Safe
 
         # дефект длиной 500 мм и глубиной 50% от толщины стенки трубы

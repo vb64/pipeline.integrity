@@ -1,6 +1,5 @@
 """Root class for testing."""
 from unittest import TestCase
-from py23 import super23
 
 
 class TestBase(TestCase):
@@ -8,7 +7,7 @@ class TestBase(TestCase):
 
     def setUp(self):
         """Set up test data."""
-        super23(self).setUp()
+        super(TestBase, self).setUp()
         from pipeline_integrity.material import Material
         from pipeline_integrity.pipe import Pipe
 

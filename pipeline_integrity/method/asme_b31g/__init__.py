@@ -5,7 +5,6 @@ https://github.com/novanumeric/WebIntegrity
 https://edu.truboprovod.ru/kbase/doc/start/WebHelp_ru/ASMEB31G.htm
 """
 import math
-from py23 import super23
 
 from .. import Context as ContextBase
 from ...defect import Type
@@ -34,7 +33,7 @@ class Context(ContextBase):
 
     def __init__(self, defect):
         """New defect."""
-        super23(self).__init__(defect)
+        super(Context, self).__init__(defect)
         self.safe_pressure = None
 
     @property

@@ -54,6 +54,7 @@ setup2: setup_python2 setup_pip
 
 setup_pip:
 	$(PIP) --upgrade pip
+	$(PIP) -r requirements.txt
 	$(PIP) -r $(TESTS)/requirements.txt
 	$(PIP) -r deploy.txt
 

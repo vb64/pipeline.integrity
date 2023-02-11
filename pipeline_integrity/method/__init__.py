@@ -6,7 +6,7 @@ class ErrDefectTypeNotSupported(ErrorBase):
     """Given defect type not supported by method."""
 
 
-class Context:
+class Context(object):
     """Base class for Context of the danger method."""
 
     name = "not defined"

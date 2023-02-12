@@ -343,4 +343,4 @@ class TestsAsme(TestMethod):
         asme_b31g = Context(defect)
         assert asme_b31g.explain() == ''
         asme_b31g.explain_text = ['xx', 'yy']
-        assert asme_b31g.explain() == 'xx\nyy'
+        assert asme_b31g.explain() == 'xxyy'

@@ -25,4 +25,4 @@ class Context(object):
 
     def explain(self):
         """Return text with explanation for calculation."""
-        return '\n'.join(self.explain_text)
+        return ''.join(self.explain_text)

@@ -67,6 +67,7 @@ class Context(ContextBase):
         ])
 
         if self.is_ok:
+
             self.add_explain([
               '\n', _("The relative defect depth less than {}% from wall thickness.").format(
                 DEPTH_CRITICAL_PERCENT
@@ -76,6 +77,7 @@ class Context(ContextBase):
             result = State.Ok
 
         elif self.is_replace:
+
             self.add_explain([
               '\n', _("The relative defect depth greater than {}% from wall thickness.").format(
                 DEPTH_OK_PERCENT
@@ -85,12 +87,38 @@ class Context(ContextBase):
             result = State.Replace
 
         else:
+
             max_length = self.defect_max_length()
             if max_length > self.anomaly.length:
+                self.add_explain([
+                  '\n',
+                  _("The length of the defect {} does not exceed the maximum allowable length {}.").format(
+                    self.anomaly.length, round(max_length, 3)
+                  ),
+                  '\n', _("The defect is not dangerous."),
+                ])
+
                 result = State.Safe
+
             else:
+
+                self.add_explain([
+                  '\n',
+                  _("The length of the defect {} exceed the maximum allowable length {}.").format(
+                    self.anomaly.length, round(max_length, 3)
+                  ),
+                  '\n', _("It is necessary to calculate the allowable pressure for such a defect."),
+                ])
+
                 self.safe_pressure = self.get_safe_pressure()
                 if self.safe_pressure > self.anomaly.pipe.maop:
+                    self.add_explain([
+                      '\n',
+                      _("The working pressure {} does not exceed the allowable pressure {}.").format(
+                        self.anomaly.pipe.maop, round(self.safe_pressure, 2)
+                      ),
+                      '\n', _("The defect is not dangerous."),
+                    ])
                     result = State.Defected
                 else:
                     self.add_explain([

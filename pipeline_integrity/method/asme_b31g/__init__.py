@@ -61,9 +61,10 @@ class Context(ContextBase):
 
         if self.is_ok:
             self.add_explain([
-              _("The relative defect depth less than {}% from wall thickness."),
-              '\n',
-              _("The defect is not dangerous."),
+              '\n', _("The relative defect depth less than {}% from wall thickness.").format(
+                DEPTH_OK_PERCENT
+              ),
+              '\n', _("The defect is not dangerous."),
             ])
             result = State.Ok
         elif self.is_replace:

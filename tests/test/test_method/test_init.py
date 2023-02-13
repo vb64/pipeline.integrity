@@ -21,6 +21,9 @@ class TestsContext(TestMethod):
         asme.explain_text = ['xx', 'yy']
         assert asme.explain() == 'xxyy'
 
+        asme.add_explain(['zz'])
+        assert asme.explain() == 'xxyy'
+
         asme.is_explain = True
         asme.add_explain(['zz'])
         assert asme.explain() == 'xxyyzz'

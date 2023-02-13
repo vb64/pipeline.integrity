@@ -59,6 +59,13 @@ class Context(ContextBase):
 
         result = State.Repair
 
+        self.add_explain([
+          _("The relative defect depth == defect depth / pipe wall thickness * 100%."),
+          '\n', "{} / {} * 100 = {}".format(
+            self.anomaly.depth, self.anomaly.pipe.wallthickness, round(self.relative_depth, 3)
+          ),
+        ])
+
         if self.is_ok:
             self.add_explain([
               '\n', _("The relative defect depth less than {}% from wall thickness.").format(
@@ -78,7 +85,8 @@ class Context(ContextBase):
             result = State.Replace
 
         else:
-            if self.defect_max_length() > self.anomaly.length:
+            max_length = self.defect_max_length()
+            if max_length > self.anomaly.length:
                 result = State.Safe
             else:
                 self.safe_pressure = self.get_safe_pressure()

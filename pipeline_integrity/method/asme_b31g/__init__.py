@@ -62,13 +62,21 @@ class Context(ContextBase):
         if self.is_ok:
             self.add_explain([
               '\n', _("The relative defect depth less than {}% from wall thickness.").format(
-                DEPTH_OK_PERCENT
+                DEPTH_CRITICAL_PERCENT
               ),
               '\n', _("The defect is not dangerous."),
             ])
             result = State.Ok
+
         elif self.is_replace:
+            self.add_explain([
+              '\n', _("The relative defect depth greater than {}% from wall thickness.").format(
+                DEPTH_OK_PERCENT
+              ),
+              '\n', _("The defect needs to be repaired."),
+            ])
             result = State.Replace
+
         else:
             if self.defect_max_length() > self.anomaly.length:
                 result = State.Safe
@@ -76,6 +84,13 @@ class Context(ContextBase):
                 self.safe_pressure = self.get_safe_pressure()
                 if self.safe_pressure > self.anomaly.pipe.maop:
                     result = State.Defected
+                else:
+                    self.add_explain([
+                      '\n',
+                      _("Repair or pressure reduction to {} required.").format(
+                        round(self.safe_pressure, 2)
+                      ),
+                    ])
 
         return result
 
@@ -87,8 +102,6 @@ class Context(ContextBase):
 
         rel = self.relative_depth / 100.0
         b_val = math.sqrt(math.pow(rel / (1.1 * rel - 0.15), 2) - 1)
-        # if b_val > b_max:
-        #     return b_max
 
         return b_val
 

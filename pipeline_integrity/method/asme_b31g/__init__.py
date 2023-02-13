@@ -8,6 +8,7 @@ import math
 
 from .. import Context as ContextBase
 from ...defect import Type
+from ...i18n import fake_gettext as _
 
 DEPTH_OK_PERCENT = 10
 DEPTH_CRITICAL_PERCENT = 80
@@ -59,6 +60,11 @@ class Context(ContextBase):
         result = State.Repair
 
         if self.is_ok:
+            self.add_explain([
+              _("The relative defect depth less than {}% from wall thickness."),
+              '\n',
+              _("The defect is not dangerous."),
+            ])
             result = State.Ok
         elif self.is_replace:
             result = State.Replace

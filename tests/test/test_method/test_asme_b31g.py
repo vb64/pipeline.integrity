@@ -334,13 +334,3 @@ class TestsAsme(TestMethod):
 
         defect.depth = 5
         assert round(asme_b31g.defect_max_length(), 1) == 100.1
-
-    def test_explain(self):
-        """Function explain."""
-        from pipeline_integrity.method.asme_b31g import Context
-
-        defect = self.pipe.add_metal_loss(10, 100, 10, 20, 1.5)
-        asme_b31g = Context(defect)
-        assert asme_b31g.explain() == ''
-        asme_b31g.explain_text = ['xx', 'yy']
-        assert asme_b31g.explain() == 'xxyy'

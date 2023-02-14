@@ -67,7 +67,8 @@ class TestsReadme(TestMethod):
         assert pipe.maop == 900
         assert round(asme.safe_pressure, 2) == 700.68
         pipe.maop = 700
-        assert asme.pipe_state() == State.Defected
+        assert asme.pipe_state(is_explain=True) == State.Defected
+        assert 'defect is not dangerous' in asme.explain()
 
     @staticmethod
     def test_ru():
@@ -124,7 +125,8 @@ class TestsReadme(TestMethod):
         assert pipe.maop == 7
         assert round(asme.safe_pressure, 2) == 3.96
         pipe.maop = 3.95
-        assert asme.pipe_state() == State.Defected
+        assert asme.pipe_state(is_explain=True) == State.Defected
+        assert 'defect is not dangerous' in asme.explain()
 
 
 class TestsCrvlBas(TestMethod):
@@ -334,13 +336,3 @@ class TestsAsme(TestMethod):
 
         defect.depth = 5
         assert round(asme_b31g.defect_max_length(), 1) == 100.1
-
-    def test_explain(self):
-        """Function explain."""
-        from pipeline_integrity.method.asme_b31g import Context
-
-        defect = self.pipe.add_metal_loss(10, 100, 10, 20, 1.5)
-        asme_b31g = Context(defect)
-        assert asme_b31g.explain() == ''
-        asme_b31g.explain_text = ['xx', 'yy']
-        assert asme_b31g.explain() == 'xx\nyy'

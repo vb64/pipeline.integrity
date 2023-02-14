@@ -1,3 +1,5 @@
++ Calculation explain facility for ASME B31G method
+
 + Python2 support
 
 09.02.2023 ver.1.0

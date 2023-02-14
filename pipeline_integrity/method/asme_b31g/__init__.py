@@ -132,12 +132,37 @@ class Context(ContextBase):
 
     def get_b(self):
         """Parameter B from method description."""
+        self.add_explain([
+          '\n', _("Parameter B."),
+        ])
+
         b_max = 4.0
-        if self.relative_depth < 17.5:
+        border = 17.5
+        if self.relative_depth < border:
+            self.add_explain([
+              '\n',
+              _("The relative defect depth {} less then {}%.").format(
+                round(self.relative_depth, 3), border
+              ),
+              '\n',
+              _("Set Parameter B value to {}").format(b_max),
+            ])
             return b_max
+
+        self.add_explain([
+          '\n',
+          _("The relative defect depth {} more then {}%.").format(round(self.relative_depth, 3), border),
+        ])
 
         rel = self.relative_depth / 100.0
         b_val = math.sqrt(math.pow(rel / (1.1 * rel - 0.15), 2) - 1)
+
+        self.add_explain([
+          '\n',
+          _("B = math.sqrt(math.pow({} / (1.1 * {} - 0.15), 2) - 1) = {}").format(
+            round(rel, 3), round(rel, 3), b_val
+          ),
+        ])
 
         return b_val
 
@@ -153,7 +178,23 @@ class Context(ContextBase):
 
     def defect_max_length(self):
         """Return maximum allowable longitudinal extent of corrosion."""
-        return 1.12 * self.get_b() * self.diam_wall
+        self.add_explain([
+          '\n',
+          _("Calculation of the maximum allowable defect length."),
+        ])
+        b_val = self.get_b()
+        length = 1.12 * b_val * self.diam_wall
+        pipe = self.anomaly.pipe
+
+        self.add_explain([
+          '\n',
+          _("L = 1.12 * B * math.sqrt(diameter * wallthickness)"),
+          _("L = 1.12 * {} * math.sqrt({} * {}) = {}").format(
+            round(b_val, 3), pipe.diameter, pipe.wallthickness, round(length, 3)
+          ),
+        ])
+
+        return length
 
     def get_design_pressure(self):
         """Return design pressure."""
@@ -164,6 +205,11 @@ class Context(ContextBase):
 
     def get_safe_pressure(self):
         """Return acceptable pressure level."""
+        self.add_explain([
+          '\n',
+          _("Calculation of the maximum allowable pressure."),
+        ])
+
         a_val = self.get_a(self.anomaly.length)
         p_val = self.get_design_pressure()
         d_t = self.relative_depth / 100.0

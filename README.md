@@ -106,7 +106,7 @@ assert asme.pipe_state(is_explain=True) == State.Defected
 ```
 
 If you call `pipe_state` method with parameter `is_explain=True`,
-you can get explanation in text form.
+then you can get explanation in text form.
 
 ```python
 asme.explain()

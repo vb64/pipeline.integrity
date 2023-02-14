@@ -94,7 +94,41 @@ assert asme.pipe_state() == State.Repair
 assert pipe.maop == 7
 assert round(asme.safe_pressure, 2) == 3.96
 pipe.maop = 3.95
-assert asme.pipe_state() == State.Defected
+assert asme.pipe_state(is_explain=True) == State.Defected
+```
+
+Если метод `pipe_state` вызван с параметром `is_explain=True`,
+то вы можете получить объяснение сделанного расчета в текстовом виде (на английском).
+
+```python
+asme.explain()
+```
+
+```text
+The relative defect depth == defect depth / pipe wall thickness * 100%.
+8 / 16 * 100 = 50.0
+Calculation of the maximum allowable defect length.
+Parameter B.
+The relative defect depth 50.0 more than 17.5%.
+B = sqrt(pow(0.5 / (1.1 * 0.5 - 0.15), 2) - 1) = 0.75
+L = 1.12 * B * sqrt(diameter * wallthickness)L = 1.12 * 0.75 * sqrt(1420 * 16) = 126.615
+The length of the defect 500 exceed the maximum allowable length 126.615.
+It is necessary to calculate the allowable pressure for defect.
+Calculation of the maximum allowable pressure.
+Parameter A for defect length 500.
+A = 0.823 * defect_length / sqrt(diameter * wallthickness)
+A = 0.823 * 500 / sqrt(1420 * 16) = 2.73
+Design pressure.
+Design_press = 2 * material_smys * wallthickness * design_factor * temperature_factor / diam.
+Design_press = 2 * 295 * 16 * 0.72 * 1 / 1420 = 4.786.
+Parameter A less than 4.
+a_pow = sqrt(pow(a_param, 2) + 1).
+a_pow = sqrt(pow(2.73, 2) + 1) = 2.907.
+Safe_press = 1.1 * design_press * ((1 - 2/3 * rel_depth) / (1 - 2/3 * rel_depth / a_pow)).
+Safe_press = 1.1 * 4.786 * ((1 - 2/3 * 0.5) / (1 - 2/3 * 0.5 / 2.907)) = 3.965.
+Use safe pressure 3.965 as maximum allowable pressure.
+The working pressure 3.95 does not exceed the allowable pressure 3.965.
+The defect is not dangerous.
 ```
 
 ## Разработка

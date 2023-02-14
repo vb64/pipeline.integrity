@@ -211,8 +211,19 @@ class Context(ContextBase):
         """Return design pressure."""
         pipe = self.anomaly.pipe
         smys = pipe.material.yield_strength
+        p_v = 2.0 * smys * pipe.wallthickness * self.design_factor * self.temperature_factor / pipe.diameter
 
-        return 2.0 * smys * pipe.wallthickness * self.design_factor * self.temperature_factor / pipe.diameter
+        self.add_explain([
+          '\n',
+          _("Design_press = 2 * material_smys * wallthickness * design_factor * temperature_factor / diam."),
+          '\n',
+          _("Design_press = 2 * {} * {} * {} * {} / {} = {}.").format(
+            smys, pipe.wallthickness, self.design_factor, self.temperature_factor,
+            pipe.diameter, round(p_v, 3)
+          ),
+        ])
+
+        return p_v
 
     def get_safe_pressure(self):
         """Return acceptable pressure level."""

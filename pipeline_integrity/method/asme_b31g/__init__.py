@@ -159,7 +159,7 @@ class Context(ContextBase):
 
         self.add_explain([
           '\n',
-          _("B = math.sqrt(math.pow({} / (1.1 * {} - 0.15), 2) - 1) = {}").format(
+          _("B = sqrt(pow({} / (1.1 * {} - 0.15), 2) - 1) = {}").format(
             round(rel, 3), round(rel, 3), b_val
           ),
         ])
@@ -188,8 +188,8 @@ class Context(ContextBase):
 
         self.add_explain([
           '\n',
-          _("L = 1.12 * B * math.sqrt(diameter * wallthickness)"),
-          _("L = 1.12 * {} * math.sqrt({} * {}) = {}").format(
+          _("L = 1.12 * B * sqrt(diameter * wallthickness)"),
+          _("L = 1.12 * {} * sqrt({} * {}) = {}").format(
             round(b_val, 3), pipe.diameter, pipe.wallthickness, round(length, 3)
           ),
         ])
@@ -210,7 +210,6 @@ class Context(ContextBase):
           _("Calculation of the maximum allowable pressure."),
           '\n', _("Parameter A."),
         ])
-
         a_val = self.get_a(self.anomaly.length)
 
         self.add_explain([
@@ -222,28 +221,38 @@ class Context(ContextBase):
         tmp = 1.1 * p_val
 
         if a_val > 4.0:
+            p_s = tmp * (1 - d_t)
             self.add_explain([
               '\n', _("Parameter A more than 4."),
+              '\n', _("Safe pressure = 1.1 * design_press * (1 - rel_depth)."),
+              '\n', _("Safe pressure = 1.1 * {} * (1 - {}) = {}.").format(
+                round(p_val, 3), round(d_t, 3), round(p_s, 3)
+              ),
             ])
-            p_s = tmp * (1 - d_t)
         else:
-            self.add_explain([
-              '\n', _("Parameter A less than 4."),
-            ])
             v23 = 2.0 / 3.0
             a_pow = math.sqrt(math.pow(a_val, 2) + 1)
             p_s = tmp * ((1 - v23 * d_t) / (1 - v23 * d_t / a_pow))
+            self.add_explain([
+              '\n', _("Parameter A less than 4."),
+              '\n', _("a_pow = sqrt(pow(a_param, 2) + 1)."),
+              '\n', _("a_pow = sqrt(pow({}, 2) + 1) = {}.").format(round(a_val, 3), round(a_pow, 3)),
+              '\n',
+              _("Safe pressure = 1.1 * design_press * ((1 - 2/3 * rel_depth) / (1 - 2/3 * rel_depth / a_pow))."),
+              '\n',
+              _("Safe pressure = 1.1 * {} * ((1 - 2/3 * {}) / (1 - 2/3 * {} / {})) = {}.").format(
+                round(p_val, 3), round(d_t, 3), round(d_t, 3), round(a_pow, 3), round(p_s, 3)
+              ),
+            ])
 
         if p_s > p_val:
             self.add_explain([
-              '\n',
-              _("Safe pressure more than design pressure."),
-              '\n',
-              _("Use design pressure {} as maximum allowable pressure.").format(round(p_val, 3)),
+              '\n', _("Safe pressure more than design pressure."),
+              '\n', _("Use design pressure {} as maximum allowable pressure.").format(round(p_val, 3)),
             ])
             return p_val
 
         self.add_explain([
-          '\n', _("Use pressure pressure {} as maximum allowable pressure.").format(round(p_s, 3)),
+          '\n', _("Use safe pressure {} as maximum allowable pressure.").format(round(p_s, 3)),
         ])
         return p_s

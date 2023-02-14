@@ -144,8 +144,7 @@ class Context(ContextBase):
               _("The relative defect depth {} less than {}%.").format(
                 round(self.relative_depth, 3), border
               ),
-              '\n',
-              _("Set Parameter B value to {}").format(b_max),
+              '\n', _("Set Parameter B value to {}").format(b_max),
             ])
             return b_max
 
@@ -159,7 +158,7 @@ class Context(ContextBase):
 
         self.add_explain([
           '\n',
-          _("B = sqrt(pow({} / (1.1 * {} - 0.15), 2) - 1) = {}").format(
+          "B = sqrt(pow({} / (1.1 * {} - 0.15), 2) - 1) = {}".format(
             round(rel, 3), round(rel, 3), b_val
           ),
         ])
@@ -173,8 +172,8 @@ class Context(ContextBase):
         pipe = self.anomaly.pipe
         self.add_explain([
           '\n',
-          _("A = 0.823 * defect_length / sqrt(diameter * wallthickness)"),
-          _("A = 0.823 * {} / sqrt({} * {}) = {}").format(
+          "A = 0.823 * defect_length / sqrt(diameter * wallthickness)",
+          "A = 0.823 * {} / sqrt({} * {}) = {}".format(
             max_length, pipe.diameter, pipe.wallthickness, round(a_val, 3)
           ),
         ])
@@ -199,8 +198,8 @@ class Context(ContextBase):
 
         self.add_explain([
           '\n',
-          _("L = 1.12 * B * sqrt(diameter * wallthickness)"),
-          _("L = 1.12 * {} * sqrt({} * {}) = {}").format(
+          "L = 1.12 * B * sqrt(diameter * wallthickness)",
+          "L = 1.12 * {} * sqrt({} * {}) = {}".format(
             round(b_val, 3), pipe.diameter, pipe.wallthickness, round(length, 3)
           ),
         ])
@@ -215,9 +214,9 @@ class Context(ContextBase):
 
         self.add_explain([
           '\n',
-          _("Design_press = 2 * material_smys * wallthickness * design_factor * temperature_factor / diam."),
+          "Design_press = 2 * material_smys * wallthickness * design_factor * temperature_factor / diam.",
           '\n',
-          _("Design_press = 2 * {} * {} * {} * {} / {} = {}.").format(
+          "Design_press = 2 * {} * {} * {} * {} / {} = {}.".format(
             smys, pipe.wallthickness, self.design_factor, self.temperature_factor,
             pipe.diameter, round(p_v, 3)
           ),
@@ -246,8 +245,8 @@ class Context(ContextBase):
             p_s = tmp * (1 - d_t)
             self.add_explain([
               '\n', _("Parameter A more than 4."),
-              '\n', _("Safe pressure = 1.1 * design_press * (1 - rel_depth)."),
-              '\n', _("Safe pressure = 1.1 * {} * (1 - {}) = {}.").format(
+              '\n', "Safe_press = 1.1 * design_press * (1 - rel_depth).",
+              '\n', "Safe_press = 1.1 * {} * (1 - {}) = {}.".format(
                 round(p_val, 3), round(d_t, 3), round(p_s, 3)
               ),
             ])
@@ -257,19 +256,20 @@ class Context(ContextBase):
             p_s = tmp * ((1 - v23 * d_t) / (1 - v23 * d_t / a_pow))
             self.add_explain([
               '\n', _("Parameter A less than 4."),
-              '\n', _("a_pow = sqrt(pow(a_param, 2) + 1)."),
-              '\n', _("a_pow = sqrt(pow({}, 2) + 1) = {}.").format(round(a_val, 3), round(a_pow, 3)),
+              '\n', "a_pow = sqrt(pow(a_param, 2) + 1).",
+              '\n', "a_pow = sqrt(pow({}, 2) + 1) = {}.".format(round(a_val, 3), round(a_pow, 3)),
               '\n',
-              _("Safe pressure = 1.1 * design_press * ((1 - 2/3 * rel_depth) / (1 - 2/3 * rel_depth / a_pow))."),
-              '\n',
-              _("Safe pressure = 1.1 * {} * ((1 - 2/3 * {}) / (1 - 2/3 * {} / {})) = {}.").format(
+              "Safe_press = 1.1 * design_press * ((1 - 2/3 * rel_depth) / (1 - 2/3 * rel_depth / a_pow)).",
+              '\n', "Safe_press = 1.1 * {} * ((1 - 2/3 * {}) / (1 - 2/3 * {} / {})) = {}.".format(
                 round(p_val, 3), round(d_t, 3), round(d_t, 3), round(a_pow, 3), round(p_s, 3)
               ),
             ])
 
         if p_s > p_val:
             self.add_explain([
-              '\n', _("Safe pressure more than design pressure."),
+              '\n', _("Safe pressure {} more than design pressure {}.").format(
+                round(p_s, 3), round(p_val, 3)
+              ),
               '\n', _("Use design pressure {} as maximum allowable pressure.").format(round(p_val, 3)),
             ])
             return p_val

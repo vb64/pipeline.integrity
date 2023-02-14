@@ -67,7 +67,8 @@ class TestsReadme(TestMethod):
         assert pipe.maop == 900
         assert round(asme.safe_pressure, 2) == 700.68
         pipe.maop = 700
-        assert asme.pipe_state() == State.Defected
+        assert asme.pipe_state(is_explain=True) == State.Defected
+        assert 'defect is not dangerous' in asme.explain()
 
     @staticmethod
     def test_ru():
@@ -124,7 +125,8 @@ class TestsReadme(TestMethod):
         assert pipe.maop == 7
         assert round(asme.safe_pressure, 2) == 3.96
         pipe.maop = 3.95
-        assert asme.pipe_state() == State.Defected
+        assert asme.pipe_state(is_explain=True) == State.Defected
+        assert 'defect is not dangerous' in asme.explain()
 
 
 class TestsCrvlBas(TestMethod):

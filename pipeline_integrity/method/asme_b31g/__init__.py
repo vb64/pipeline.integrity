@@ -141,7 +141,7 @@ class Context(ContextBase):
         if self.relative_depth < border:
             self.add_explain([
               '\n',
-              _("The relative defect depth {} less then {}%.").format(
+              _("The relative defect depth {} less than {}%.").format(
                 round(self.relative_depth, 3), border
               ),
               '\n',
@@ -151,7 +151,7 @@ class Context(ContextBase):
 
         self.add_explain([
           '\n',
-          _("The relative defect depth {} more then {}%.").format(round(self.relative_depth, 3), border),
+          _("The relative defect depth {} more than {}%.").format(round(self.relative_depth, 3), border),
         ])
 
         rel = self.relative_depth / 100.0
@@ -208,21 +208,42 @@ class Context(ContextBase):
         self.add_explain([
           '\n',
           _("Calculation of the maximum allowable pressure."),
+          '\n', _("Parameter A."),
         ])
 
         a_val = self.get_a(self.anomaly.length)
+
+        self.add_explain([
+          '\n', _("Design pressure."),
+        ])
         p_val = self.get_design_pressure()
+
         d_t = self.relative_depth / 100.0
         tmp = 1.1 * p_val
 
         if a_val > 4.0:
+            self.add_explain([
+              '\n', _("Parameter A more than 4."),
+            ])
             p_s = tmp * (1 - d_t)
         else:
+            self.add_explain([
+              '\n', _("Parameter A less than 4."),
+            ])
             v23 = 2.0 / 3.0
             a_pow = math.sqrt(math.pow(a_val, 2) + 1)
             p_s = tmp * ((1 - v23 * d_t) / (1 - v23 * d_t / a_pow))
 
         if p_s > p_val:
+            self.add_explain([
+              '\n',
+              _("Safe pressure more than design pressure."),
+              '\n',
+              _("Use design pressure {} as maximum allowable pressure.").format(round(p_val, 3)),
+            ])
             return p_val
 
+        self.add_explain([
+          '\n', _("Use pressure pressure {} as maximum allowable pressure.").format(round(p_s, 3)),
+        ])
         return p_s

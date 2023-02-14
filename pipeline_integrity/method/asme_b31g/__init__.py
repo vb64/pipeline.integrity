@@ -168,7 +168,18 @@ class Context(ContextBase):
 
     def get_a(self, max_length):
         """Parameter A from method description."""
-        return 0.823 * max_length / self.diam_wall
+        a_val = 0.823 * max_length / self.diam_wall
+
+        pipe = self.anomaly.pipe
+        self.add_explain([
+          '\n',
+          _("A = 0.823 * defect_length / sqrt(diameter * wallthickness)"),
+          _("A = 0.823 * {} / sqrt({} * {}) = {}").format(
+            max_length, pipe.diameter, pipe.wallthickness, round(a_val, 3)
+          ),
+        ])
+
+        return a_val
 
     @property
     def diam_wall(self):
@@ -208,7 +219,7 @@ class Context(ContextBase):
         self.add_explain([
           '\n',
           _("Calculation of the maximum allowable pressure."),
-          '\n', _("Parameter A."),
+          '\n', _("Parameter A for defect length {}.").format(self.anomaly.length),
         ])
         a_val = self.get_a(self.anomaly.length)
 

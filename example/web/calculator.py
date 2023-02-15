@@ -33,9 +33,9 @@ def asme():
     if state == State.Replace:
         g.result = "Replacement of the pipe is necessary."
     elif state == State.Repair:
-        g.result = "Repair of the pipe is necessary."
+        g.result = "Repair or pressure reduction to {} required.".format(round(model.safe_pressure, 2))
 
-    g.explain = model.explain()
+    g.explain = model.explain().replace('\n', '<br>')
     g.asme = model
 
     return render_template('asme.html', g=g)

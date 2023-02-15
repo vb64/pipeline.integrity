@@ -1,14 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>Online calculator with PipelineIntegrity library</h1>
+<p>
+Online calculator the degree of danger of pipeline defects with
+<a href="https://github.com/vb64/pipeline.integrity">PipelineIntegrity library</a>.
+</p>
 
 <p>
 Choose the method for calculation.
 </p>
 
-<div><p>
-<a href="/asme/">ASME B31G</a>.
-</p></div>
+<div>
+<a href="{{ g.asme_url }}">ASME B31G</a>.
+</div>
 
 {% endblock %}

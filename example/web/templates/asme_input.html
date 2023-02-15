@@ -5,13 +5,64 @@
 ASME B31G method input data.
 </p>
 
-<p>
-Pipe
-</p>
+<form role="form" method="POST" action="">
 
-<p>
-Defect
-</p>
+<table>
 
+<tr>
+<td><b>Pipe</b></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>Diameter</td>
+<td><input type="text" name="diameter" class="form-control" value="{{ g.asme.anomaly.pipe.diameter }}"></td>
+<td>mm</td>
+</tr>
+
+<tr>
+<td>Wall thickness</td>
+<td><input type="text" name="wall" class="form-control" value="{{ g.asme.anomaly.pipe.wallthickness }}"></td>
+<td>mm</td>
+</tr>
+
+<tr>
+<td>Material SMYS</td>
+<td><input type="text" name="smys" class="form-control" value="{{ g.asme.anomaly.pipe.material.yield_strength }}"></td>
+<td>MPa</td>
+</tr>
+
+<tr>
+<td>Pressure</td>
+<td><input type="text" name="pressure" class="form-control" value="{{ g.asme.anomaly.pipe.maop }}"></td>
+<td>MPa</td>
+</tr>
+
+<tr>
+<td><b>Defect</b></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>Length</td>
+<td><input type="text" name="length" class="form-control" value="{{ g.asme.anomaly.length }}"></td>
+<td>mm</td>
+</tr>
+
+<tr>
+<td>Depth</td>
+<td><input type="text" name="depth" class="form-control" value="{{ g.asme.anomaly.depth }}"></td>
+<td>mm</td>
+</tr>
+
+</table>
+
+<div class="form-group">
+  <button type="submit" class="btn btn-info">Calculate</button>
+</div>
+
+</form>
 
 {% endblock %}

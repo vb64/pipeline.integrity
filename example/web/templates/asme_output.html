@@ -2,8 +2,64 @@
 {% block content %}
 
 <p>
-ASME B31G method result
+ASME B31G method.
 </p>
+
+<p>
+Input data.
+</p>
+
+<table>
+
+<tr>
+<td><b>Pipe</b></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>Diameter</td>
+<td>{{ g.asme.anomaly.pipe.diameter }}</td>
+<td>mm</td>
+</tr>
+
+<tr>
+<td>Wall thickness</td>
+<td>{{ g.asme.anomaly.pipe.wallthickness }}</td>
+<td>mm</td>
+</tr>
+
+<tr>
+<td>Material SMYS</td>
+<td>{{ g.asme.anomaly.pipe.material.yield_strength }}</td>
+<td>MPa</td>
+</tr>
+
+<tr>
+<td>Pressure</td>
+<td>{{ g.asme.anomaly.pipe.maop }}</td>
+<td>MPa</td>
+</tr>
+
+<tr>
+<td><b>Defect</b></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>Length</td>
+<td>{{ g.asme.anomaly.length }}</td>
+<td>mm</td>
+</tr>
+
+<tr>
+<td>Depth</td>
+<td>{{ g.asme.anomaly.depth }}</td>
+<td>mm</td>
+</tr>
+
+</table>
 
 <p>
 <a href="{{ g.asme_url }}">Another calculation</a>.

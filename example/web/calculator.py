@@ -37,5 +37,15 @@ def asme():
 
 
 def calc_asme():
+    model.anomaly.pipe.diameter = float(request.form['diameter'])
+    model.anomaly.pipe.wallthickness = float(request.form['wall'])
+    model.anomaly.pipe.material.yield_strength = float(request.form['smys'])
+    model.anomaly.pipe.maop = float(request.form['pressure'])
+
+    model.anomaly.length = float(request.form['length'])
+    model.anomaly.depth = float(request.form['depth'])
+
+    g.asme = model
     g.asme_url = url_for('asme')
+
     return render_template('asme_output.html', g=g)

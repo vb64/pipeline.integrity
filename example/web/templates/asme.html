@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 
-<p>
-ASME B31G method input data.
-</p>
+<h1>
+ASME B31G method
+</h1>
 
 <form role="form" method="POST" action="">
 
@@ -64,5 +64,21 @@ ASME B31G method input data.
 </div>
 
 </form>
+
+<h1>
+Result
+</h1>
+
+<div>
+{{ g.result }}
+</div>
+
+<h1>
+Explanation
+</h1>
+
+<div>
+{{ g.explain }}
+</div>
 
 {% endblock %}

@@ -11,7 +11,7 @@ PIP = $(PYTHON) -m pip install
 all: run
 
 run:
-	$(PYTHON) -m flask --env-file .env run
+	$(PYTHON) -m flask --debug --env-file .env run
 
 setup: setup_python setup_pip
 

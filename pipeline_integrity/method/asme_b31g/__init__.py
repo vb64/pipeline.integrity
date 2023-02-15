@@ -71,7 +71,7 @@ class Context(ContextBase):
 
             self.add_explain([
               '\n', _("The relative defect depth less than {}% from wall thickness.").format(
-                DEPTH_CRITICAL_PERCENT
+                DEPTH_OK_PERCENT
               ),
               '\n', _("The defect is not dangerous."),
             ])
@@ -81,7 +81,7 @@ class Context(ContextBase):
 
             self.add_explain([
               '\n', _("The relative defect depth greater than {}% from wall thickness.").format(
-                DEPTH_OK_PERCENT
+                DEPTH_CRITICAL_PERCENT
               ),
               '\n', _("The defect needs to be repaired."),
             ])

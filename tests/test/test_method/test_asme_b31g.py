@@ -43,12 +43,14 @@ class TestsReadme(TestMethod):
         # defect depth less than 10% wall thickness, no danger.
         assert defect.depth == 0.039
         assert pipe.wallthickness == 0.63
-        assert asme.pipe_state() == State.Ok
+        assert asme.pipe_state(is_explain=True) == State.Ok
+        assert '10%' in asme.explain()
 
         # the depth of the defect is more than 80% of the pipe wall thickness,
         # repair or replacement of the pipe is necessary.
         defect.depth = 0.6
-        assert asme.pipe_state() == State.Replace
+        assert asme.pipe_state(is_explain=True) == State.Replace
+        assert '80%' in asme.explain()
 
         # the depth of the defect is 50% of the pipe wall thickness, but the length of the defect
         # does not exceed its maximum allowable length.

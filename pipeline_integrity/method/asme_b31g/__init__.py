@@ -4,11 +4,12 @@ https://pypi.org/project/pyintegrity/
 https://github.com/novanumeric/WebIntegrity
 https://edu.truboprovod.ru/kbase/doc/start/WebHelp_ru/ASMEB31G.htm
 """
+import os
 import math
 
 from .. import Context as ContextBase
 from ...defect import Type
-from ...i18n import fake_gettext as _
+from ...i18n import load_po, fake_gettext as _
 
 DEPTH_OK_PERCENT = 10
 DEPTH_CRITICAL_PERCENT = 80
@@ -38,6 +39,12 @@ class Context(ContextBase):
         super(Context, self).__init__(defect)
         self.safe_pressure = None
 
+    @classmethod
+    def lang(cls, lang_code):
+        """Load language dict for localize explain text."""
+        name = os.path.join(os.path.dirname(__file__), 'locale', lang_code, 'LC_MESSAGES', 'messages.po')
+        return load_po(name)
+
     @property
     def relative_depth(self):
         """Return defect depth as percent from pipe wall thickness."""
@@ -61,7 +68,7 @@ class Context(ContextBase):
         result = State.Repair
 
         self.add_explain([
-          _("The relative defect depth == defect depth / pipe wall thickness * 100%."),
+          _("The relative defect depth == defect depth / pipe wall thickness * 100%.", self),
           '\n', "{} / {} * 100 = {}".format(
             self.anomaly.depth, self.anomaly.pipe.wallthickness, round(self.relative_depth, EXPL_ROUND)
           ),
@@ -70,20 +77,20 @@ class Context(ContextBase):
         if self.is_ok:
 
             self.add_explain([
-              '\n', _("The relative defect depth less than {}% from wall thickness.").format(
+              '\n', _("The relative defect depth less than {}% from wall thickness.", self).format(
                 DEPTH_OK_PERCENT
               ),
-              '\n', _("The defect is not dangerous."),
+              '\n', _("The defect is not dangerous.", self),
             ])
             result = State.Ok
 
         elif self.is_replace:
 
             self.add_explain([
-              '\n', _("The relative defect depth greater than {}% from wall thickness.").format(
+              '\n', _("The relative defect depth greater than {}% from wall thickness.", self).format(
                 DEPTH_CRITICAL_PERCENT
               ),
-              '\n', _("The defect needs to be repaired."),
+              '\n', _("The defect needs to be repaired.", self),
             ])
             result = State.Replace
 
@@ -93,10 +100,10 @@ class Context(ContextBase):
             if max_length > self.anomaly.length:
                 self.add_explain([
                   '\n',
-                  _("The length of the defect {} does not exceed the maximum allowable length {}.").format(
+                  _("The length of the defect {} does not exceed the maximum allowable length {}.", self).format(
                     self.anomaly.length, round(max_length, EXPL_ROUND)
                   ),
-                  '\n', _("The defect is not dangerous."),
+                  '\n', _("The defect is not dangerous.", self),
                 ])
 
                 result = State.Safe
@@ -105,26 +112,26 @@ class Context(ContextBase):
 
                 self.add_explain([
                   '\n',
-                  _("The length of the defect {} exceed the maximum allowable length {}.").format(
+                  _("The length of the defect {} exceed the maximum allowable length {}.", self).format(
                     self.anomaly.length, round(max_length, EXPL_ROUND)
                   ),
-                  '\n', _("It is necessary to calculate the allowable pressure for defect."),
+                  '\n', _("It is necessary to calculate the allowable pressure for defect.", self),
                 ])
 
                 self.safe_pressure = self.get_safe_pressure()
                 if self.safe_pressure > self.anomaly.pipe.maop:
                     self.add_explain([
                       '\n',
-                      _("The working pressure {} does not exceed the allowable pressure {}.").format(
+                      _("The working pressure {} does not exceed the allowable pressure {}.", self).format(
                         self.anomaly.pipe.maop, round(self.safe_pressure, EXPL_ROUND)
                       ),
-                      '\n', _("The defect is not dangerous."),
+                      '\n', _("The defect is not dangerous.", self),
                     ])
                     result = State.Defected
                 else:
                     self.add_explain([
                       '\n',
-                      _("Repair or pressure reduction to {} required.").format(
+                      _("Repair or pressure reduction to {} required.", self).format(
                         round(self.safe_pressure, 2)
                       ),
                     ])
@@ -134,7 +141,7 @@ class Context(ContextBase):
     def get_b(self):
         """Parameter B from method description."""
         self.add_explain([
-          '\n', _("Parameter B."),
+          '\n', _("Parameter B.", self),
         ])
 
         b_max = 4.0
@@ -142,16 +149,18 @@ class Context(ContextBase):
         if self.relative_depth < border:
             self.add_explain([
               '\n',
-              _("The relative defect depth {} less than {}%.").format(
+              _("The relative defect depth {} less than {}%.", self).format(
                 round(self.relative_depth, EXPL_ROUND), border
               ),
-              '\n', _("Set Parameter B value to {}").format(b_max),
+              '\n', _("Set Parameter B value to {}.", self).format(b_max),
             ])
             return b_max
 
         self.add_explain([
           '\n',
-          _("The relative defect depth {} more than {}%.").format(round(self.relative_depth, EXPL_ROUND), border),
+          _("The relative defect depth {} more than {}%.", self).format(
+            round(self.relative_depth, EXPL_ROUND), border
+          ),
         ])
 
         rel = self.relative_depth / 100.0
@@ -190,7 +199,7 @@ class Context(ContextBase):
         """Return maximum allowable longitudinal extent of corrosion."""
         self.add_explain([
           '\n',
-          _("Calculation of the maximum allowable defect length."),
+          _("Calculation of the maximum allowable defect length.", self),
         ])
         b_val = self.get_b()
         length = 1.12 * b_val * self.diam_wall
@@ -228,13 +237,13 @@ class Context(ContextBase):
         """Return acceptable pressure level."""
         self.add_explain([
           '\n',
-          _("Calculation of the maximum allowable pressure."),
-          '\n', _("Parameter A for defect length {}.").format(self.anomaly.length),
+          _("Calculation of the maximum allowable pressure.", self),
+          '\n', _("Parameter A for defect length {}.", self).format(self.anomaly.length),
         ])
         a_val = self.get_a(self.anomaly.length)
 
         self.add_explain([
-          '\n', _("Design pressure."),
+          '\n', _("Design pressure.", self),
         ])
         p_val = self.get_design_pressure()
 
@@ -244,7 +253,7 @@ class Context(ContextBase):
         if a_val > 4.0:
             p_s = tmp * (1 - d_t)
             self.add_explain([
-              '\n', _("Parameter A more than 4."),
+              '\n', _("Parameter A more than 4.", self),
               '\n', "Safe_press = 1.1 * design_press * (1 - rel_depth).",
               '\n', "Safe_press = 1.1 * {} * (1 - {}) = {}.".format(
                 round(p_val, EXPL_ROUND), round(d_t, EXPL_ROUND), round(p_s, EXPL_ROUND)
@@ -255,7 +264,7 @@ class Context(ContextBase):
             a_pow = math.sqrt(math.pow(a_val, 2) + 1)
             p_s = tmp * ((1 - v23 * d_t) / (1 - v23 * d_t / a_pow))
             self.add_explain([
-              '\n', _("Parameter A less than 4."),
+              '\n', _("Parameter A less than 4.", self),
               '\n', "a_pow = sqrt(pow(a_param, 2) + 1).",
               '\n', "a_pow = sqrt(pow({}, 2) + 1) = {}.".format(
                 round(a_val, EXPL_ROUND), round(a_pow, EXPL_ROUND)
@@ -270,14 +279,15 @@ class Context(ContextBase):
 
         if p_s > p_val:
             self.add_explain([
-              '\n', _("Safe pressure {} more than design pressure {}.").format(
+              '\n', _("Safe pressure {} more than design pressure {}.", self).format(
                 round(p_s, EXPL_ROUND), round(p_val, EXPL_ROUND)
               ),
-              '\n', _("Use design pressure {} as maximum allowable pressure.").format(round(p_val, EXPL_ROUND)),
+              '\n',
+              _("Use design pressure {} as maximum allowable pressure.", self).format(round(p_val, EXPL_ROUND)),
             ])
             return p_val
 
         self.add_explain([
-          '\n', _("Use safe pressure {} as maximum allowable pressure.").format(round(p_s, EXPL_ROUND)),
+          '\n', _("Use safe pressure {} as maximum allowable pressure.", self).format(round(p_s, EXPL_ROUND)),
         ])
         return p_s

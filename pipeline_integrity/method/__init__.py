@@ -23,6 +23,11 @@ class Context(object):
         self.explain_text = []
         self.is_explain = False
 
+    @classmethod
+    def lang(cls, _lang_code):
+        """Load language dict for localize explain text."""
+        raise NotImplementedError("{}.lang".format(cls.__class__.__name__))
+
     def explain(self):
         """Return text with explanation for calculation."""
         return ''.join(self.explain_text)

@@ -127,8 +127,12 @@ class TestsReadme(TestMethod):
         assert pipe.maop == 7
         assert round(asme.safe_pressure, 2) == 3.96
         pipe.maop = 3.95
-        assert asme.pipe_state(is_explain=True) == State.Defected
-        assert 'defect is not dangerous' in asme.explain()
+
+        from pipeline_integrity.i18n import Lang
+
+        lang_ru = asme.lang(Lang.Ru)
+        assert asme.pipe_state(is_explain=lang_ru) == State.Defected
+        assert 'Дефект не опасен.' in asme.explain()
 
 
 class TestsCrvlBas(TestMethod):
@@ -338,3 +342,11 @@ class TestsAsme(TestMethod):
 
         defect.depth = 5
         assert round(asme_b31g.defect_max_length(), 1) == 100.1
+
+    def test_lang(self):
+        """Function defect_max_length."""
+        from pipeline_integrity.i18n import Lang
+        from pipeline_integrity.method.asme_b31g import Context
+
+        asme = Context(self.pipe.add_metal_loss(10, 100, 10, 20, 1.5))
+        assert len(asme.lang(Lang.Ru)) == 23

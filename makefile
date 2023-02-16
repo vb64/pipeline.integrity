@@ -4,14 +4,17 @@ ifeq ($(OS),Windows_NT)
 PYTHON = venv/Scripts/python.exe
 PTEST = venv/Scripts/pytest.exe
 COVERAGE = venv/Scripts/coverage.exe
+PYBABEL = venv/Scripts/pybabel.exe
 else
 PYTHON = ./venv/bin/python
 PTEST = ./venv/bin/pytest
 COVERAGE = ./venv/bin/coverage
+PYBABEL = ./venv/bin/pybabel
 endif
 
 SOURCE = pipeline_integrity
 TESTS = tests
+LOCALE_ASME = $(SOURCE)/method/asme_b31g/locale
 
 FLAKE8 = $(PYTHON) -m flake8 --max-line-length=120
 PYLINT = $(PYTHON) -m pylint
@@ -48,6 +51,12 @@ tests2: flake8 pep257 lint2
 	$(PYTEST) --durations=5 $(TESTS)
 	$(COVERAGE) html --skip-covered
 
+po: po_asme
+
+po_asme:
+	$(PYBABEL) extract -F $(LOCALE_ASME)/babel.cfg -o $(LOCALE_ASME)/messages.pot .
+	$(PYBABEL) update -i $(LOCALE_ASME)/messages.pot -d $(LOCALE_ASME) -l ru
+
 package:
 	$(PYTHON) -m build -n
 
@@ -63,6 +72,7 @@ setup2: setup_python2 setup_pip
 
 setup_pip:
 	$(PIP) --upgrade pip
+	$(PIP) -r requirements.txt
 	$(PIP) -r $(TESTS)/requirements.txt
 	$(PIP) -r deploy.txt
 

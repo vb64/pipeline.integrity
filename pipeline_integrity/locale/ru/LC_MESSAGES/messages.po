@@ -1,0 +1,120 @@
+# Russian translations for PROJECT.
+# Copyright (C) 2023 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2023-02-16 10:18+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ru\n"
+"Language-Team: ru <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.11.0\n"
+
+#: pipeline_integrity/method/asme_b31g/__init__.py:64
+msgid "The relative defect depth == defect depth / pipe wall thickness * 100%."
+msgstr "Относительная глубина дефекта == глубина / толщина стенки  * 100%."
+
+#: pipeline_integrity/method/asme_b31g/__init__.py:73
+#, python-format
+msgid "The relative defect depth less than {}% from wall thickness."
+msgstr "Относительная глубина дефекта меньше {}% толщины стенки."
+
+#: pipeline_integrity/method/asme_b31g/__init__.py:76
+#: pipeline_integrity/method/asme_b31g/__init__.py:99
+#: pipeline_integrity/method/asme_b31g/__init__.py:121
+msgid "The defect is not dangerous."
+msgstr "Дефект не опасен."
+
+#: pipeline_integrity/method/asme_b31g/__init__.py:83
+#, python-format
+msgid "The relative defect depth greater than {}% from wall thickness."
+msgstr "Относительная глубина дефекта больше {}% толщины стенки."
+
+#: pipeline_integrity/method/asme_b31g/__init__.py:86
+msgid "The defect needs to be repaired."
+msgstr "Дефект нужно ремонтировать."
+
+#: pipeline_integrity/method/asme_b31g/__init__.py:96
+msgid ""
+"The length of the defect {} does not exceed the maximum allowable length "
+"{}."
+msgstr "Длина дефекта {} не превышает максимально допустимую длину {}."
+
+#: pipeline_integrity/method/asme_b31g/__init__.py:108
+msgid "The length of the defect {} exceed the maximum allowable length {}."
+msgstr "Длина дефекта {} превышает максимально допустимую длину {}."
+
+#: pipeline_integrity/method/asme_b31g/__init__.py:111
+msgid "It is necessary to calculate the allowable pressure for defect."
+msgstr "Необходимо рассчитать допустимое давление для дефекта."
+
+#: pipeline_integrity/method/asme_b31g/__init__.py:118
+msgid "The working pressure {} does not exceed the allowable pressure {}."
+msgstr "Рабочее давление {} не превышает допустимое давление {}."
+
+#: pipeline_integrity/method/asme_b31g/__init__.py:127
+msgid "Repair or pressure reduction to {} required."
+msgstr "Необходим ремонт или снижение давления до {}."
+
+#: pipeline_integrity/method/asme_b31g/__init__.py:137
+msgid "Parameter B."
+msgstr "Параметр B."
+
+#: pipeline_integrity/method/asme_b31g/__init__.py:145
+msgid "The relative defect depth {} less than {}%."
+msgstr "Относительная глубина дефекта {} меньше {}%."
+
+#: pipeline_integrity/method/asme_b31g/__init__.py:148
+msgid "Set Parameter B value to {}."
+msgstr "Параметр B ghbybvftncz hfdysv {}."
+
+#: pipeline_integrity/method/asme_b31g/__init__.py:154
+msgid "The relative defect depth {} more than {}%."
+msgstr "Относительная глубина дефекта {} больше {}%."
+
+#: pipeline_integrity/method/asme_b31g/__init__.py:193
+msgid "Calculation of the maximum allowable defect length."
+msgstr "Расчет максимально допустимой длины дефекта."
+
+#: pipeline_integrity/method/asme_b31g/__init__.py:231
+msgid "Calculation of the maximum allowable pressure."
+msgstr "Расчет максимально допустимого давления."
+
+#: pipeline_integrity/method/asme_b31g/__init__.py:232
+msgid "Parameter A for defect length {}."
+msgstr "Параметр A для дефекта длиной {}."
+
+#: pipeline_integrity/method/asme_b31g/__init__.py:237
+msgid "Design pressure."
+msgstr "Расчетное давление."
+
+#: pipeline_integrity/method/asme_b31g/__init__.py:247
+msgid "Parameter A more than 4."
+msgstr "Параметр A больше 4."
+
+#: pipeline_integrity/method/asme_b31g/__init__.py:258
+msgid "Parameter A less than 4."
+msgstr "Параметр A меньше 4."
+
+#: pipeline_integrity/method/asme_b31g/__init__.py:273
+msgid "Safe pressure {} more than design pressure {}."
+msgstr "Безопасное давление {} превышает расчетное давление {}."
+
+#: pipeline_integrity/method/asme_b31g/__init__.py:276
+msgid "Use design pressure {} as maximum allowable pressure."
+msgstr "Используем расчетное давление как максимально допустимое давление."
+
+#: pipeline_integrity/method/asme_b31g/__init__.py:281
+msgid "Use safe pressure {} as maximum allowable pressure."
+msgstr "Используем безопасное давление как максимально допустимое давление."
+

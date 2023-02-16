@@ -145,7 +145,7 @@ class Context(ContextBase):
               _("The relative defect depth {} less than {}%.").format(
                 round(self.relative_depth, EXPL_ROUND), border
               ),
-              '\n', _("Set Parameter B value to {}").format(b_max),
+              '\n', _("Set Parameter B value to {}.").format(b_max),
             ])
             return b_max
 

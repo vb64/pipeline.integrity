@@ -1,4 +1,5 @@
 """Localization stuff."""
+from py23 import open_text_file, gen_next
 
 
 class Lang:
@@ -21,10 +22,10 @@ def read_item(sign, line, inp):
     Return tuple from item and last read line.
     """
     item = [line.strip().split(sign)[1].strip('"')]
-    line = inp.__next__().strip()  # pylint: disable=unnecessary-dunder-call
+    line = gen_next(inp).strip()
     while line.startswith('"'):
         item.append(line.strip('"'))
-        line = inp.__next__().strip()  # pylint: disable=unnecessary-dunder-call
+        line = gen_next(inp).strip()
 
     return (''.join(item), line)
 
@@ -40,7 +41,7 @@ def read_pair(line, inp):
 def load_po(file_name):
     """Load data from given po file and return it as dict."""
     data = {}
-    with open(file_name, 'rt', encoding='utf-8') as inp:
+    with open_text_file(file_name, 'r', 'utf-8') as inp:
         for line in inp:
             if line.startswith('msgid '):
                 msgid, msgstr = read_pair(line, inp)

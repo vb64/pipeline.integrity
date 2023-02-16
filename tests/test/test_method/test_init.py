@@ -29,7 +29,8 @@ class TestsContext(TestMethod):
         asme.add_explain(['zz'])
         assert asme.explain() == 'xxyyzz'
 
-    def test_lang(self):
+    @staticmethod
+    def test_lang():
         """Method lang."""
         from pipeline_integrity.method import Context
 

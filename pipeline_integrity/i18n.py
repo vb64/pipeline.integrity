@@ -7,8 +7,11 @@ class Lang:
     Ru = 'ru'
 
 
-def fake_gettext(text):
-    """For marking text to translate."""
+def fake_gettext(text, context):
+    """Translate text in given context."""
+    if isinstance(context.is_explain, dict):
+        return context.is_explain.get(text, text)
+
     return text
 
 

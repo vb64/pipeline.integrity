@@ -9,12 +9,20 @@ from . import TestBase
 class TestsI18n(TestBase):
     """Module i18n.py."""
 
-    @staticmethod
-    def test_fake_gettext():
+    def test_fake_gettext(self):
         """Function fake_gettext."""
-        from pipeline_integrity.i18n import fake_gettext
+        from pipeline_integrity.i18n import fake_gettext, Lang
+        from pipeline_integrity.method.asme_b31g import Context
 
-        assert fake_gettext('xxx') == 'xxx'
+        asme = Context(self.pipe.add_metal_loss(10, 100, 10, 20, 1.5))
+        asme.is_explain = Context.lang(Lang.Ru)
+        assert fake_gettext('xxx', asme) == 'xxx'
+        text = fake_gettext("Parameter B.", asme)
+        assert " B." in text
+        assert "Parameter " not in text
+
+        asme.is_explain = False
+        assert fake_gettext("Parameter B.", asme) == "Parameter B."
 
     @staticmethod
     def test_load_po():

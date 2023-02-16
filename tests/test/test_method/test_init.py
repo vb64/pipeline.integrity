@@ -2,6 +2,7 @@
 
 make test T=test_method/test_init.py
 """
+import pytest
 from . import TestMethod
 
 
@@ -27,3 +28,11 @@ class TestsContext(TestMethod):
         asme.is_explain = True
         asme.add_explain(['zz'])
         assert asme.explain() == 'xxyyzz'
+
+    def test_lang(self):
+        """Method lang."""
+        from pipeline_integrity.method import Context
+
+        with pytest.raises(NotImplementedError) as err:
+            Context.lang('xxx')
+        assert '.lang' in str(err.value)

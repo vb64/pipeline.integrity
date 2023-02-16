@@ -1,6 +1,12 @@
 """Localization stuff."""
 
 
+class Lang:
+    """Embedded languages for localize explain text."""
+
+    Ru = 'ru'
+
+
 def fake_gettext(text):
     """For marking text to translate."""
     return text
@@ -37,8 +43,5 @@ def load_po(file_name):
                 msgid, msgstr = read_pair(line, inp)
                 if msgid and msgstr:
                     data[msgid] = msgstr
-                    print()
-                    print(msgid)
-                    print(msgstr)
 
     return data

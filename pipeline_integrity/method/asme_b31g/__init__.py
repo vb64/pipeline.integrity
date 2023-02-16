@@ -4,11 +4,12 @@ https://pypi.org/project/pyintegrity/
 https://github.com/novanumeric/WebIntegrity
 https://edu.truboprovod.ru/kbase/doc/start/WebHelp_ru/ASMEB31G.htm
 """
+import os
 import math
 
 from .. import Context as ContextBase
 from ...defect import Type
-from ...i18n import fake_gettext as _
+from ...i18n import load_po, fake_gettext as _
 
 DEPTH_OK_PERCENT = 10
 DEPTH_CRITICAL_PERCENT = 80
@@ -37,6 +38,12 @@ class Context(ContextBase):
         """New defect."""
         super(Context, self).__init__(defect)
         self.safe_pressure = None
+
+    @classmethod
+    def lang(cls, lang_code):
+        """Load language dict for localize explain text."""
+        name = os.path.join(os.path.dirname(__file__), 'locale', lang_code, 'LC_MESSAGES', 'messages.po')
+        return load_po(name)
 
     @property
     def relative_depth(self):

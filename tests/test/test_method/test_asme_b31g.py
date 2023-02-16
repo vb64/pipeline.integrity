@@ -338,3 +338,11 @@ class TestsAsme(TestMethod):
 
         defect.depth = 5
         assert round(asme_b31g.defect_max_length(), 1) == 100.1
+
+    def test_lang(self):
+        """Function defect_max_length."""
+        from pipeline_integrity.i18n import Lang
+        from pipeline_integrity.method.asme_b31g import Context
+
+        asme = Context(self.pipe.add_metal_loss(10, 100, 10, 20, 1.5))
+        assert len(asme.lang(Lang.Ru)) == 23

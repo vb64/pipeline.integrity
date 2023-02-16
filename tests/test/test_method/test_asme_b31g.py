@@ -127,8 +127,12 @@ class TestsReadme(TestMethod):
         assert pipe.maop == 7
         assert round(asme.safe_pressure, 2) == 3.96
         pipe.maop = 3.95
-        assert asme.pipe_state(is_explain=True) == State.Defected
-        assert 'defect is not dangerous' in asme.explain()
+
+        from pipeline_integrity.i18n import Lang
+
+        lang_ru = asme.lang(Lang.Ru)
+        assert asme.pipe_state(is_explain=lang_ru) == State.Defected
+        assert 'Дефект не опасен.' in asme.explain()
 
 
 class TestsCrvlBas(TestMethod):

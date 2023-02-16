@@ -25,4 +25,4 @@ class TestsI18n(TestBase):
           'pipeline_integrity', 'method', 'asme_b31g', 'locale',
           'ru', 'LC_MESSAGES', 'messages.po'
         ))
-        assert len(data) == 1
+        assert len(data) == 23

@@ -1,3 +1,6 @@
+16.02.2023 ver.1.2
+------------------
+
 + Localization feature for ASME B31G method explain text
 
 - Fix error in ASME B31G method explain text

@@ -1,7 +1,6 @@
 """Module for i18n stuff."""
 import os
 import gettext
-import jinja2
 
 
 def activate(app, lang_code):

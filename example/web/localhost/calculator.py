@@ -10,10 +10,10 @@ model = Context(Pipe(11200, 1420, 16, Material("Steel", 295), 7
 ).add_metal_loss(1000, 100, 10, 20, 1))
 
 app = Flask(__name__)
-lang = True
 lang_code = os.getenv('LANG_CODE')
 activate(app, lang_code)
 
+lang = True
 if lang_code in [Lang.Ru]:
     lang = model.lang(lang_code)
 
@@ -28,12 +28,7 @@ def main():
 def asme():
     g.asme_url = url_for('asme')
     if request.method == 'POST':
-        model.anomaly.pipe.diameter = float(request.form['diameter'])
-        model.anomaly.pipe.wallthickness = float(request.form['wall'])
-        model.anomaly.pipe.material.yield_strength = float(request.form['smys'])
-        model.anomaly.pipe.maop = float(request.form['pressure'])
-        model.anomaly.length = float(request.form['length'])
-        model.anomaly.depth = float(request.form['depth'])
+        save_form(model.anomaly, request.form)
         return redirect(g.asme_url)
 
     state = model.pipe_state(is_explain=lang)
@@ -48,3 +43,13 @@ def asme():
     g.asme = model
 
     return render_template('asme.html', g=g)
+
+def save_form(defect, form):
+    pipe = defect.pipe
+    pipe.diameter = float(form['diameter'])
+    pipe.wallthickness = float(form['wall'])
+    pipe.material.yield_strength = float(form['smys'])
+    pipe.maop = float(form['pressure'])
+
+    defect.length = float(form['length'])
+    defect.depth = float(form['depth'])

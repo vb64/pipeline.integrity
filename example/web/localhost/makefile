@@ -1,4 +1,4 @@
-.PHONY: all setup run po
+.PHONY: all setup run runru po mo
 # make tests >debug.log 2>&1
 ifeq ($(OS),Windows_NT)
 PYTHON = venv/Scripts/python.exe
@@ -19,6 +19,9 @@ all: run
 
 run:
 	$(PYTHON) -m flask --debug --env-file .env run
+
+runru:
+	$(PYTHON) -m flask --debug --env-file .envru run
 
 po:
 	$(PYBABEL) extract -F $(LOCALE)/babel.cfg -o $(LOCALE)/messages.pot .

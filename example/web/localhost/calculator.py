@@ -2,11 +2,16 @@ from flask import Flask, render_template, request, url_for, redirect, g
 from pipeline_integrity.material import Material
 from pipeline_integrity.pipe import Pipe
 from pipeline_integrity.method.asme_b31g import Context, State
+from pipeline_integrity.i18n import Lang
+from i18n import activate
 
 model = Context(Pipe(11200, 1420, 16, Material("Steel", 295), 7
 ).add_metal_loss(1000, 100, 10, 20, 1))
 
 app = Flask(__name__)
+
+lang_code = Lang.Ru
+activate(lang_code)
 
 
 @app.route('/')
@@ -27,13 +32,13 @@ def asme():
         model.anomaly.depth = float(request.form['depth'])
         return redirect(g.asme_url)
 
-    state = model.pipe_state(is_explain=True)
+    state = model.pipe_state(is_explain=model.lang(lang_code))
 
-    g.result = "No danger."
+    g.result = _("No danger.")
     if state == State.Replace:
-        g.result = "Replacement of the pipe is necessary."
+        g.result = _("Replacement of the pipe is necessary.")
     elif state == State.Repair:
-        g.result = "Repair or pressure reduction to {} required.".format(round(model.safe_pressure, 2))
+        g.result = _("Repair or pressure reduction to {} required.").format(round(model.safe_pressure, 2))
 
     g.explain = model.explain().replace('\n', '<br>')
     g.asme = model

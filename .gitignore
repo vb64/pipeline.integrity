@@ -2,6 +2,7 @@ __pycache__
 *.pyc
 *.log
 *.pot
+*.mo
 .coverage
 htmlcov/*
 venv*

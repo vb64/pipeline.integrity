@@ -11,7 +11,7 @@ model = Context(Pipe(11200, 1420, 16, Material("Steel", 295), 7
 app = Flask(__name__)
 
 lang_code = Lang.Ru
-activate(lang_code)
+activate(app, lang_code)
 
 
 @app.route('/')

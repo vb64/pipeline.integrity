@@ -27,7 +27,7 @@ po:
 mo:
 	$(MSGFMT) $(LOCALE)/ru/$(PO) -o $(LOCALE)/ru/$(MO)
 
-setup: setup_python setup_pip
+setup: setup_python setup_pip mo
 
 setup_pip:
 	$(PIP) --upgrade pip

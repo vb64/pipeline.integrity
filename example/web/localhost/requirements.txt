@@ -2,3 +2,4 @@ python-dotenv==0.21.1
 flask==2.2.2
 pipeline-integrity==1.2
 Babel
+Flask-Babel

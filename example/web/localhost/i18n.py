@@ -1,13 +1,17 @@
 """Module for i18n stuff."""
 import os
 import gettext
+import jinja2
 
 
-def activate(lang_code):
-    """Activate given locale."""
+def activate(app, lang_code):
+    """Activate locale for given language code."""
     locale_path = os.path.dirname(os.path.abspath(__file__))
-    gettext.translation(
+    trans = gettext.translation(
       'messages',
       os.path.join(locale_path, 'locale'),
       languages=[lang_code]
-    ).install()
+    )
+    trans.install()
+    app.jinja_env.add_extension('jinja2.ext.i18n')
+    app.jinja_env.install_gettext_translations(trans)

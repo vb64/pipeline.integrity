@@ -26,6 +26,7 @@ po:
 
 mo:
 	$(MSGFMT) $(LOCALE)/ru/$(PO) -o $(LOCALE)/ru/$(MO)
+	$(MSGFMT) $(LOCALE)/en/$(PO) -o $(LOCALE)/en/$(MO)
 
 setup: setup_python setup_pip mo
 

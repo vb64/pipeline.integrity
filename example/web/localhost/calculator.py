@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request, url_for, redirect, g
 from pipeline_integrity.material import Material
 from pipeline_integrity.pipe import Pipe
@@ -9,9 +10,12 @@ model = Context(Pipe(11200, 1420, 16, Material("Steel", 295), 7
 ).add_metal_loss(1000, 100, 10, 20, 1))
 
 app = Flask(__name__)
-
-lang_code = Lang.Ru
+lang = True
+lang_code = os.getenv('LANG_CODE')
 activate(app, lang_code)
+
+if lang_code in [Lang.Ru]:
+    lang = model.lang(lang_code)
 
 
 @app.route('/')
@@ -32,7 +36,7 @@ def asme():
         model.anomaly.depth = float(request.form['depth'])
         return redirect(g.asme_url)
 
-    state = model.pipe_state(is_explain=model.lang(lang_code))
+    state = model.pipe_state(is_explain=lang)
 
     g.result = _("No danger.")
     if state == State.Replace:

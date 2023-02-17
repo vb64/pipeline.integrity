@@ -7,4 +7,4 @@ $ make setup PYTHON_BIN=/path/to/python3
 $ make run
 ```
 
-Vizit http://127.0.0.1:5000
+Then vizit http://127.0.0.1:5000

@@ -2,4 +2,4 @@
 
 Version for GoogleAppEngine (Python3) platform.
 
-https://cloud.google.com/appengine/docs/standard/python3/runtime
+[Setting up](https://cloud.google.com/appengine/docs/standard/python3/runtime) GAE project.

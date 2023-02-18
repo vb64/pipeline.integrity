@@ -19,7 +19,7 @@ MO = LC_MESSAGES/messages.mo
 PIP = $(PYTHON) -m pip install
 DEPLOY = $(GCLOUD) app deploy --project wot-online-hours
 
-VERSION = test4
+VERSION = test5
 
 all: run
 

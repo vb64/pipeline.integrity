@@ -4,3 +4,4 @@ Version for GoogleAppEngine (Python3) platform.
 
 -   [Setting up](https://cloud.google.com/appengine/docs/standard/python3/runtime) GAE project.
 -   [Setting up](https://cloud.google.com/appengine/docs/standard/setting-up-environment?tab=python) development environment.
+-   [Memcache](https://cloud.google.com/appengine/docs/legacy/standard/python/memcache)

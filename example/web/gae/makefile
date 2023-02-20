@@ -17,7 +17,8 @@ LOCALE = $(SOURCE)/locale
 PO = LC_MESSAGES/messages.po
 MO = LC_MESSAGES/messages.mo
 PIP = $(PYTHON) -m pip install
-DEPLOY = $(GCLOUD) app deploy --project wot-online-hours
+PRJ = wot-online-hours
+DEPLOY = $(GCLOUD) app deploy --project $(PRJ)
 
 VERSION = test5
 
@@ -36,6 +37,10 @@ mo:
 
 deploy:
 	$(DEPLOY) --version $(VERSION) $(SOURCE)/app.yaml
+
+auth:
+	$(GCLOUD) auth application-default set-quota-project $(PRJ)
+	$(GCLOUD) auth application-default login
 
 setup: setup_python setup_pip
 

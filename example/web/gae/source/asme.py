@@ -5,8 +5,8 @@ from google.protobuf.message import DecodeError
 from pipeline_integrity.material import Material
 from pipeline_integrity.pipe import Pipe
 from pipeline_integrity.method.asme_b31g import Context, State
+from i18n import LANG_CODE
 
-lang_code = 'ru'
 asme_page = Blueprint('asme_page', __name__)
 
 
@@ -40,7 +40,7 @@ def show():
         return redirect(g.asme_url)
 
     model = get_model(asme)
-    state = model.pipe_state(is_explain=model.lang(lang_code))
+    state = model.pipe_state(is_explain=model.lang(LANG_CODE))
     g.result = _("No danger.")
 
     if state == State.Replace:

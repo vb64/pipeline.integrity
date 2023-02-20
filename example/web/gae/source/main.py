@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template, url_for, g
 from google.cloud import ndb
-from i18n import activate
+from i18n import activate, LANG_CODE
 from asme import asme_page
 
 # https://stackoverflow.com/questions/43628002/google-vision-api-project-not-passed
@@ -20,7 +20,7 @@ app = Flask(__name__)
 app.wsgi_app = ndb_wsgi_middleware(app.wsgi_app)  # Wrap the app in middleware.
 app.secret_key = b'YourSecretKeyHere'
 app.register_blueprint(asme_page)
-activate(app, 'ru')
+activate(app, LANG_CODE)
 
 
 @app.route('/')

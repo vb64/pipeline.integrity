@@ -2,6 +2,8 @@
 import os
 import gettext
 
+LANG_CODE = 'ru'
+
 
 def activate(app, lang_code):
     """Activate locale for given language code."""

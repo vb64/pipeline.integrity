@@ -28,6 +28,7 @@ activate(app, lang_code)
 
 
 class AsmeB31G(ndb.Model):
+    last_used = ndb.DateTimeProperty(indexed=True, auto_now=True)
     diameter = ndb.FloatProperty(indexed=False, default=1420.0)
     wallthickness = ndb.FloatProperty(indexed=False, default=16.0)
     smys = ndb.FloatProperty(indexed=False, default=295.0)

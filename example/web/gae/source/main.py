@@ -23,7 +23,7 @@ app = Flask(__name__)
 app.wsgi_app = ndb_wsgi_middleware(app.wsgi_app)  # Wrap the app in middleware.
 app.secret_key = b'YourSecretKeyHere'
 
-lang_code = 'en'
+lang_code = 'ru'
 activate(app, lang_code)
 
 
@@ -63,7 +63,7 @@ def asme():
         return redirect(g.asme_url)
 
     model = get_model(asme)
-    state = model.pipe_state(is_explain=True)
+    state = model.pipe_state(is_explain=model.lang(lang_code))
     g.result = _("No danger.")
 
     if state == State.Replace:

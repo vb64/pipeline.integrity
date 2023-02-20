@@ -20,7 +20,7 @@ PIP = $(PYTHON) -m pip install
 PRJ = wot-online-hours
 DEPLOY = $(GCLOUD) app deploy --project $(PRJ)
 
-VERSION = test5
+VERSION = test6
 
 all: run
 

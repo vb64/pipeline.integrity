@@ -1,3 +1,4 @@
+# https://flask.palletsprojects.com/en/2.2.x/blueprints/
 import os
 from flask import Flask, render_template, request, url_for, redirect, session, g
 from google.cloud import ndb

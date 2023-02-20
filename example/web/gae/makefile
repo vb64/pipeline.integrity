@@ -20,7 +20,7 @@ PIP = $(PYTHON) -m pip install
 PRJ = wot-online-hours
 DEPLOY = $(GCLOUD) app deploy --project $(PRJ)
 
-VERSION = test6
+VERSION = work
 
 all: run
 
@@ -35,14 +35,14 @@ mo:
 	$(MSGFMT) $(LOCALE)/ru/$(PO) -o $(LOCALE)/ru/$(MO)
 	$(MSGFMT) $(LOCALE)/en/$(PO) -o $(LOCALE)/en/$(MO)
 
-deploy:
+deploy: mo
 	$(DEPLOY) --version $(VERSION) $(SOURCE)/app.yaml
 
 auth:
 	$(GCLOUD) auth application-default set-quota-project $(PRJ)
 	$(GCLOUD) auth application-default login
 
-setup: setup_python setup_pip
+setup: setup_python setup_pip mo
 
 setup_pip:
 	$(PIP) --upgrade pip

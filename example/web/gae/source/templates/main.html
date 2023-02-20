@@ -2,16 +2,16 @@
 {% block content %}
 
 <p>
-Online calculator the degree of danger of pipeline defects with
-<a href="https://github.com/vb64/pipeline.integrity">PipelineIntegrity library</a>.
+{{ _("Online calculator the degree of danger of pipeline defects with") }}
+<a href="https://github.com/vb64/pipeline.integrity">{{ _("PipelineIntegrity library") }}</a>.
 </p>
 
 <p>
-Choose the method for calculation.
+{{ _("Choose the method for calculation.") }}
 </p>
 
 <div>
-<a href="">ASME B31G</a>.
+<a href="{{ g.asme_url }}">ASME B31G</a>.
 </div>
 
 {% endblock %}

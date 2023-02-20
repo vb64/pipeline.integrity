@@ -13,7 +13,7 @@ MSGFMT = msgfmt
 endif
 
 SOURCE = source
-LOCALE = locale
+LOCALE = $(SOURCE)/locale
 PO = LC_MESSAGES/messages.po
 MO = LC_MESSAGES/messages.mo
 PIP = $(PYTHON) -m pip install
@@ -26,6 +26,14 @@ all: run
 run:
 	$(PYTHON) $(SOURCE)/main.py
 
+po:
+	$(PYBABEL) extract -F $(LOCALE)/babel.cfg -o $(LOCALE)/messages.pot .
+	$(PYBABEL) update -i $(LOCALE)/messages.pot -d $(LOCALE) -l ru
+
+mo:
+	$(MSGFMT) $(LOCALE)/ru/$(PO) -o $(LOCALE)/ru/$(MO)
+	$(MSGFMT) $(LOCALE)/en/$(PO) -o $(LOCALE)/en/$(MO)
+
 deploy:
 	$(DEPLOY) --version $(VERSION) $(SOURCE)/app.yaml
 
@@ -33,6 +41,7 @@ setup: setup_python setup_pip
 
 setup_pip:
 	$(PIP) --upgrade pip
+	$(PIP) -r requirements.txt
 	$(PIP) -r $(SOURCE)/requirements.txt
 
 setup_python:

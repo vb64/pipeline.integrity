@@ -1,0 +1,11 @@
+runtime: python39
+instance_class: F1
+
+automatic_scaling:
+  target_cpu_utilization: 0.8
+  max_instances: 2
+  max_idle_instances: 1
+
+handlers:
+- url: /.*
+  script: auto

@@ -19,6 +19,7 @@ MO = LC_MESSAGES/messages.mo
 PIP = $(PYTHON) -m pip install
 PRJ = wot-online-hours
 DEPLOY = $(GCLOUD) app deploy --project $(PRJ)
+BACK = backend
 
 VERSION = ndbm
 
@@ -26,6 +27,9 @@ all: run
 
 run:
 	$(PYTHON) $(SOURCE)/main.py
+
+back:
+	$(PYTHON) $(BACK)/main.py
 
 po:
 	$(PYBABEL) extract -F $(LOCALE)/babel.cfg -o $(LOCALE)/messages.pot .

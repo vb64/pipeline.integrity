@@ -14,7 +14,7 @@ class AsmeB31G(ndb.Model):
 
 @app.route('/')
 def main():
-    border = datetime.utcnow() - timedelta(days=1)
+    border = datetime.utcnow() - timedelta(days=14)
     query = AsmeB31G.query(AsmeB31G.last_used < border)
     keys = query.fetch(100, keys_only=True)
     if keys:

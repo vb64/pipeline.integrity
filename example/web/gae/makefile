@@ -21,7 +21,7 @@ PRJ = wot-online-hours
 DEPLOY = $(GCLOUD) app deploy --project $(PRJ)
 BACK = backend
 
-BACK_VERSION = test6
+BACK_VERSION = days14
 VERSION = ndbm
 
 all: run
@@ -45,6 +45,9 @@ deploy: mo
 
 deployback:
 	$(DEPLOY) --version $(BACK_VERSION) $(BACK)/app.yaml
+
+cron:
+	$(DEPLOY) cron.yaml
 
 auth:
 	$(GCLOUD) auth application-default login

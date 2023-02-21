@@ -39,8 +39,8 @@ deploy: mo
 	$(DEPLOY) --version $(VERSION) $(SOURCE)/app.yaml
 
 auth:
-	$(GCLOUD) auth application-default set-quota-project $(PRJ)
 	$(GCLOUD) auth application-default login
+	$(GCLOUD) auth application-default set-quota-project $(PRJ)
 
 setup: setup_python setup_pip mo
 

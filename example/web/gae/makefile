@@ -21,7 +21,7 @@ PRJ = wot-online-hours
 DEPLOY = $(GCLOUD) app deploy --project $(PRJ)
 BACK = backend
 
-BACK_VERSION = test5
+BACK_VERSION = test6
 VERSION = ndbm
 
 all: run

@@ -19,6 +19,7 @@ MO = LC_MESSAGES/messages.mo
 PIP = $(PYTHON) -m pip install
 PRJ = wot-online-hours
 DEPLOY = $(GCLOUD) app deploy --project $(PRJ)
+BACK = backend
 
 VERSION = ndbm
 
@@ -26,6 +27,9 @@ all: run
 
 run:
 	$(PYTHON) $(SOURCE)/main.py
+
+back:
+	$(PYTHON) $(BACK)/main.py
 
 po:
 	$(PYBABEL) extract -F $(LOCALE)/babel.cfg -o $(LOCALE)/messages.pot .
@@ -38,6 +42,12 @@ mo:
 deploy: mo
 	$(DEPLOY) --version $(VERSION) $(SOURCE)/app.yaml
 
+deployback:
+	$(DEPLOY) --version $(BACK_VERSION) $(BACK)/app.yaml
+
+cron:
+	$(DEPLOY) cron.yaml
+
 auth:
 	$(GCLOUD) auth application-default login
 	$(GCLOUD) auth application-default set-quota-project $(PRJ)
@@ -48,6 +58,7 @@ setup_pip:
 	$(PIP) --upgrade pip
 	$(PIP) -r requirements.txt
 	$(PIP) -r $(SOURCE)/requirements.txt
+	$(PIP) -r $(BACK)/requirements.txt
 
 setup_python:
 	$(PYTHON_BIN) -m venv ./venv

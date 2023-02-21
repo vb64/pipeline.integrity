@@ -21,6 +21,7 @@ PRJ = wot-online-hours
 DEPLOY = $(GCLOUD) app deploy --project $(PRJ)
 BACK = backend
 
+BACK_VERSION = test1
 VERSION = ndbm
 
 all: run
@@ -42,6 +43,9 @@ mo:
 deploy: mo
 	$(DEPLOY) --version $(VERSION) $(SOURCE)/app.yaml
 
+deployback:
+	$(DEPLOY) --version $(BACK_VERSION) $(BACK)/app.yaml
+
 auth:
 	$(GCLOUD) auth application-default login
 	$(GCLOUD) auth application-default set-quota-project $(PRJ)
@@ -52,6 +56,7 @@ setup_pip:
 	$(PIP) --upgrade pip
 	$(PIP) -r requirements.txt
 	$(PIP) -r $(SOURCE)/requirements.txt
+	$(PIP) -r $(BACK)/requirements.txt
 
 setup_python:
 	$(PYTHON_BIN) -m venv ./venv

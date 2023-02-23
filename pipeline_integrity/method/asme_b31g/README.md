@@ -1,6 +1,6 @@
 # ASME B31G
 
-Source: https://law.resource.org/pub/us/cfr/ibr/002/asme.b31g.1991.pdf
+Source: https://github.com/vb64/pipeline.integrity/blob/main/docs/asme.b31g.1991.pdf
 
 ## PART 1 INTRODUCTION
 

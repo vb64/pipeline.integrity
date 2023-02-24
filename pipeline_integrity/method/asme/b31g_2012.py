@@ -12,18 +12,21 @@ class Context(ContextBase):
     @property
     def relative_depth(self):
         """Return relative depth to wall thickness."""
-        return float(self.anomaly.depth) / self.anomaly.pipe.wallthickness
+        r_d = float(self.anomaly.depth) / self.anomaly.pipe.wallthickness
+        return r_d
 
     @property
     def z_param(self):
         """Parameter z."""
         pipe = self.anomaly.pipe
-        return math.pow(self.anomaly.length, 2) / (pipe.diameter * pipe.wallthickness)
+        z_val = math.pow(self.anomaly.length, 2) / (pipe.diameter * pipe.wallthickness)
+        return z_val
 
     @property
     def m_param(self):
         """Parameter M."""
-        return math.sqrt((1 + 0.8 * self.z_param))
+        m_val = math.sqrt((1 + 0.8 * self.z_param))
+        return m_val
 
     def get_safe_pressure(self):
         """Return acceptable pressure level."""
@@ -33,6 +36,8 @@ class Context(ContextBase):
         if self.z_param <= 20:
             tmp1 = 1 - v23 * self.relative_depth
             tmp2 = 1 - v23 * self.relative_depth / self.m_param
-            return press_flow * (tmp1 / tmp2)
+            s_p = press_flow * (tmp1 / tmp2)
+            return s_p
 
-        return press_flow * (1 - self.relative_depth)
+        s_p = press_flow * (1 - self.relative_depth)
+        return s_p

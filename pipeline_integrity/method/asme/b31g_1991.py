@@ -32,6 +32,11 @@ class Context(ContextBase):
         self.safe_pressure = None
 
     @property
+    def relative_depth(self):
+        """Return defect depth as percent from pipe wall thickness."""
+        return 100.0 * self.anomaly.depth / self.anomaly.pipe.wallthickness
+
+    @property
     def is_ok(self):
         """Return True if state is ok."""
         return self.relative_depth <= DEPTH_OK_PERCENT
@@ -113,7 +118,7 @@ class Context(ContextBase):
                     self.add_explain([
                       '\n',
                       _("Repair or pressure reduction to {} required.", self).format(
-                        round(self.safe_pressure, 2)
+                        round(self.safe_pressure, EXPL_ROUND)
                       ),
                     ])
 

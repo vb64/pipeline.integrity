@@ -21,8 +21,3 @@ class Context(ContextBase):
         """Load language dict for localize explain text."""
         name = os.path.join(os.path.dirname(__file__), 'locale', lang_code, 'LC_MESSAGES', 'messages.po')
         return load_po(name)
-
-    @property
-    def relative_depth(self):
-        """Return defect depth as percent from pipe wall thickness."""
-        return 100.0 * self.anomaly.depth / self.anomaly.pipe.wallthickness

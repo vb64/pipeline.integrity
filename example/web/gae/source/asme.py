@@ -4,7 +4,7 @@ from google.cloud import ndb
 from google.protobuf.message import DecodeError
 from pipeline_integrity.material import Material
 from pipeline_integrity.pipe import Pipe
-from pipeline_integrity.method.asme_b31g import Context, State
+from pipeline_integrity.method.asme.b31g_1991 import Context, State
 from i18n import LANG_CODE
 
 asme_page = Blueprint('asme_page', __name__)

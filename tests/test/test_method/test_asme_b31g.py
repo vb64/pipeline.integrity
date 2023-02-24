@@ -36,7 +36,7 @@ class TestsReadme(TestMethod):
           0.039  # defect depth 0.039 inches
         )
 
-        from pipeline_integrity.method.asme_b31g import Context, State
+        from pipeline_integrity.method.asme.b31g_1991 import Context, State
 
         asme = Context(defect)
 
@@ -97,7 +97,7 @@ class TestsReadme(TestMethod):
           1  # глубина дефекта 1 мм
         )
 
-        from pipeline_integrity.method.asme_b31g import Context, State
+        from pipeline_integrity.method.asme.b31g_1991 import Context, State
 
         asme = Context(defect)
 
@@ -143,7 +143,7 @@ class TestsCrvlBas(TestMethod):
         super(TestsCrvlBas, self).setUp()
         from pipeline_integrity.material import Material
         from pipeline_integrity.pipe import Pipe
-        from pipeline_integrity.method.asme_b31g import Context, State
+        from pipeline_integrity.method.asme.b31g_1991 import Context, State
 
         self.state = State
 
@@ -282,17 +282,17 @@ class TestsCrvlBas(TestMethod):
         assert round(self.asme.get_a(self.defect.length), 3) == 2.851  # 3.093
 
 
-class TestsAsme(TestMethod):
-    """Method asme b31g."""
+class TestsAsme1991(TestMethod):
+    """Method asme b31g edition 1991."""
 
     def test_context(self):
         """Method context."""
-        from pipeline_integrity.method.asme_b31g import Context as AsmeB31g
+        from pipeline_integrity.method.asme.b31g_1991 import Context as AsmeB31g
         from pipeline_integrity.method import ErrDefectTypeNotSupported
 
         defect = self.pipe.add_metal_loss(10, 100, 10, 20, 5)
         asme_b31g = AsmeB31g(defect)
-        assert asme_b31g.name == "ASME B31G"
+        assert asme_b31g.name == "ASME B31G 1991"
 
         from pipeline_integrity.defect import Type
         defect.type = Type.Dent
@@ -307,7 +307,7 @@ class TestsAsme(TestMethod):
         assert defect.depth == 1
         assert defect.pipe.wallthickness == 10
 
-        from pipeline_integrity.method.asme_b31g import Context, State
+        from pipeline_integrity.method.asme.b31g_1991 import Context, State
 
         asme_b31g = Context(defect)
         assert asme_b31g.pipe_state() == State.Ok
@@ -320,7 +320,7 @@ class TestsAsme(TestMethod):
 
     def test_get_b(self):
         """Function get_b."""
-        from pipeline_integrity.method.asme_b31g import Context
+        from pipeline_integrity.method.asme.b31g_1991 import Context
 
         defect = self.pipe.add_metal_loss(10, 100, 10, 20, 1.5)
         asme_b31g = Context(defect)
@@ -333,7 +333,7 @@ class TestsAsme(TestMethod):
 
     def test_defect_max_length(self):
         """Function defect_max_length."""
-        from pipeline_integrity.method.asme_b31g import Context
+        from pipeline_integrity.method.asme.b31g_1991 import Context
 
         defect = self.pipe.add_metal_loss(10, 100, 10, 20, 1.5)
         asme_b31g = Context(defect)
@@ -346,7 +346,7 @@ class TestsAsme(TestMethod):
     def test_lang(self):
         """Function defect_max_length."""
         from pipeline_integrity.i18n import Lang
-        from pipeline_integrity.method.asme_b31g import Context
+        from pipeline_integrity.method.asme.b31g_1991 import Context
 
         asme = Context(self.pipe.add_metal_loss(10, 100, 10, 20, 1.5))
         assert len(asme.lang(Lang.Ru)) == 23

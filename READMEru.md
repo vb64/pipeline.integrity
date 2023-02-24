@@ -49,7 +49,7 @@ defect = pipe.add_metal_loss(
 Контекст для вычисления степени опасности дефекта по методике ASME B31G.
 
 ```python
-from pipeline_integrity.method.asme_b31g import Context
+from pipeline_integrity.method.asme.b31g_1991 import Context
 
 asme = Context(defect)
 ```
@@ -57,7 +57,7 @@ asme = Context(defect)
 Глубина дефекта менее 10% толщины стенки трубы, опасности нет.
 
 ```python
-from pipeline_integrity.method.asme_b31g import State
+from pipeline_integrity.method.asme.b31g_1991 import State
 
 assert defect.depth == 1
 assert pipe.wallthickness == 16

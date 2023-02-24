@@ -55,7 +55,7 @@ defect = pipe.add_metal_loss(
 Context for calculating the degree of severity of the defect according to the ASME B31G method
 
 ```python
-from pipeline_integrity.method.asme_b31g import Context
+from pipeline_integrity.method.asme.b31g_1991 import Context
 
 asme = Context(defect)
 ```
@@ -63,7 +63,7 @@ asme = Context(defect)
 Defect depth less than 10% wall thickness, no danger.
 
 ```python
-from pipeline_integrity.method.asme_b31g import State
+from pipeline_integrity.method.asme.b31g_1991 import State
 
 assert defect.depth == 0.039
 assert pipe.wallthickness == 0.63

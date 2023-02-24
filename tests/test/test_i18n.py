@@ -12,7 +12,7 @@ class TestsI18n(TestBase):
     def test_fake_gettext(self):
         """Function fake_gettext."""
         from pipeline_integrity.i18n import fake_gettext, Lang
-        from pipeline_integrity.method.asme_b31g import Context
+        from pipeline_integrity.method.asme.b31g_1991 import Context
 
         asme = Context(self.pipe.add_metal_loss(10, 100, 10, 20, 1.5))
         asme.is_explain = Context.lang(Lang.Ru)
@@ -30,7 +30,7 @@ class TestsI18n(TestBase):
         from pipeline_integrity.i18n import load_po
 
         data = load_po(os.path.join(
-          'pipeline_integrity', 'method', 'asme_b31g', 'locale',
+          'pipeline_integrity', 'method', 'asme', 'locale',
           'ru', 'LC_MESSAGES', 'messages.po'
         ))
         assert len(data) == 23

@@ -204,7 +204,7 @@ class Context(ContextBase):
     def get_design_pressure(self):
         """Return design pressure."""
         pipe = self.anomaly.pipe
-        smys = pipe.material.yield_strength
+        smys = pipe.material.smys
         p_v = 2.0 * smys * pipe.wallthickness * self.design_factor * self.temperature_factor / pipe.diameter
 
         self.add_explain([

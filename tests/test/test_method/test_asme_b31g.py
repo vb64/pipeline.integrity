@@ -175,7 +175,7 @@ class TestsCrvlBas(TestMethod):
 
     def test_example2(self):
         """Example 2."""
-        self.pipe.material.yield_strength = 35000
+        self.pipe.material.smys = 35000
         self.pipe.diameter = 20
         self.pipe.wallthickness = 0.25
         self.pipe.maop = 400
@@ -261,7 +261,7 @@ class TestsCrvlBas(TestMethod):
         self.pipe.maop = 877
         self.pipe.diameter = 12.625
         self.pipe.wallthickness = 0.5
-        self.pipe.material.yield_strength = 35000
+        self.pipe.material.smys = 35000
         self.asme.design_factor = 0.4
         self.defect.depth = 0.035
         self.defect.length = 3.0
@@ -273,7 +273,7 @@ class TestsCrvlBas(TestMethod):
         """Example 8."""
         self.pipe.diameter = 24
         self.pipe.wallthickness = 0.5
-        self.pipe.material.yield_strength = 42000
+        self.pipe.material.smys = 42000
         self.asme.design_factor = 0.5
         self.defect.depth = 0.125
         self.defect.length = 12.0

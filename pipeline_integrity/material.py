@@ -5,9 +5,9 @@
 class Material:
     """Pipe material."""
 
-    def __init__(self, name, yield_strength):
+    def __init__(self, name, smys):
         """New material."""
         self.name = name
-        self.yield_strength = yield_strength  # текучесть
-        self.durability = None  # прочность
+        self.smys = smys  # предел текучести
+        self.smts = None  # предел прочности при растяжении
         self.toughness = None  # вязкость

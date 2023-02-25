@@ -31,7 +31,7 @@ class Context(ContextBase):
     def z_param(self):
         """Parameter z."""
         pipe = self.anomaly.pipe
-        z_val = math.pow(self.anomaly.length, 2) / (pipe.diameter * pipe.wallthickness)
+        z_val = pow(self.anomaly.length, 2) / (pipe.diameter * pipe.wallthickness)
         return z_val
 
     @property
@@ -52,23 +52,41 @@ class Context(ContextBase):
     def get_stress_fail(self):
         """Return estimated failure stress level."""
         s_f = self.s_flow()
+        d_t = self.relative_depth
 
         if self.z_param <= 20:
             v23 = 2.0 / 3.0
-            tmp1 = 1 - v23 * self.relative_depth
-            tmp2 = 1 - v23 * self.relative_depth / self.m_param
-            s_p = s_f * (tmp1 / tmp2)
+            m_val = self.m_param
+            s_p = s_f * (1 - v23 * d_t) / (1 - v23 * d_t / m_val)
             return s_p
 
-        s_p = s_f * (1 - self.relative_depth)
+        s_p = s_f * (1 - d_t)
         return s_p
 
-    def get_press_fail(self):
+    def get_stress_fail_mod(self):
+        """Return estimated failure stress level by modified method."""
+        s_f = self.s_flow()
+        d_t = self.relative_depth
+        z_val = self.z_param
+
+        if z_val <= 50:
+            m_val = math.sqrt(1 + 0.6275 * z_val - 0.003375 * pow(z_val, 2))
+        else:
+            m_val = 0.032 * z_val + 3.3
+
+        s_p = s_f * (1 - 0.85 * d_t) / (1 - 0.85 * d_t / m_val)
+        return s_p
+
+    def get_press_fail(self, is_mod=False):
         """Return estimated failure pressure."""
-        s_f = self.get_stress_fail()
+        if is_mod:
+            s_f = self.get_stress_fail_mod()
+        else:
+            s_f = self.get_stress_fail()
+
         p_f = 2 * s_f * self.relative_depth
         return p_f
 
-    def erf(self):
+    def erf(self, is_mod=False):
         """Return estimated repair factor."""
-        return self.get_press_fail() / self.anomaly.pipe.maop
+        return self.get_press_fail(is_mod=is_mod) / self.anomaly.pipe.maop

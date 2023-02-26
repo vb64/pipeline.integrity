@@ -8,9 +8,9 @@
 [In Russian](READMEru.md)
 
 Free, open source PipelineIntegrity library designed to calculate the degree of danger
-of pipeline metal loss defects according to the [ASME B31G method](https://law.resource.org/pub/us/cfr/ibr/002/asme.b31g.1991.pdf).
+of pipeline metal loss defects according to the ASME B31G method.
 
-![ASME B31G method](pipeline_integrity/method/asme_b31g/img/fig_1_1.png)
+![ASME B31G method](pipeline_integrity/method/asme/img/fig_1_1.png)
 
 ## Installation
 

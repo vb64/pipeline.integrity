@@ -11,7 +11,7 @@ class TestsReadme2012(TestAsme):
     """Code from readme files."""
 
     def test_en(self):
-        """Code from README.md."""
+        """Code from README.md 2012."""
         pipe = self.pipe_en
         defect = self.defect_en
 
@@ -21,7 +21,7 @@ class TestsReadme2012(TestAsme):
             Context(defect)
         assert 'SMTS not defined' in str(err.value)
 
-        pipe.material.smts = 60000
+        pipe.material.smts = 1.5 * pipe.material.smys
         asme = Context(defect)
 
         # defect depth less than 10% wall thickness, no danger.

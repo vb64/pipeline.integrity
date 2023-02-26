@@ -38,7 +38,7 @@ class Context(ContextBase):
 
         self.add_explain([
           '\n', _("Parameter Z = length^2 / (diameter * wallthickness).", self),
-          '\n', _("Z = {}^2 / ({} * {}) = {}.", self).format(
+          '\n', "Z = {}^2 / ({} * {}) = {}.".format(
             round(self.anomaly.length, EXPL_ROUND),
             round(pipe.diameter, EXPL_ROUND),
             round(pipe.wallthickness, EXPL_ROUND),
@@ -56,7 +56,7 @@ class Context(ContextBase):
 
         self.add_explain([
           '\n', _("Parameter M = sqrt(1 + 0.8 * Z).", self),
-          '\n', _("M = sqrt(1 + 0.8 * {}) = {}.", self).format(
+          '\n', "M = sqrt(1 + 0.8 * {}) = {}.".format(
             round(z_val, EXPL_ROUND),
             round(m_val, EXPL_ROUND),
           ),
@@ -71,7 +71,7 @@ class Context(ContextBase):
 
         self.add_explain([
           '\n', _("Parameter Sflow = 1.1 * material_smys.", self),
-          '\n', _("Sflow = 1.1 * {} = {}.", self).format(
+          '\n', "Sflow = 1.1 * {} = {}.".format(
             round(material.smys, EXPL_ROUND),
             round(s_f, EXPL_ROUND),
           ),
@@ -113,7 +113,7 @@ class Context(ContextBase):
                 "(1 - 2/3 * (depth / wallthickness) / M).",
                 self
               ),
-              '\n', _("stress_fail = {} * (1 - 2/3 * ({} / {})) / (1 - 2/3 * ({} / {} / {})) = {}.", self).format(
+              '\n', "stress_fail = {} * (1 - 2/3 * ({} / {})) / (1 - 2/3 * ({} / {} / {})) = {}.".format(
                 round(s_f, EXPL_ROUND),
                 round(self.anomaly.depth, EXPL_ROUND),
                 round(self.anomaly.pipe.wallthickness, EXPL_ROUND),
@@ -131,7 +131,7 @@ class Context(ContextBase):
         self.add_explain([
           '\n', _("Parameter Z = {} > 20.", self).format(round(z_val, EXPL_ROUND)),
           '\n', _("Failure stress level = Sflow * (1 - depth / wallthickness).", self),
-          '\n', _("stress_fail = {} * (1 - {} / {}) = {}.", self).format(
+          '\n', "stress_fail = {} * (1 - {} / {}) = {}.".format(
             round(s_f, EXPL_ROUND),
             round(self.anomaly.depth, EXPL_ROUND),
             round(self.anomaly.pipe.wallthickness, EXPL_ROUND),
@@ -156,7 +156,7 @@ class Context(ContextBase):
             self.add_explain([
               '\n', _("Parameter Z = {} <= 50.", self).format(round(z_val, EXPL_ROUND)),
               '\n', _("Parameter M = sqrt(1 + 0.6275 * Z - 0.003375 * Z^2)", self),
-              '\n', _("M = sqrt(1 + 0.6275 * {} - 0.003375 * {}^2) = {}", self).format(
+              '\n', "M = sqrt(1 + 0.6275 * {} - 0.003375 * {}^2) = {}".format(
                 round(z_val, EXPL_ROUND),
                 round(z_val, EXPL_ROUND),
                 round(m_val, EXPL_ROUND),
@@ -167,7 +167,7 @@ class Context(ContextBase):
             self.add_explain([
               '\n', _("Parameter Z = {} > 50.", self).format(round(z_val, EXPL_ROUND)),
               '\n', _("Parameter M = 0.032 * Z + 3.3", self),
-              '\n', _("M = 0.032 * {} + 3.3 = {}", self).format(
+              '\n', "M = 0.032 * {} + 3.3 = {}".format(
                 round(z_val, EXPL_ROUND),
                 round(m_val, EXPL_ROUND),
               ),
@@ -182,7 +182,7 @@ class Context(ContextBase):
             "(1 - 0.85 * (depth / wallthickness) / M).",
             self
           ),
-          '\n', _("stress_fail = {} * (1 - 0.85 * ({} / {})) / (1 - 0.85 * ({} / {}) / {}) = {}.", self).format(
+          '\n', "stress_fail = {} * (1 - 0.85 * ({} / {})) / (1 - 0.85 * ({} / {}) / {}) = {}.".format(
             round(s_f, EXPL_ROUND),
             round(self.anomaly.depth, EXPL_ROUND),
             round(self.anomaly.pipe.wallthickness, EXPL_ROUND),
@@ -206,7 +206,7 @@ class Context(ContextBase):
 
         self.add_explain([
           '\n', _("Failure pressure = 2 * stress_fail * depth / wallthickness.", self),
-          '\n', _("press_fail = 2 * {} * {} / {} = {}.", self).format(
+          '\n', "press_fail = 2 * {} * {} / {} = {}.".format(
             round(s_f, EXPL_ROUND),
             round(self.anomaly.depth, EXPL_ROUND),
             round(self.anomaly.pipe.wallthickness, EXPL_ROUND),
@@ -232,8 +232,10 @@ class Context(ContextBase):
 
         self.add_explain([
           '\n', _("ERF = pipe_maop / press_fail.", self),
-          '\n', "{} / {} = {}".format(
-            self.anomaly.pipe.maop, round(self.safe_pressure, EXPL_ROUND), round(erf_val, EXPL_ROUND)
+          '\n', "ERF = {} / {} = {}".format(
+            self.anomaly.pipe.maop,
+            round(self.safe_pressure, EXPL_ROUND),
+            round(erf_val, EXPL_ROUND)
           ),
         ])
 

@@ -4,8 +4,9 @@ https://edu.truboprovod.ru/kbase/doc/start/WebHelp_ru/ASMEB31G.htm
 """
 import math
 
+from ...i18n import fake_gettext as _
 from ... import Error as ErrorBase
-from . import Context as ContextBase
+from . import Context as ContextBase, EXPL_ROUND
 
 
 class ErrMaterialSMTSNotDefined(ErrorBase):
@@ -90,6 +91,25 @@ class Context(ContextBase):
         p_f = 2 * s_f * self.relative_depth
         return p_f
 
-    def erf(self, is_mod=False):
+    def erf(self, is_mod=False, is_explain=False):
         """Return estimated repair factor."""
-        return self.get_press_fail(is_mod=is_mod) / self.anomaly.pipe.maop
+        self.is_explain = is_explain
+        self.explain_text = []
+
+        modname = _("modified", self) if is_mod else _("classic", self)
+
+        self.add_explain([
+          _("Calculate ERF by {} {}.", self).format(self.name, modname),
+        ])
+
+        press_fail = self.get_press_fail(is_mod=is_mod)
+        erf_val = self.anomaly.pipe.maop / press_fail
+
+        self.add_explain([
+          '\n', _("ERF = pipe_maop / press_fail.", self),
+          '\n', "{} / {} = {}".format(
+             self.anomaly.pipe.maop, round(press_fail, EXPL_ROUND), round(erf_val, EXPL_ROUND)
+          ),
+        ])
+
+        return erf_val

@@ -2,11 +2,10 @@
 import math
 
 from ...i18n import fake_gettext as _
-from . import Context as ContextBase
+from . import Context as ContextBase, EXPL_ROUND
 
 DEPTH_OK_PERCENT = 10
 DEPTH_CRITICAL_PERCENT = 80
-EXPL_ROUND = 3
 
 
 class State:

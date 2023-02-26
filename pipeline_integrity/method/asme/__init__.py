@@ -9,6 +9,8 @@ from .. import Context as ContextBase
 from ...defect import Type
 from ...i18n import load_po
 
+EXPL_ROUND = 3
+
 
 class Context(ContextBase):
     """Context of the ASME B31G method."""

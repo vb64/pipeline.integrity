@@ -28,4 +28,6 @@ class TestsReadme2012(TestAsme):
         assert defect.depth == 0.039
         assert pipe.wallthickness == 0.63
 
-        assert round(asme.erf(), 3) == 7.821
+        assert round(asme.erf(is_explain=True), 3) == 0.128
+        # print('###')
+        # print(asme.explain())

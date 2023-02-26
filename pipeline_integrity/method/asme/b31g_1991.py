@@ -1,8 +1,8 @@
 """ASME B31G method edition 1991."""
 import math
 
-from ....i18n import fake_gettext as _
-from .. import Context as ContextBase
+from ...i18n import fake_gettext as _
+from . import Context as ContextBase
 
 DEPTH_OK_PERCENT = 10
 DEPTH_CRITICAL_PERCENT = 80

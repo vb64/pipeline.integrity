@@ -1,8 +1,8 @@
 """ASME B31G method for metal loss defects edition 2012."""
 import math
 
-from .... import Error as ErrorBase
-from .. import Context as ContextBase
+from ... import Error as ErrorBase
+from . import Context as ContextBase
 
 
 class ErrMaterialSMTSNotDefined(ErrorBase):

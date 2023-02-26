@@ -1,6 +1,6 @@
 # ASME B31G edition 1991
 
-[In Russian](READMEru_1991.md)
+[In Russian](READMEru.md)
 
 Context for calculating the degree of severity of the defect according to the ASME B31G method edition 1991.
 

@@ -17,6 +17,11 @@ class Context(ContextBase):
 
     valid_defect_types = [Type.MetalLoss]
 
+    def __init__(self, defect):
+        """ASME B31G context."""
+        super(Context, self).__init__(defect)
+        self.safe_pressure = None
+
     @classmethod
     def lang(cls, lang_code):
         """Load language dict for localize explain text."""

@@ -24,13 +24,11 @@ class Context(ContextBase):
             raise ErrMaterialSMTSNotDefined("SMTS not defined for material of the pipe.")
 
         super(Context, self).__init__(defect)
-        self.safe_pressure = None
 
     @property
     def relative_depth(self):
         """Return relative depth to wall thickness."""
-        r_d = float(self.anomaly.depth) / self.anomaly.pipe.wallthickness
-        return r_d
+        return float(self.anomaly.depth) / self.anomaly.pipe.wallthickness
 
     @property
     def z_param(self):

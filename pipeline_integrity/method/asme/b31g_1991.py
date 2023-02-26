@@ -25,11 +25,6 @@ class Context(ContextBase):
     design_factor = 0.72  # DesignFactors.md
     temperature_factor = 1
 
-    def __init__(self, defect):
-        """New defect."""
-        super(Context, self).__init__(defect)
-        self.safe_pressure = None
-
     @property
     def relative_depth(self):
         """Return defect depth as percent from pipe wall thickness."""

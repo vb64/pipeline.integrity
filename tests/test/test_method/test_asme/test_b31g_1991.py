@@ -10,31 +10,10 @@ from . import TestAsme
 class TestsReadme(TestAsme):
     """Code from readme files."""
 
-    @staticmethod
-    def test_en():
+    def test_en(self):
         """Code from README.md."""
-        from pipeline_integrity.material import Material
-        from pipeline_integrity.pipe import Pipe
-
-        pipe = Pipe(
-          440,  # length inches
-          56,  # diameter 56 inches
-          0.63,  # wall thickness inches
-          Material(  # pipe material
-            "Steel",
-            52000  # SMYS psi
-          ),
-          900  # pressure psi
-        )
-
-        defect = pipe.add_metal_loss(
-          40,  # the defect starts at a distance of 40 inches from the beginning of the pipe
-          4,  # defect length 4 inches
-          10,  # along the circumference of the pipe, the defect begins
-               # at 10 arc minutes from the top of the pipe
-          20,  # the size of the defect along the circumference is 20 arc minutes
-          0.039  # defect depth 0.039 inches
-        )
+        pipe = self.pipe_en
+        defect = self.defect_en
 
         from pipeline_integrity.method.asme.b31g_1991 import Context, State
 
@@ -72,30 +51,10 @@ class TestsReadme(TestAsme):
         assert asme.pipe_state(is_explain=True) == State.Defected
         assert 'defect is not dangerous' in asme.explain()
 
-    @staticmethod
-    def test_ru():
+    def test_ru(self):
         """Code from READMEru.md."""
-        from pipeline_integrity.material import Material
-        from pipeline_integrity.pipe import Pipe
-
-        pipe = Pipe(
-          11200,  # длина 11.2 метра
-          1420,  # диаметр 1420 мм
-          16,  # толщина стенки 16 мм
-          Material(  # материал трубы
-            "Сталь",
-            295  # предел текучести Мпа
-          ),
-          7  # рабочее давление Мпа
-        )
-
-        defect = pipe.add_metal_loss(
-          1000,  # дефект начинается на расстоянии 1 метра от начала трубы
-          100,  # длина дефекта 100 мм
-          10,  # по окружности трубы дефект начинается на 10 угловых минут от верхней точки трубы
-          20,  # размер дефекта по окружности составляет 20 угловых минут
-          1  # глубина дефекта 1 мм
-        )
+        pipe = self.pipe_ru
+        defect = self.defect_ru
 
         from pipeline_integrity.method.asme.b31g_1991 import Context, State
 

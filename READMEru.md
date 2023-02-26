@@ -6,7 +6,7 @@
 предназначена для расчета степени опасности дефектов потери металла трубопровода
 по методике ASME B31G.
 
-![методика ASME B31G](pipeline_integrity/method/asme/img/fig_1_1.png)
+![методика ASME B31G](docs/asme/img/fig_1_1.png)
 
 ## Установка
 

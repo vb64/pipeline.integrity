@@ -24,6 +24,7 @@ class Context(ContextBase):
             raise ErrMaterialSMTSNotDefined("SMTS not defined for material of the pipe.")
 
         super(Context, self).__init__(defect)
+        self.safe_pressure = None
 
     @property
     def relative_depth(self):
@@ -55,16 +56,53 @@ class Context(ContextBase):
 
     def get_stress_fail(self):
         """Return estimated failure stress level."""
+        self.add_explain([
+          _("Calculate failure stress level by the classic way.", self),
+        ])
+
         s_f = self.s_flow()
         d_t = self.relative_depth
+        z_val = self.z_param
 
-        if self.z_param <= 20:
+        if z_val <= 20:
             v23 = 2.0 / 3.0
             m_val = self.m_param
             s_p = s_f * (1 - v23 * d_t) / (1 - v23 * d_t / m_val)
+
+            self.add_explain([
+              '\n', _("Parameter Z = {} <= 20.", self).format(round(z_val, EXPL_ROUND)),
+              '\n', _(
+                "Failure stress level = Sflow * "
+                "(1 - 2/3 * (depth / wallthickness)) / "
+                "(1 - 2/3 * (depth / wallthickness) / M).",
+                self
+              ),
+              '\n', _("stress_fail = {} * (1 - 2/3 * ({} / {})) / (1 - 2/3 * ({} / {} / {})) = {}.", self).format(
+                round(s_f, EXPL_ROUND),
+                round(self.anomaly.depth, EXPL_ROUND),
+                round(self.anomaly.pipe.wallthickness, EXPL_ROUND),
+                round(self.anomaly.depth, EXPL_ROUND),
+                round(self.anomaly.pipe.wallthickness, EXPL_ROUND),
+                round(m_val, EXPL_ROUND),
+                round(s_p, EXPL_ROUND),
+              ),
+            ])
+
             return s_p
 
         s_p = s_f * (1 - d_t)
+
+        self.add_explain([
+          '\n', _("Parameter Z = {} > 20.", self).format(round(z_val, EXPL_ROUND)),
+          '\n', _("Failure stress level = Sflow * (1 - depth / wallthickness).", self),
+          '\n', _("stress_fail = {} * (1 - {} / {}) = {}.", self).format(
+            round(s_f, EXPL_ROUND),
+            round(self.anomaly.depth, EXPL_ROUND),
+            round(self.anomaly.pipe.wallthickness, EXPL_ROUND),
+            round(s_p, EXPL_ROUND),
+          ),
+        ])
+
         return s_p
 
     def get_stress_fail_mod(self):
@@ -89,6 +127,17 @@ class Context(ContextBase):
             s_f = self.get_stress_fail()
 
         p_f = 2 * s_f * self.relative_depth
+
+        self.add_explain([
+          '\n', _("Failure pressure = 2 * stress_fail * depth / wallthickness.", self),
+          '\n', _("press_fail = 2 * {} * {} / {} = {}.", self).format(
+            round(s_f, EXPL_ROUND),
+            round(self.anomaly.depth, EXPL_ROUND),
+            round(self.anomaly.pipe.wallthickness, EXPL_ROUND),
+            round(p_f, EXPL_ROUND),
+          ),
+        ])
+
         return p_f
 
     def erf(self, is_mod=False, is_explain=False):
@@ -102,13 +151,13 @@ class Context(ContextBase):
           _("Calculate ERF by {} {}.", self).format(self.name, modname),
         ])
 
-        press_fail = self.get_press_fail(is_mod=is_mod)
-        erf_val = self.anomaly.pipe.maop / press_fail
+        self.safe_pressure = self.get_press_fail(is_mod=is_mod)
+        erf_val = self.anomaly.pipe.maop / self.safe_pressure
 
         self.add_explain([
           '\n', _("ERF = pipe_maop / press_fail.", self),
           '\n', "{} / {} = {}".format(
-             self.anomaly.pipe.maop, round(press_fail, EXPL_ROUND), round(erf_val, EXPL_ROUND)
+            self.anomaly.pipe.maop, round(self.safe_pressure, EXPL_ROUND), round(erf_val, EXPL_ROUND)
           ),
         ])
 

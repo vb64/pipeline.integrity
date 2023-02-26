@@ -7,11 +7,11 @@ import pytest
 from . import TestAsme
 
 
-class TestsReadme(TestAsme):
+class TestsReadme1991(TestAsme):
     """Code from readme files."""
 
     def test_en(self):
-        """Code from README.md."""
+        """Code from README.md 1991."""
         pipe = self.pipe_en
         defect = self.defect_en
 

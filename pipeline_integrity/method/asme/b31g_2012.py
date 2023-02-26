@@ -1,4 +1,7 @@
-"""ASME B31G method for metal loss defects edition 2012."""
+"""ASME B31G method for metal loss defects edition 2012.
+
+https://edu.truboprovod.ru/kbase/doc/start/WebHelp_ru/ASMEB31G.htm
+"""
 import math
 
 from ... import Error as ErrorBase

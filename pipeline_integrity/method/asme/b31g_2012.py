@@ -37,19 +37,57 @@ class Context(ContextBase):
         """Parameter z."""
         pipe = self.anomaly.pipe
         z_val = pow(self.anomaly.length, 2) / (pipe.diameter * pipe.wallthickness)
+
+        self.add_explain([
+          '\n', _("Parameter Z = length^2 / (diameter * wallthickness).", self),
+          '\n', _("Z = {}^2 / ({} * {}) = {}.", self).format(
+            round(self.anomaly.length, EXPL_ROUND),
+            round(pipe.diameter, EXPL_ROUND),
+            round(pipe.wallthickness, EXPL_ROUND),
+            round(z_val, EXPL_ROUND),
+          ),
+        ])
+
         return z_val
 
     @property
     def m_param(self):
         """Parameter M."""
-        m_val = math.sqrt((1 + 0.8 * self.z_param))
+        z_val = self.z_param
+        m_val = math.sqrt(1 + 0.8 * z_val)
+
+        self.add_explain([
+          '\n', _("Parameter M = sqrt(1 + 0.8 * Z).", self),
+          '\n', _("M = sqrt(1 + 0.8 * {}) = {}.", self).format(
+            round(z_val, EXPL_ROUND),
+            round(m_val, EXPL_ROUND),
+          ),
+        ])
+
         return m_val
 
     def s_flow(self):
         """Return S_flow."""
         material = self.anomaly.pipe.material
         s_f = 1.1 * material.smys
+
+        self.add_explain([
+          '\n', _("Parameter Sflow = 1.1 * material_smys.", self),
+          '\n', _("Sflow = 1.1 * {} = {}.", self).format(
+            round(material.smys, EXPL_ROUND),
+            round(s_f, EXPL_ROUND),
+          ),
+        ])
+
         if s_f > material.smts:
+
+            self.add_explain([
+              '\n', _("Parameter Sflow > material SMTS.", self),
+              '\n', _("Use material SMTS as Sflow = {}.", self).format(
+                round(material.smts, EXPL_ROUND),
+              ),
+            ])
+
             return material.smts
 
         return s_f
@@ -57,7 +95,7 @@ class Context(ContextBase):
     def get_stress_fail(self):
         """Return estimated failure stress level."""
         self.add_explain([
-          _("Calculate failure stress level by the classic way.", self),
+          '\n', _("Calculate failure stress level by the classic way.", self),
         ])
 
         s_f = self.s_flow()
@@ -107,16 +145,56 @@ class Context(ContextBase):
 
     def get_stress_fail_mod(self):
         """Return estimated failure stress level by modified method."""
+        self.add_explain([
+          '\n', _("Calculate failure stress level by the modified way.", self),
+        ])
+
         s_f = self.s_flow()
         d_t = self.relative_depth
         z_val = self.z_param
 
         if z_val <= 50:
             m_val = math.sqrt(1 + 0.6275 * z_val - 0.003375 * pow(z_val, 2))
+            self.add_explain([
+              '\n', _("Parameter Z = {} <= 50.", self).format(round(z_val, EXPL_ROUND)),
+              '\n', _("Parameter M = sqrt(1 + 0.6275 * Z - 0.003375 * Z^2)", self),
+              '\n', _("M = sqrt(1 + 0.6275 * {} - 0.003375 * {}^2) = {}", self).format(
+                round(z_val, EXPL_ROUND),
+                round(z_val, EXPL_ROUND),
+                round(m_val, EXPL_ROUND),
+              ),
+            ])
         else:
             m_val = 0.032 * z_val + 3.3
+            self.add_explain([
+              '\n', _("Parameter Z = {} > 50.", self).format(round(z_val, EXPL_ROUND)),
+              '\n', _("Parameter M = 0.032 * Z + 3.3", self),
+              '\n', _("M = 0.032 * {} + 3.3 = {}", self).format(
+                round(z_val, EXPL_ROUND),
+                round(m_val, EXPL_ROUND),
+              ),
+            ])
 
         s_p = s_f * (1 - 0.85 * d_t) / (1 - 0.85 * d_t / m_val)
+
+        self.add_explain([
+          '\n', _(
+            "Failure stress level = Sflow * "
+            "(1 - 0.85 * (depth / wallthickness)) / "
+            "(1 - 0.85 * (depth / wallthickness) / M).",
+            self
+          ),
+          '\n', _("stress_fail = {} * (1 - 0.85 * ({} / {})) / (1 - 0.85 * ({} / {}) / {}) = {}.", self).format(
+            round(s_f, EXPL_ROUND),
+            round(self.anomaly.depth, EXPL_ROUND),
+            round(self.anomaly.pipe.wallthickness, EXPL_ROUND),
+            round(self.anomaly.depth, EXPL_ROUND),
+            round(self.anomaly.pipe.wallthickness, EXPL_ROUND),
+            round(m_val, EXPL_ROUND),
+            round(s_p, EXPL_ROUND),
+          ),
+        ])
+
         return s_p
 
     def get_press_fail(self, is_mod=False):

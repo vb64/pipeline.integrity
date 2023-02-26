@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-"""Test asme_b31g.py module.
+"""Test b31g_1991.py module.
 
-make test T=test_method/test_asme_b31g.py
+make test T=test_method/test_asme/test_b31g_1991.py
 """
 import pytest
-from . import TestMethod
+from . import TestAsme
 
 
-class TestsReadme(TestMethod):
+class TestsReadme(TestAsme):
     """Code from readme files."""
 
     @staticmethod
@@ -135,7 +135,7 @@ class TestsReadme(TestMethod):
         assert 'Дефект не опасен.' in asme.explain()
 
 
-class TestsCrvlBas(TestMethod):
+class TestsCrvlBas(TestAsme):
     """Examples from CRVL.BAS."""
 
     def setUp(self):
@@ -282,7 +282,7 @@ class TestsCrvlBas(TestMethod):
         assert round(self.asme.get_a(self.defect.length), 3) == 2.851  # 3.093
 
 
-class TestsAsme1991(TestMethod):
+class TestsAsme1991(TestAsme):
     """Method asme b31g edition 1991."""
 
     def test_context(self):

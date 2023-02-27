@@ -1,19 +1,11 @@
-"""ASME B31G method for metal loss defects.
-
-https://pypi.org/project/pyintegrity/
-https://github.com/novanumeric/WebIntegrity
-https://edu.truboprovod.ru/kbase/doc/start/WebHelp_ru/ASMEB31G.htm
-"""
-import os
+"""ASME B31G method edition 1991."""
 import math
 
-from .. import Context as ContextBase
-from ...defect import Type
-from ...i18n import load_po, fake_gettext as _
+from ...i18n import fake_gettext as _
+from . import Context as ContextBase, EXPL_ROUND
 
 DEPTH_OK_PERCENT = 10
 DEPTH_CRITICAL_PERCENT = 80
-EXPL_ROUND = 3
 
 
 class State:
@@ -27,23 +19,11 @@ class State:
 
 
 class Context(ContextBase):
-    """Context of the ASME B31G method."""
+    """Context of the ASME B31G  edition 1991."""
 
-    name = "ASME B31G"
-    valid_defect_types = [Type.MetalLoss]
+    name = "ASME B31G 1991"
     design_factor = 0.72  # DesignFactors.md
     temperature_factor = 1
-
-    def __init__(self, defect):
-        """New defect."""
-        super(Context, self).__init__(defect)
-        self.safe_pressure = None
-
-    @classmethod
-    def lang(cls, lang_code):
-        """Load language dict for localize explain text."""
-        name = os.path.join(os.path.dirname(__file__), 'locale', lang_code, 'LC_MESSAGES', 'messages.po')
-        return load_po(name)
 
     @property
     def relative_depth(self):
@@ -132,7 +112,7 @@ class Context(ContextBase):
                     self.add_explain([
                       '\n',
                       _("Repair or pressure reduction to {} required.", self).format(
-                        round(self.safe_pressure, 2)
+                        round(self.safe_pressure, EXPL_ROUND)
                       ),
                     ])
 
@@ -218,7 +198,7 @@ class Context(ContextBase):
     def get_design_pressure(self):
         """Return design pressure."""
         pipe = self.anomaly.pipe
-        smys = pipe.material.yield_strength
+        smys = pipe.material.smys
         p_v = 2.0 * smys * pipe.wallthickness * self.design_factor * self.temperature_factor / pipe.diameter
 
         self.add_explain([

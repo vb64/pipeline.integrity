@@ -1,0 +1,212 @@
+# Russian translations for PROJECT.
+# Copyright (C) 2023 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2023-02-27 14:54+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ru\n"
+"Language-Team: ru <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.11.0\n"
+
+#: pipeline_integrity/method/asme/b31g_1991.py:51
+msgid "The relative defect depth == defect depth / pipe wall thickness * 100%."
+msgstr "Относительная глубина дефекта == глубина / толщина стенки  * 100%."
+
+#: pipeline_integrity/method/asme/b31g_1991.py:60
+#, python-format
+msgid "The relative defect depth less than {}% from wall thickness."
+msgstr "Относительная глубина дефекта меньше {}% толщины стенки."
+
+#: pipeline_integrity/method/asme/b31g_1991.py:63
+#: pipeline_integrity/method/asme/b31g_1991.py:86
+#: pipeline_integrity/method/asme/b31g_1991.py:108
+msgid "The defect is not dangerous."
+msgstr "Дефект не опасен."
+
+#: pipeline_integrity/method/asme/b31g_1991.py:70
+#, python-format
+msgid "The relative defect depth greater than {}% from wall thickness."
+msgstr "Относительная глубина дефекта больше {}% толщины стенки."
+
+#: pipeline_integrity/method/asme/b31g_1991.py:73
+msgid "The defect needs to be repaired."
+msgstr "Дефект нужно ремонтировать."
+
+#: pipeline_integrity/method/asme/b31g_1991.py:83
+msgid ""
+"The length of the defect {} does not exceed the maximum allowable length "
+"{}."
+msgstr "Длина дефекта {} не превышает максимально допустимую длину {}."
+
+#: pipeline_integrity/method/asme/b31g_1991.py:95
+msgid "The length of the defect {} exceed the maximum allowable length {}."
+msgstr "Длина дефекта {} превышает максимально допустимую длину {}."
+
+#: pipeline_integrity/method/asme/b31g_1991.py:98
+msgid "It is necessary to calculate the allowable pressure for defect."
+msgstr "Необходимо рассчитать допустимое давление для дефекта."
+
+#: pipeline_integrity/method/asme/b31g_1991.py:105
+msgid "The working pressure {} does not exceed the allowable pressure {}."
+msgstr "Рабочее давление {} не превышает допустимое давление {}."
+
+#: pipeline_integrity/method/asme/b31g_1991.py:114
+msgid "Repair or pressure reduction to {} required."
+msgstr "Необходим ремонт или снижение давления до {}."
+
+#: pipeline_integrity/method/asme/b31g_1991.py:124
+msgid "Parameter B."
+msgstr "Параметр B."
+
+#: pipeline_integrity/method/asme/b31g_1991.py:132
+msgid "The relative defect depth {} less than {}%."
+msgstr "Относительная глубина дефекта {} меньше {}%."
+
+#: pipeline_integrity/method/asme/b31g_1991.py:135
+msgid "Set Parameter B value to {}."
+msgstr "Параметр B ghbybvftncz hfdysv {}."
+
+#: pipeline_integrity/method/asme/b31g_1991.py:141
+msgid "The relative defect depth {} more than {}%."
+msgstr "Относительная глубина дефекта {} больше {}%."
+
+#: pipeline_integrity/method/asme/b31g_1991.py:182
+msgid "Calculation of the maximum allowable defect length."
+msgstr "Расчет максимально допустимой длины дефекта."
+
+#: pipeline_integrity/method/asme/b31g_1991.py:220
+msgid "Calculation of the maximum allowable pressure."
+msgstr "Расчет максимально допустимого давления."
+
+#: pipeline_integrity/method/asme/b31g_1991.py:221
+msgid "Parameter A for defect length {}."
+msgstr "Параметр A для дефекта длиной {}."
+
+#: pipeline_integrity/method/asme/b31g_1991.py:226
+msgid "Design pressure."
+msgstr "Расчетное давление."
+
+#: pipeline_integrity/method/asme/b31g_1991.py:236
+msgid "Parameter A more than 4."
+msgstr "Параметр A больше 4."
+
+#: pipeline_integrity/method/asme/b31g_1991.py:247
+msgid "Parameter A less than 4."
+msgstr "Параметр A меньше 4."
+
+#: pipeline_integrity/method/asme/b31g_1991.py:262
+msgid "Safe pressure {} more than design pressure {}."
+msgstr "Безопасное давление {} превышает расчетное давление {}."
+
+#: pipeline_integrity/method/asme/b31g_1991.py:266
+msgid "Use design pressure {} as maximum allowable pressure."
+msgstr "Используем расчетное давление как максимально допустимое давление."
+
+#: pipeline_integrity/method/asme/b31g_1991.py:271
+msgid "Use safe pressure {} as maximum allowable pressure."
+msgstr "Используем безопасное давление как максимально допустимое давление."
+
+#: pipeline_integrity/method/asme/b31g_2012.py:40
+msgid "Parameter Z = length^2 / (diameter * wallthickness)."
+msgstr "Параметр Z = длина^2 / (диаметр * толщина)."
+
+#: pipeline_integrity/method/asme/b31g_2012.py:56
+msgid "Parameter M = sqrt(1 + 0.8 * Z)."
+msgstr "Параметр M = sqrt(1 + 0.8 * Z)."
+
+#: pipeline_integrity/method/asme/b31g_2012.py:71
+msgid "Parameter Sflow = 1.1 * material_smys."
+msgstr "Параметр Sflow = 1.1 * предел_текучести."
+
+#: pipeline_integrity/method/asme/b31g_2012.py:81
+msgid "Parameter Sflow > material SMTS."
+msgstr "Параметр Sflow > предела прочности при растяжении материала."
+
+#: pipeline_integrity/method/asme/b31g_2012.py:82
+msgid "Use material SMTS as Sflow = {}."
+msgstr "Используем предел прочности при растяжении материала как параметр Sflow."
+
+#: pipeline_integrity/method/asme/b31g_2012.py:94
+msgid "Calculate failure stress level by the classic way."
+msgstr "Вычисляем величину напряжения разрыва классическим методом."
+
+#: pipeline_integrity/method/asme/b31g_2012.py:107
+msgid "Parameter Z = {} <= 20."
+msgstr "Параметр Z = {} <= 20."
+
+#: pipeline_integrity/method/asme/b31g_2012.py:108
+msgid ""
+"Failure stress level = Sflow * (1 - 2/3 * (depth / wallthickness)) / (1 -"
+" 2/3 * (depth / wallthickness) / M)."
+msgstr ""
+"Напряжение разрыва = Sflow * (1 - 2/3 * (глубина / толщина)) / (1 - 2/3 *"
+" (глубина / толщина) / M)."
+
+#: pipeline_integrity/method/asme/b31g_2012.py:130
+msgid "Parameter Z = {} > 20."
+msgstr "Параметр Z = {} > 20."
+
+#: pipeline_integrity/method/asme/b31g_2012.py:131
+msgid "Failure stress level = Sflow * (1 - depth / wallthickness)."
+msgstr "Напряжение разрыва = Sflow * (1 - глубина / толщина)."
+
+#: pipeline_integrity/method/asme/b31g_2012.py:145
+msgid "Calculate failure stress level by the modified way."
+msgstr "Вычисляем величину напряжения разрыва модифицированным методом."
+
+#: pipeline_integrity/method/asme/b31g_2012.py:155
+msgid "Parameter Z = {} <= 50."
+msgstr "Параметр Z = {} <= 50."
+
+#: pipeline_integrity/method/asme/b31g_2012.py:156
+msgid "Parameter M = sqrt(1 + 0.6275 * Z - 0.003375 * Z^2)"
+msgstr "Параметр M = sqrt(1 + 0.6275 * Z - 0.003375 * Z^2)"
+
+#: pipeline_integrity/method/asme/b31g_2012.py:166
+msgid "Parameter Z = {} > 50."
+msgstr "Параметр Z = {} > 50."
+
+#: pipeline_integrity/method/asme/b31g_2012.py:167
+msgid "Parameter M = 0.032 * Z + 3.3"
+msgstr "Параметр M = 0.032 * Z + 3.3"
+
+#: pipeline_integrity/method/asme/b31g_2012.py:177
+msgid ""
+"Failure stress level = Sflow * (1 - 0.85 * (depth / wallthickness)) / (1 "
+"- 0.85 * (depth / wallthickness) / M)."
+msgstr ""
+"Напряжение разрыва = Sflow * (1 - 0.85 * (глубина / толщина)) / (1 - 0.85"
+" * (глубина / толщина) / M)."
+
+#: pipeline_integrity/method/asme/b31g_2012.py:207
+msgid "Failure pressure = 2 * stress_fail * wallthickness / diameter."
+msgstr "Давление разрыва = 2 * stress_fail * толщина / диаметр."
+
+#: pipeline_integrity/method/asme/b31g_2012.py:223
+msgid "modified"
+msgstr "модифицированный"
+
+#: pipeline_integrity/method/asme/b31g_2012.py:223
+msgid "classic"
+msgstr "классический"
+
+#: pipeline_integrity/method/asme/b31g_2012.py:226
+msgid "Calculate ERF by {} {}."
+msgstr "Вычисляем КБД по {} {}."
+
+#: pipeline_integrity/method/asme/b31g_2012.py:233
+msgid "ERF = pipe_maop / press_fail."
+msgstr "КБД = рабочее_давление / давление_разрыва."
+

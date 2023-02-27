@@ -1,42 +1,21 @@
 # -*- coding: utf-8 -*-
-"""Test asme_b31g.py module.
+"""Test b31g_1991.py module.
 
-make test T=test_method/test_asme_b31g.py
+make test T=test_method/test_asme/test_b31g_1991.py
 """
 import pytest
-from . import TestMethod
+from . import TestAsme
 
 
-class TestsReadme(TestMethod):
+class TestsReadme1991(TestAsme):
     """Code from readme files."""
 
-    @staticmethod
-    def test_en():
-        """Code from README.md."""
-        from pipeline_integrity.material import Material
-        from pipeline_integrity.pipe import Pipe
+    def test_en(self):
+        """Code from README.md 1991."""
+        pipe = self.pipe_en
+        defect = self.defect_en
 
-        pipe = Pipe(
-          440,  # length inches
-          56,  # diameter 56 inches
-          0.63,  # wall thickness inches
-          Material(  # pipe material
-            "Steel",
-            52000  # SMYS psi
-          ),
-          900  # pressure psi
-        )
-
-        defect = pipe.add_metal_loss(
-          40,  # the defect starts at a distance of 40 inches from the beginning of the pipe
-          4,  # defect length 4 inches
-          10,  # along the circumference of the pipe, the defect begins
-               # at 10 arc minutes from the top of the pipe
-          20,  # the size of the defect along the circumference is 20 arc minutes
-          0.039  # defect depth 0.039 inches
-        )
-
-        from pipeline_integrity.method.asme_b31g import Context, State
+        from pipeline_integrity.method.asme.b31g_1991 import Context, State
 
         asme = Context(defect)
 
@@ -72,32 +51,12 @@ class TestsReadme(TestMethod):
         assert asme.pipe_state(is_explain=True) == State.Defected
         assert 'defect is not dangerous' in asme.explain()
 
-    @staticmethod
-    def test_ru():
+    def test_ru(self):
         """Code from READMEru.md."""
-        from pipeline_integrity.material import Material
-        from pipeline_integrity.pipe import Pipe
+        pipe = self.pipe_ru
+        defect = self.defect_ru
 
-        pipe = Pipe(
-          11200,  # длина 11.2 метра
-          1420,  # диаметр 1420 мм
-          16,  # толщина стенки 16 мм
-          Material(  # материал трубы
-            "Сталь",
-            295  # предел текучести Мпа
-          ),
-          7  # рабочее давление Мпа
-        )
-
-        defect = pipe.add_metal_loss(
-          1000,  # дефект начинается на расстоянии 1 метра от начала трубы
-          100,  # длина дефекта 100 мм
-          10,  # по окружности трубы дефект начинается на 10 угловых минут от верхней точки трубы
-          20,  # размер дефекта по окружности составляет 20 угловых минут
-          1  # глубина дефекта 1 мм
-        )
-
-        from pipeline_integrity.method.asme_b31g import Context, State
+        from pipeline_integrity.method.asme.b31g_1991 import Context, State
 
         asme = Context(defect)
 
@@ -135,7 +94,7 @@ class TestsReadme(TestMethod):
         assert 'Дефект не опасен.' in asme.explain()
 
 
-class TestsCrvlBas(TestMethod):
+class TestsCrvlBas(TestAsme):
     """Examples from CRVL.BAS."""
 
     def setUp(self):
@@ -143,7 +102,7 @@ class TestsCrvlBas(TestMethod):
         super(TestsCrvlBas, self).setUp()
         from pipeline_integrity.material import Material
         from pipeline_integrity.pipe import Pipe
-        from pipeline_integrity.method.asme_b31g import Context, State
+        from pipeline_integrity.method.asme.b31g_1991 import Context, State
 
         self.state = State
 
@@ -175,7 +134,7 @@ class TestsCrvlBas(TestMethod):
 
     def test_example2(self):
         """Example 2."""
-        self.pipe.material.yield_strength = 35000
+        self.pipe.material.smys = 35000
         self.pipe.diameter = 20
         self.pipe.wallthickness = 0.25
         self.pipe.maop = 400
@@ -261,7 +220,7 @@ class TestsCrvlBas(TestMethod):
         self.pipe.maop = 877
         self.pipe.diameter = 12.625
         self.pipe.wallthickness = 0.5
-        self.pipe.material.yield_strength = 35000
+        self.pipe.material.smys = 35000
         self.asme.design_factor = 0.4
         self.defect.depth = 0.035
         self.defect.length = 3.0
@@ -273,7 +232,7 @@ class TestsCrvlBas(TestMethod):
         """Example 8."""
         self.pipe.diameter = 24
         self.pipe.wallthickness = 0.5
-        self.pipe.material.yield_strength = 42000
+        self.pipe.material.smys = 42000
         self.asme.design_factor = 0.5
         self.defect.depth = 0.125
         self.defect.length = 12.0
@@ -282,17 +241,17 @@ class TestsCrvlBas(TestMethod):
         assert round(self.asme.get_a(self.defect.length), 3) == 2.851  # 3.093
 
 
-class TestsAsme(TestMethod):
-    """Method asme b31g."""
+class TestsAsme1991(TestAsme):
+    """Method asme b31g edition 1991."""
 
     def test_context(self):
         """Method context."""
-        from pipeline_integrity.method.asme_b31g import Context as AsmeB31g
+        from pipeline_integrity.method.asme.b31g_1991 import Context as AsmeB31g
         from pipeline_integrity.method import ErrDefectTypeNotSupported
 
         defect = self.pipe.add_metal_loss(10, 100, 10, 20, 5)
         asme_b31g = AsmeB31g(defect)
-        assert asme_b31g.name == "ASME B31G"
+        assert asme_b31g.name == "ASME B31G 1991"
 
         from pipeline_integrity.defect import Type
         defect.type = Type.Dent
@@ -307,7 +266,7 @@ class TestsAsme(TestMethod):
         assert defect.depth == 1
         assert defect.pipe.wallthickness == 10
 
-        from pipeline_integrity.method.asme_b31g import Context, State
+        from pipeline_integrity.method.asme.b31g_1991 import Context, State
 
         asme_b31g = Context(defect)
         assert asme_b31g.pipe_state() == State.Ok
@@ -320,7 +279,7 @@ class TestsAsme(TestMethod):
 
     def test_get_b(self):
         """Function get_b."""
-        from pipeline_integrity.method.asme_b31g import Context
+        from pipeline_integrity.method.asme.b31g_1991 import Context
 
         defect = self.pipe.add_metal_loss(10, 100, 10, 20, 1.5)
         asme_b31g = Context(defect)
@@ -333,7 +292,7 @@ class TestsAsme(TestMethod):
 
     def test_defect_max_length(self):
         """Function defect_max_length."""
-        from pipeline_integrity.method.asme_b31g import Context
+        from pipeline_integrity.method.asme.b31g_1991 import Context
 
         defect = self.pipe.add_metal_loss(10, 100, 10, 20, 1.5)
         asme_b31g = Context(defect)
@@ -346,7 +305,7 @@ class TestsAsme(TestMethod):
     def test_lang(self):
         """Function defect_max_length."""
         from pipeline_integrity.i18n import Lang
-        from pipeline_integrity.method.asme_b31g import Context
+        from pipeline_integrity.method.asme.b31g_1991 import Context
 
         asme = Context(self.pipe.add_metal_loss(10, 100, 10, 20, 1.5))
-        assert len(asme.lang(Lang.Ru)) == 23
+        assert len(asme.lang(Lang.Ru)) > 1

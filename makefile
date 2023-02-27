@@ -14,7 +14,7 @@ endif
 
 SOURCE = pipeline_integrity
 TESTS = tests
-LOCALE_ASME = $(SOURCE)/method/asme_b31g/locale
+LOCALE_ASME = $(SOURCE)/method/asme/locale
 
 FLAKE8 = $(PYTHON) -m flake8 --max-line-length=120
 PYLINT = $(PYTHON) -m pylint

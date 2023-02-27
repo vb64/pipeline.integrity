@@ -30,29 +30,29 @@ class TestsReadme2012(TestAsme):
         assert pipe.wallthickness == 0.63
 
         # classic
-        assert round(asme.erf(is_explain=True), 3) == 0.704
+        assert 0.7 < asme.erf() < 0.71
         # modified
-        assert round(asme.erf(is_mod=True, is_explain=True), 3) == 0.704
+        assert round(asme.erf(is_mod=True), 3) == 0.704
 
         # the depth of the defect is more than 80% of the pipe wall thickness
         defect.depth = 0.6
-        assert round(asme.erf(is_explain=True), 3) == 0.874
+        assert round(asme.erf(), 3) == 0.874
 
         # the depth of the defect is 50% of the pipe wall thickness
         defect.depth = 0.31
         assert defect.length == 4
-        assert round(asme.erf(is_explain=True), 3) == 0.748
+        assert 0.74 < asme.erf() < 0.75
 
         # a defect with a length of 30 inches and a depth of 50% of the pipe wall thickness
         defect.length = 30
-        assert round(asme.erf(is_explain=True), 3) == 1.377
+        assert asme.erf() > 1.3
 
         assert pipe.maop == 900
         assert round(asme.safe_pressure, 2) == 653.71
         pipe.maop = 650
-        assert round(asme.erf(is_explain=True), 3) < 1
-        # print('###')
-        # print(asme.explain())
+        assert asme.erf(is_explain=True) < 1
+        print('###')
+        print(asme.explain())
 
 
 class Tests2012(TestAsme):

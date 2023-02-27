@@ -10,6 +10,38 @@ from . import TestAsme
 class TestsReadme2012(TestAsme):
     """Code from readme files."""
 
+    def test_ru(self):
+        """Code from READMEru.md 2012."""
+        pipe = self.pipe_ru
+        defect = self.defect_ru
+
+        from pipeline_integrity.method.asme.b31g_2012 import Context
+
+        assert pipe.material.smys == 295
+        pipe.material.smts = 420
+
+        asme = Context(defect)
+
+        assert defect.depth == 1
+        assert pipe.wallthickness == 16
+
+        assert 0.96 < asme.erf() < 0.97
+
+        defect.depth = 8
+        assert defect.length == 100
+        assert asme.erf() > 1.024
+
+        assert pipe.maop == 7
+        assert round(asme.safe_pressure, 2) == 6.83
+        pipe.maop = 6.8
+
+        from pipeline_integrity.i18n import Lang
+
+        lang_ru = asme.lang(Lang.Ru)
+        assert asme.erf(is_explain=lang_ru) < 1
+        # print('###')
+        # print(asme.explain())
+
     def test_en(self):
         """Code from README.md 2012."""
         pipe = self.pipe_en
@@ -51,8 +83,6 @@ class TestsReadme2012(TestAsme):
         assert round(asme.safe_pressure, 2) == 653.71
         pipe.maop = 650
         assert asme.erf(is_explain=True) < 1
-        print('###')
-        print(asme.explain())
 
 
 class Tests2012(TestAsme):

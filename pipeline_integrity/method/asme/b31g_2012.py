@@ -48,10 +48,8 @@ class Context(ContextBase):
 
         return z_val
 
-    @property
-    def m_param(self):
+    def m_param(self, z_val):
         """Parameter M."""
-        z_val = self.z_param
         m_val = math.sqrt(1 + 0.8 * z_val)
 
         self.add_explain([
@@ -102,7 +100,7 @@ class Context(ContextBase):
 
         if z_val <= 20:
             v23 = 2.0 / 3.0
-            m_val = self.m_param
+            m_val = self.m_param(z_val)
             s_p = s_f * (1 - v23 * d_t) / (1 - v23 * d_t / m_val)
 
             self.add_explain([
@@ -202,14 +200,15 @@ class Context(ContextBase):
         else:
             s_f = self.get_stress_fail()
 
-        p_f = 2 * s_f * self.relative_depth
+        pipe = self.anomaly.pipe
+        p_f = 2 * s_f * pipe.wallthickness / pipe.diameter
 
         self.add_explain([
-          '\n', _("Failure pressure = 2 * stress_fail * depth / wallthickness.", self),
+          '\n', _("Failure pressure = 2 * stress_fail * wallthickness / diameter.", self),
           '\n', "press_fail = 2 * {} * {} / {} = {}.".format(
             round(s_f, EXPL_ROUND),
-            round(self.anomaly.depth, EXPL_ROUND),
-            round(self.anomaly.pipe.wallthickness, EXPL_ROUND),
+            round(pipe.wallthickness, EXPL_ROUND),
+            round(pipe.diameter, EXPL_ROUND),
             round(p_f, EXPL_ROUND),
           ),
         ])

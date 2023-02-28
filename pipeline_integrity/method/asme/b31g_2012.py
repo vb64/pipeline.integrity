@@ -248,11 +248,23 @@ class Context(ContextBase):
 
         depth_saved = self.anomaly.depth
 
-        years = int((self.anomaly.pipe.wallthickness - self.anomaly.depth) / self.corrosion_rate) + 1
-        self.anomaly.depth += self.corrosion_rate * years
+        right = int((self.anomaly.pipe.wallthickness - self.anomaly.depth) / self.corrosion_rate) + 1
+        self.anomaly.depth = depth_saved + self.corrosion_rate * right
         erf_val = self.erf(is_mod=is_mod)
         if erf_val < 1:
-            print('## NOT NEED REAPAIR!!!')
+            # print('## NOT NEED REAPAIR!!!')
+            return 777
 
-        print('##', 'years', years, 'erf', round(erf_val, 3))
-        return years
+        # print('###')
+        left = 0
+        while (right - left) > 1:
+            years = left + int((right - left) / 2)
+            self.anomaly.depth = depth_saved + self.corrosion_rate * years
+            erf_val = self.erf(is_mod=is_mod)
+            # print(left, '<-', years, '->', right, '==', erf_val)
+            if erf_val < 1:
+                left = years
+            else:
+                right = years
+
+        return left

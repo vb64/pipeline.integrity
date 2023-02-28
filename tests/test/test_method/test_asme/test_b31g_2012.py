@@ -40,7 +40,7 @@ class TestsReadme2012(TestAsme):
         lang_ru = asme.lang(Lang.Ru)
         assert asme.erf(is_explain=lang_ru) < 1
 
-        assert asme.years() == 21
+        assert asme.years() == 1
         # print('###')
         # print(asme.explain())
 

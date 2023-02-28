@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-02-28 10:46+0400\n"
+"POT-Creation-Date: 2023-02-28 12:00+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -19,11 +19,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.11.0\n"
 
-#: source/asme.py:46
+#: source/asme.py:47
 msgid "No danger."
 msgstr "Опасности нет."
 
-#: source/asme.py:48
+#: source/asme.py:49
 msgid "Repair or pressure reduction to {} required."
 msgstr "Необходим ремонт или снижение давления до {}."
 
@@ -81,15 +81,23 @@ msgstr "Длина"
 msgid "Depth"
 msgstr "Глубина"
 
-#: source/templates/asme.html:68
+#: source/templates/asme.html:66
+msgid "Method"
+msgstr "Метод"
+
+#: source/templates/asme.html:74
+msgid "Modified"
+msgstr "Модифицированный"
+
+#: source/templates/asme.html:82
 msgid "Calculate"
 msgstr "Расчет"
 
-#: source/templates/asme.html:74
+#: source/templates/asme.html:88
 msgid "Result"
 msgstr "Результат"
 
-#: source/templates/asme.html:82
+#: source/templates/asme.html:96
 msgid "Explanation"
 msgstr "Объяснение"
 
@@ -104,3 +112,4 @@ msgstr "библиотеки PipelineIntegrity"
 #: source/templates/main.html:10
 msgid "Choose the method for calculation."
 msgstr "Выберите метод расчета."
+

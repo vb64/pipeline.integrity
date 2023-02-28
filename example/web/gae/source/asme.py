@@ -19,6 +19,7 @@ class AsmeB31G(ndb.Model):
     maop = ndb.FloatProperty(indexed=False, default=7.0)
     length = ndb.FloatProperty(indexed=False, default=100.0)
     depth = ndb.FloatProperty(indexed=False, default=1.0)
+    is_modified = ndb.BooleanProperty(indexed=False, default=False)
 
 
 @asme_page.route('/asme/', methods=['GET', 'POST'])
@@ -41,7 +42,7 @@ def show():
         return redirect(g.asme_url)
 
     model = get_model(asme)
-    erf = model.erf(is_explain=model.lang(LANG_CODE))
+    erf = model.erf(is_explain=model.lang(LANG_CODE), is_mod=asme.is_modified)
 
     g.result = _("No danger.") + " (ERF = {})".format(round(erf, 3))
     if erf >= 1:
@@ -49,6 +50,7 @@ def show():
 
     g.explain = model.explain().replace('\n', '<br>')
     g.asme = model
+    g.is_modified = asme.is_modified
 
     return render_template('asme.html', g=g)
 
@@ -84,4 +86,5 @@ def save_form(asme, form):
     asme.maop = float(form['pressure'])
     asme.length = float(form['length'])
     asme.depth = float(form['depth'])
+    asme.is_modified = True if 'modified' in form else False
     return asme.put()

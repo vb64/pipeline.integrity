@@ -62,6 +62,20 @@
 <td>{{ _("mm") }}</td>
 </tr>
 
+<tr>
+<td><b>{{ _("Method") }}</b></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>
+<input type="checkbox" name="modified" id="modified" {% if g.is_modified %}checked{% endif %}>
+<label for="modified">{{ _("Modified") }}</label>
+</td>
+<td></td>
+</tr>
+
 </table>
 
 <div class="form-group">

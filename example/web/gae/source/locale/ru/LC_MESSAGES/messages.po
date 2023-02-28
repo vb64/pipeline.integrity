@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-02-20 16:10+0400\n"
+"POT-Creation-Date: 2023-02-28 12:00+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -19,72 +19,85 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.11.0\n"
 
-#: source/asme.py:44
+#: source/asme.py:47
 msgid "No danger."
 msgstr "Опасности нет."
-
-#: source/asme.py:47
-msgid "Replacement of the pipe is necessary."
-msgstr "Необходим ремонт или замена трубы."
 
 #: source/asme.py:49
 msgid "Repair or pressure reduction to {} required."
 msgstr "Необходим ремонт или снижение давления до {}."
 
 #: source/templates/asme.html:5
-msgid "ASME B31G method"
-msgstr "Методика ASME B31G"
+msgid "ASME B31G method 2012 edition"
+msgstr "Методика ASME B31G редакция 2012"
 
 #: source/templates/asme.html:13
 msgid "Pipe"
 msgstr "Труба"
 
-#: source/templates/asme.html:19
+#: source/templates/asme.html:18
 msgid "Diameter"
 msgstr "Диаметр"
 
-#: source/templates/asme.html:21 source/templates/asme.html:27
-#: source/templates/asme.html:51 source/templates/asme.html:57
+#: source/templates/asme.html:20 source/templates/asme.html:25
+#: source/templates/asme.html:57 source/templates/asme.html:62
 msgid "mm"
 msgstr "мм"
 
-#: source/templates/asme.html:25
+#: source/templates/asme.html:23
 msgid "Wall thickness"
 msgstr "Толщина стенки"
 
-#: source/templates/asme.html:31
-msgid "Material SMYS"
-msgstr "Предел текучести"
-
-#: source/templates/asme.html:33 source/templates/asme.html:39
-msgid "MPa"
-msgstr "МПа"
-
-#: source/templates/asme.html:37
+#: source/templates/asme.html:28
 msgid "Pressure"
 msgstr "Давление"
 
-#: source/templates/asme.html:43
+#: source/templates/asme.html:30 source/templates/asme.html:41
+#: source/templates/asme.html:46
+msgid "MPa"
+msgstr "МПа"
+
+#: source/templates/asme.html:34
+msgid "Material"
+msgstr "Материал"
+
+#: source/templates/asme.html:39
+msgid "SMYS"
+msgstr "Предел текучести"
+
+#: source/templates/asme.html:44
+msgid "SMTS"
+msgstr "Предел прочности"
+
+#: source/templates/asme.html:50
 msgid "Defect"
 msgstr "Дефект"
 
-#: source/templates/asme.html:49
+#: source/templates/asme.html:55
 msgid "Length"
 msgstr "Длина"
 
-#: source/templates/asme.html:55
+#: source/templates/asme.html:60
 msgid "Depth"
 msgstr "Глубина"
 
-#: source/templates/asme.html:63
+#: source/templates/asme.html:66
+msgid "Method"
+msgstr "Метод"
+
+#: source/templates/asme.html:74
+msgid "Modified"
+msgstr "Модифицированный"
+
+#: source/templates/asme.html:82
 msgid "Calculate"
 msgstr "Расчет"
 
-#: source/templates/asme.html:69
+#: source/templates/asme.html:88
 msgid "Result"
 msgstr "Результат"
 
-#: source/templates/asme.html:77
+#: source/templates/asme.html:96
 msgid "Explanation"
 msgstr "Объяснение"
 

@@ -17,6 +17,10 @@ class Context(ContextBase):
 
     valid_defect_types = [Type.MetalLoss]
 
+    # ANSI/NACE SP0502-2010 (formerly RP0502) Appendix C: Postassessment: Corrosion Rate Estimation C3.2
+    # https://github.com/vb64/pipeline.integrity/blob/main/docs/SOP_Pipeline_External_Corrosion.pdf
+    corrosion_rate = 0.4  # mm/year
+
     def __init__(self, defect):
         """ASME B31G context."""
         super(Context, self).__init__(defect)

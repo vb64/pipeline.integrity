@@ -239,3 +239,20 @@ class Context(ContextBase):
         ])
 
         return erf_val
+
+    def years(self, is_mod=False, is_explain=False):
+        """Return estimated years for repair."""
+        erf_val = self.erf(is_mod=is_mod, is_explain=is_explain)
+        if erf_val >= 1:
+            return 0
+
+        depth_saved = self.anomaly.depth
+
+        years = int((self.anomaly.pipe.wallthickness - self.anomaly.depth) / self.corrosion_rate) + 1
+        self.anomaly.depth += self.corrosion_rate * years
+        erf_val = self.erf(is_mod=is_mod)
+        if erf_val < 1:
+            print('## NOT NEED REAPAIR!!!')
+
+        print('##', 'years', years, 'erf', round(erf_val, 3))
+        return years

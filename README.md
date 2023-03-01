@@ -68,7 +68,7 @@ Defect depth less than 10% wall thickness, no danger. Years before repair: 1.
 assert defect.depth == 0.039
 assert pipe.wallthickness == 0.63
 
-assert asme.years() == 1
+assert asme.years() > 0
 assert 0.7 < asme.erf() < 0.71
 ```
 

@@ -242,31 +242,78 @@ class Context(ContextBase):
 
     def years(self, is_mod=False, is_explain=False):
         """Return estimated years for repair."""
-        erf_val = self.erf(is_mod=is_mod, is_explain=is_explain)
-        if erf_val >= 1:
+        erf_l = self.erf(is_mod=is_mod, is_explain=is_explain)
+        if erf_l >= 1:
+            self.add_explain([
+              '\n', _("Repair required immediately, years to repair: 0.", self),
+            ])
             return 0
 
         depth_saved = self.anomaly.depth
 
         right = int((self.anomaly.pipe.wallthickness - self.anomaly.depth) / self.corrosion_rate) + 1
         self.anomaly.depth = depth_saved + self.corrosion_rate * right
-        erf_val = self.erf(is_mod=is_mod)
-        if erf_val < 1:
-            # print('## NOT NEED REAPAIR!!!')
+        self.is_explain = False
+        explain_text = self.explain_text
+        erf_r = self.erf(is_mod=is_mod)
+        self.is_explain = is_explain
+
+        self.explain_text = explain_text
+        self.add_explain([
+          '\n',
+          '\n', _("Repair is not required at the moment, calculate the time before repair.", self),
+          '\n',
+          _(
+            "With corrosion rate {} mm/year, pipe wall {} and depth {} "
+            "a through hole is formed after years: {}.",
+            self
+          ).format(
+            round(self.corrosion_rate, EXPL_ROUND),
+            self.anomaly.pipe.wallthickness,
+            depth_saved,
+            right
+          ),
+        ])
+
+        if erf_r < 1:
+            self.add_explain([
+              '\n', _("But even a through defect does not require repair.", self),
+              '\n', _("ERF = {}. Use special value for years: 777.", self).format(
+                round(erf_r, EXPL_ROUND)
+              ),
+            ])
+
             self.anomaly.depth = depth_saved
             return 777
 
-        # print('###')
+        self.add_explain([
+          '\n',
+          _("Calculating the year in which the corrosion growth of the defect will require repair.", self),
+        ])
+
+        self.is_explain = False
+        explain_text = self.explain_text
         left = 0
+
         while (right - left) > 1:
             years = left + int((right - left) / 2)
             self.anomaly.depth = depth_saved + self.corrosion_rate * years
             erf_val = self.erf(is_mod=is_mod)
-            # print(left, '<-', years, '->', right, '==', erf_val)
             if erf_val < 1:
+                erf_l = erf_val
                 left = years
             else:
+                erf_r = erf_val
                 right = years
+
+        self.is_explain = is_explain
+        self.explain_text = explain_text
+
+        self.add_explain([
+          '\n', _("Years: {} ERF: {}.", self).format(left, round(erf_l, EXPL_ROUND)),
+          '\n', _("Years: {} ERF: {}.", self).format(right, round(erf_r, EXPL_ROUND)),
+          '\n', _("Defect will require repair after years: {}.", self).format(left),
+        ])
 
         self.anomaly.depth = depth_saved
         return left

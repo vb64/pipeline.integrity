@@ -28,6 +28,10 @@ class TestsReadme2012(TestAsme):
         assert asme.years() == 12
         assert 0.95 < asme.erf() < 0.97
 
+        pipe.maop = 0.01
+        assert asme.years() == 777
+        pipe.maop = 7
+
         defect.depth = 8
         defect.length = 200
         assert asme.years() == 0

@@ -70,12 +70,12 @@ assert asme.years() > 1
 ```python
 pipe.maop = 0.01
 assert asme.years() == 777
-pipe.maop = 7
 ```
 
 Глубина дефекта 50% от толщины стенки трубы требует ремонта при указанном рабочем давлении в трубе (КБД > 1).
 
 ```python
+pipe.maop = 7
 defect.depth = 8
 defect.length = 200
 assert asme.years() == 0

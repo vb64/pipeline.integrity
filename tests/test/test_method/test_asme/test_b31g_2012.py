@@ -25,10 +25,12 @@ class TestsReadme2012(TestAsme):
         assert defect.depth == 1
         assert pipe.wallthickness == 16
 
+        assert asme.years() == 12
         assert 0.95 < asme.erf() < 0.97
 
         defect.depth = 8
         defect.length = 200
+        assert asme.years() == 0
         assert asme.erf() > 1
 
         assert pipe.maop == 7
@@ -38,9 +40,8 @@ class TestsReadme2012(TestAsme):
         from pipeline_integrity.i18n import Lang
 
         lang_ru = asme.lang(Lang.Ru)
-        assert asme.erf(is_explain=lang_ru) < 1
-
         assert asme.years() == 1
+        assert asme.erf(is_explain=lang_ru) < 1
         # print('###')
         # print(asme.explain())
 

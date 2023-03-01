@@ -253,6 +253,7 @@ class Context(ContextBase):
         erf_val = self.erf(is_mod=is_mod)
         if erf_val < 1:
             # print('## NOT NEED REAPAIR!!!')
+            self.anomaly.depth = depth_saved
             return 777
 
         # print('###')
@@ -267,4 +268,5 @@ class Context(ContextBase):
             else:
                 right = years
 
+        self.anomaly.depth = depth_saved
         return left

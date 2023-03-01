@@ -52,26 +52,32 @@ defect = pipe.add_metal_loss(
 )
 ```
 
-SMTS for pipe material must be set.
-
-```python
-pipe.material.smts = 70000
-```
-
-Context for calculating the degree of severity of the defect according to the ASME B31G method
+SMTS for pipe material must be set to create
+context for calculating the degree of severity of the defect according to the ASME B31G method
 
 ```python
 from pipeline_integrity.method.asme.b31g_2012 import Context
 
+pipe.material.smts = 70000
 asme = Context(defect)
 ```
 
-Defect depth less than 10% wall thickness, no danger.
+Defect depth less than 10% wall thickness, no danger. Years before repair: 1.
 
 ```python
 assert defect.depth == 0.039
 assert pipe.wallthickness == 0.63
+
+assert asme.years() == 1
 assert 0.7 < asme.erf() < 0.71
+```
+
+For very low pressure cases, repair is never required (special value 777 years).
+
+```python
+pipe.maop = 1
+assert asme.years() == 777
+pipe.maop = 900
 ```
 
 The depth of the defect is 50% of the pipe wall thickness.
@@ -87,6 +93,7 @@ requires repair at the specified working pressure in the pipe.
 
 ```python
 defect.length = 30
+assert asme.years() == 0
 assert asme.erf() > 1.3
 ```
 
@@ -96,10 +103,10 @@ When the operating pressure is reduced to a safe value, the defect does not requ
 assert pipe.maop == 900
 assert round(asme.safe_pressure, 2) == 653.71
 pipe.maop = 650
-assert asme.erf(is_explain=True) < 1
+assert asme.years(is_explain=True) > 0
 ```
 
-If you call `pipe_state` method with parameter `is_explain=True`,
+If you call `years` or `erf` methods with parameter `is_explain=True`,
 then you can get explanation in text form.
 
 ```python

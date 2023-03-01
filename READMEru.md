@@ -46,26 +46,32 @@ defect = pipe.add_metal_loss(
 )
 ```
 
-Нужно задать предел прочности на растяжение материала трубы.
-
-```python
-pipe.material.smts = 420
-```
-
-Контекст для вычисления степени опасности дефекта по методике ASME B31G.
+При создании контекста для вычисления степени опасности дефекта по методике ASME B31G
+нужно задать предел прочности на растяжение материала трубы.
 
 ```python
 from pipeline_integrity.method.asme.b31g_2012 import Context
 
+pipe.material.smts = 420
 asme = Context(defect)
 ```
 
 Глубина дефекта менее 10% толщины стенки трубы, рассчитанный КБД (ERF) дефекта менее 1, опасности нет.
+Срок до ремонта: 12 лет.
 
 ```python
 assert defect.depth == 1
 assert pipe.wallthickness == 16
 assert 0.95 < asme.erf() < 0.97
+assert asme.years() == 12
+```
+
+Для случаев очень низкого давления ремонт не требуется никогда (специальное значение 777 лет).
+
+```python
+pipe.maop = 0.01
+assert asme.years() == 777
+pipe.maop = 7
 ```
 
 Глубина дефекта 50% от толщины стенки трубы требует ремонта при указанном рабочем давлении в трубе (КБД > 1).
@@ -73,6 +79,7 @@ assert 0.95 < asme.erf() < 0.97
 ```python
 defect.depth = 8
 defect.length = 200
+assert asme.years() == 0
 assert asme.erf() > 1
 ```
 
@@ -86,11 +93,10 @@ pipe.maop = asme.safe_pressure - 0.1
 from pipeline_integrity.i18n import Lang
 
 lang_ru = asme.lang(Lang.Ru)
-
-assert asme.erf(is_explain=lang_ru) < 1
+assert asme.years(is_explain=lang_ru) > 0
 ```
 
-Если метод `erf` вызван с параметром `is_explain`, задающим словарь перевода,
+Если метод `years` или `erf` вызван с параметром `is_explain`, задающим словарь перевода,
 то вы можете получить объяснение сделанного расчета в текстовом виде на русском языке.
 
 ```python

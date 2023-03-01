@@ -42,7 +42,8 @@ def show():
         return redirect(g.asme_url)
 
     model = get_model(asme)
-    erf = model.erf(is_explain=model.lang(LANG_CODE), is_mod=asme.is_modified)
+    model.is_explain = model.lang(LANG_CODE)
+    erf = model.erf(is_mod=asme.is_modified)
 
     g.result = _("No danger.") + " (ERF = {})".format(round(erf, 3))
     if erf >= 1:

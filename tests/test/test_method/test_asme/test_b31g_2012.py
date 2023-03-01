@@ -43,8 +43,8 @@ class TestsReadme2012(TestAsme):
 
         from pipeline_integrity.i18n import Lang
 
-        lang_ru = asme.lang(Lang.Ru)
-        assert asme.years(is_explain=lang_ru) > 0
+        asme.is_explain = asme.lang(Lang.Ru)
+        assert asme.years() > 0
 
     def test_en(self):
         """Code from README.md 2012."""
@@ -94,8 +94,9 @@ class TestsReadme2012(TestAsme):
 
         assert pipe.maop == 900
         assert round(asme.safe_pressure, 2) == 653.71
-        pipe.maop = 650
-        assert asme.years(is_explain=True) > 0
+        pipe.maop = 500
+        asme.is_explain = True
+        assert asme.years() > 0
 
         print('###')
         print(asme.explain())

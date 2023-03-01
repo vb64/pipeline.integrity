@@ -215,13 +215,9 @@ class Context(ContextBase):
 
         return p_f
 
-    def erf(self, is_mod=False, is_explain=False):
+    def erf(self, is_mod=False):
         """Return estimated repair factor."""
-        self.is_explain = is_explain
-        self.explain_text = []
-
         modname = _("modified", self) if is_mod else _("classic", self)
-
         self.add_explain([
           _("Calculate ERF by {} {}.", self).format(self.name, modname),
         ])
@@ -240,9 +236,11 @@ class Context(ContextBase):
 
         return erf_val
 
-    def years(self, is_mod=False, is_explain=False):
+    def years(self, is_mod=False):
         """Return estimated years for repair."""
-        erf_l = self.erf(is_mod=is_mod, is_explain=is_explain)
+        is_explain = self.is_explain
+
+        erf_l = self.erf(is_mod=is_mod)
         if erf_l >= 1:
             self.add_explain([
               '\n', _("Repair required immediately, years to repair: 0.", self),
@@ -252,13 +250,8 @@ class Context(ContextBase):
         depth_saved = self.anomaly.depth
 
         right = int((self.anomaly.pipe.wallthickness - self.anomaly.depth) / self.corrosion_rate) + 1
-        self.anomaly.depth = depth_saved + self.corrosion_rate * right
-        self.is_explain = False
-        explain_text = self.explain_text
-        erf_r = self.erf(is_mod=is_mod)
-        self.is_explain = is_explain
+        self.anomaly.depth = self.anomaly.pipe.wallthickness - self.corrosion_rate / 12.0
 
-        self.explain_text = explain_text
         self.add_explain([
           '\n',
           '\n', _("Repair is not required at the moment, calculate the time before repair.", self),
@@ -274,6 +267,10 @@ class Context(ContextBase):
             right
           ),
         ])
+
+        self.is_explain = False
+        erf_r = self.erf(is_mod=is_mod)
+        self.is_explain = is_explain
 
         if erf_r < 1:
             self.add_explain([
@@ -292,7 +289,6 @@ class Context(ContextBase):
         ])
 
         self.is_explain = False
-        explain_text = self.explain_text
         left = 0
 
         while (right - left) > 1:
@@ -307,8 +303,6 @@ class Context(ContextBase):
                 right = years
 
         self.is_explain = is_explain
-        self.explain_text = explain_text
-
         self.add_explain([
           '\n', _("Years: {} ERF: {}.", self).format(left, round(erf_l, EXPL_ROUND)),
           '\n', _("Years: {} ERF: {}.", self).format(right, round(erf_r, EXPL_ROUND)),

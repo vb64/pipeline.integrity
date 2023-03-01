@@ -52,17 +52,13 @@ defect = pipe.add_metal_loss(
 )
 ```
 
-SMTS for pipe material must be set.
-
-```python
-pipe.material.smts = 70000
-```
-
-Context for calculating the degree of severity of the defect according to the ASME B31G method
+SMTS for pipe material must be set to create
+context for calculating the degree of severity of the defect according to the ASME B31G method
 
 ```python
 from pipeline_integrity.method.asme.b31g_2012 import Context
 
+pipe.material.smts = 70000
 asme = Context(defect)
 ```
 
@@ -71,7 +67,17 @@ Defect depth less than 10% wall thickness, no danger.
 ```python
 assert defect.depth == 0.039
 assert pipe.wallthickness == 0.63
+
+assert asme.years() > 0
 assert 0.7 < asme.erf() < 0.71
+```
+
+For very low pressure cases, repair is never required (special value 777 years).
+
+```python
+pipe.maop = 1
+assert asme.years() == 777
+pipe.maop = 900
 ```
 
 The depth of the defect is 50% of the pipe wall thickness.
@@ -87,6 +93,7 @@ requires repair at the specified working pressure in the pipe.
 
 ```python
 defect.length = 30
+assert asme.years() == 0
 assert asme.erf() > 1.3
 ```
 
@@ -95,12 +102,12 @@ When the operating pressure is reduced to a safe value, the defect does not requ
 ```python
 assert pipe.maop == 900
 assert round(asme.safe_pressure, 2) == 653.71
-pipe.maop = 650
-assert asme.erf(is_explain=True) < 1
+pipe.maop = 500
+asme.is_explain = True
+assert asme.years() > 0
 ```
 
-If you call `pipe_state` method with parameter `is_explain=True`,
-then you can get explanation in text form.
+If you set context property `is_explain = True`, then you can get explanation in text form.
 
 ```python
 asme.explain()
@@ -119,7 +126,14 @@ stress_fail = 57200.0 * (1 - 0.31 / 0.63) = 29053.968.
 Failure pressure = 2 * stress_fail * wallthickness / diameter.
 press_fail = 2 * 29053.968 * 0.63 / 56 = 653.714.
 ERF = pipe_maop / press_fail.
-ERF = 650 / 653.714 = 0.994
+ERF = 500 / 653.714 = 0.765
+
+Repair is not required at the moment, calculate the time before repair.
+With corrosion rate 0.016 mm/year, pipe wall 0.63 and depth 0.31 a through hole is formed after years: 21.
+Calculating the year in which the corrosion growth of the defect will require repair.
+Years: 4 ERF: 0.952.
+Years: 5 ERF: 1.014.
+Defect will require repair after years: 4.
 ```
 
 ## Development

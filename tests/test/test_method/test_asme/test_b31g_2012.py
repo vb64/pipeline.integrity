@@ -98,9 +98,6 @@ class TestsReadme2012(TestAsme):
         asme.is_explain = True
         assert asme.years() > 0
 
-        print('###')
-        print(asme.explain())
-
 
 class Tests2012(TestAsme):
     """Class B31G_2012 methods."""

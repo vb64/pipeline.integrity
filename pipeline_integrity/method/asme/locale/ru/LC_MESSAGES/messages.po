@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-02-27 14:54+0400\n"
+"POT-Creation-Date: 2023-03-01 15:29+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -194,19 +194,56 @@ msgstr ""
 msgid "Failure pressure = 2 * stress_fail * wallthickness / diameter."
 msgstr "Давление разрыва = 2 * stress_fail * толщина / диаметр."
 
-#: pipeline_integrity/method/asme/b31g_2012.py:223
+#: pipeline_integrity/method/asme/b31g_2012.py:220
 msgid "modified"
 msgstr "модифицированный"
 
-#: pipeline_integrity/method/asme/b31g_2012.py:223
+#: pipeline_integrity/method/asme/b31g_2012.py:220
 msgid "classic"
 msgstr "классический"
 
-#: pipeline_integrity/method/asme/b31g_2012.py:226
+#: pipeline_integrity/method/asme/b31g_2012.py:222
 msgid "Calculate ERF by {} {}."
 msgstr "Вычисляем КБД по {} {}."
 
-#: pipeline_integrity/method/asme/b31g_2012.py:233
+#: pipeline_integrity/method/asme/b31g_2012.py:229
 msgid "ERF = pipe_maop / press_fail."
 msgstr "КБД = рабочее_давление / давление_разрыва."
+
+#: pipeline_integrity/method/asme/b31g_2012.py:246
+msgid "Repair required immediately, years to repair: 0."
+msgstr "Необходим ремонт, лет до ремонта: 0."
+
+#: pipeline_integrity/method/asme/b31g_2012.py:257
+msgid "Repair is not required at the moment, calculate the time before repair."
+msgstr "На данный момент ремонт не требуется, вычисляем время до ремонта."
+
+#: pipeline_integrity/method/asme/b31g_2012.py:259
+msgid ""
+"With corrosion rate {} mm/year, pipe wall {} and depth {} a through hole "
+"is formed after years: {}."
+msgstr "При скорости коррозии {} мм/год, толщине стенки {} и глубине дефекта {}, сквозной дефект образуется через лет: {}."
+
+#: pipeline_integrity/method/asme/b31g_2012.py:277
+msgid "But even a through defect does not require repair."
+msgstr "Но даже сквозной дефект не нуждается в ремонте."
+
+#: pipeline_integrity/method/asme/b31g_2012.py:278
+msgid "ERF = {}. Use special value for years: 777."
+msgstr "КБД = {}. Используем специальное значение 777 для годов до ремонта."
+
+#: pipeline_integrity/method/asme/b31g_2012.py:288
+msgid ""
+"Calculating the year in which the corrosion growth of the defect will "
+"require repair."
+msgstr "Вычисляем через сколько лет дефект потребует ремонта при заданной скорости коррозии."
+
+#: pipeline_integrity/method/asme/b31g_2012.py:307
+#: pipeline_integrity/method/asme/b31g_2012.py:308
+msgid "Years: {} ERF: {}."
+msgstr "Года: {} КБД: {}."
+
+#: pipeline_integrity/method/asme/b31g_2012.py:309
+msgid "Defect will require repair after years: {}."
+msgstr "Дефект нужно будет отремонтировать через лет: {}."
 

@@ -62,7 +62,7 @@ pipe.material.smts = 70000
 asme = Context(defect)
 ```
 
-Defect depth less than 10% wall thickness, no danger. Years before repair: 1.
+Defect depth less than 10% wall thickness, no danger.
 
 ```python
 assert defect.depth == 0.039
@@ -102,12 +102,12 @@ When the operating pressure is reduced to a safe value, the defect does not requ
 ```python
 assert pipe.maop == 900
 assert round(asme.safe_pressure, 2) == 653.71
-pipe.maop = 650
-assert asme.years(is_explain=True) > 0
+pipe.maop = 500
+asme.is_explain = True
+assert asme.years() > 0
 ```
 
-If you call `years` or `erf` methods with parameter `is_explain=True`,
-then you can get explanation in text form.
+If you set context property `is_explain = True`, then you can get explanation in text form.
 
 ```python
 asme.explain()
@@ -126,7 +126,14 @@ stress_fail = 57200.0 * (1 - 0.31 / 0.63) = 29053.968.
 Failure pressure = 2 * stress_fail * wallthickness / diameter.
 press_fail = 2 * 29053.968 * 0.63 / 56 = 653.714.
 ERF = pipe_maop / press_fail.
-ERF = 650 / 653.714 = 0.994
+ERF = 500 / 653.714 = 0.765
+
+Repair is not required at the moment, calculate the time before repair.
+With corrosion rate 0.016 mm/year, pipe wall 0.63 and depth 0.31 a through hole is formed after years: 21.
+Calculating the year in which the corrosion growth of the defect will require repair.
+Years: 4 ERF: 0.952.
+Years: 5 ERF: 1.014.
+Defect will require repair after years: 4.
 ```
 
 ## Development

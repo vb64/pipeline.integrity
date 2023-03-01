@@ -77,12 +77,12 @@ For very low pressure cases, repair is never required (special value 777 years).
 ```python
 pipe.maop = 1
 assert asme.years() == 777
-pipe.maop = 900
 ```
 
 The depth of the defect is 50% of the pipe wall thickness.
 
 ```python
+pipe.maop = 900
 defect.depth = 0.31
 assert defect.length == 4
 assert 0.74 < asme.erf() < 0.75

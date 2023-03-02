@@ -143,3 +143,8 @@ $ make tests
 $ make setup2 PYTHON_BIN=/path/to/python2
 $ make tests2
 ```
+
+## Пример
+
+Рабочая версия примера онлайн-калькулятора опасности дефекта с использованием этой библиотеки [находится здесь](https://wot-online-hours.appspot.com/).
+Исходный код примера содержится в [каталоге example](example/web/gae ) репозитария.

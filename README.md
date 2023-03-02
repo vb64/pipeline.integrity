@@ -7,7 +7,7 @@
 
 [In Russian](READMEru.md)
 
-Free, open source PipelineIntegrity library designed to calculate the degree of danger
+The free, open source PipelineIntegrity library designed to calculate the degree of danger
 of pipeline metal loss defects according to the ASME B31G method.
 
 ![ASME B31G method](docs/asme/img/fig_1_1.png)
@@ -152,3 +152,8 @@ With Python 2:
 $ make setup2 PYTHON_BIN=/path/to/python2
 $ make tests2
 ```
+
+## Example
+
+Living version of online calculator example, that use this library, can be [found here](https://wot-online-hours.appspot.com/).
+The source code of this example placed in this repo in [example dir](example/web/gae ).

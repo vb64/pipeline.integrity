@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-02-28 12:00+0400\n"
+"POT-Creation-Date: 2023-03-02 09:41+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -19,13 +19,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.11.0\n"
 
-#: source/asme.py:47
-msgid "No danger."
-msgstr "Опасности нет."
-
-#: source/asme.py:49
+#: source/asme.py:50
 msgid "Repair or pressure reduction to {} required."
 msgstr "Необходим ремонт или снижение давления до {}."
+
+#: source/asme.py:52
+msgid "Repair required after years: {}."
+msgstr "Ремонт нужен через лет: {}"
 
 #: source/templates/asme.html:5
 msgid "ASME B31G method 2012 edition"
@@ -85,19 +85,27 @@ msgstr "Глубина"
 msgid "Method"
 msgstr "Метод"
 
-#: source/templates/asme.html:74
+#: source/templates/asme.html:71
+msgid "Corrosion rate"
+msgstr "Скорость коррозии"
+
+#: source/templates/asme.html:73
+msgid "mm/year"
+msgstr "мм/год"
+
+#: source/templates/asme.html:79
 msgid "Modified"
 msgstr "Модифицированный"
 
-#: source/templates/asme.html:82
+#: source/templates/asme.html:87
 msgid "Calculate"
 msgstr "Расчет"
 
-#: source/templates/asme.html:88
+#: source/templates/asme.html:93
 msgid "Result"
 msgstr "Результат"
 
-#: source/templates/asme.html:96
+#: source/templates/asme.html:101
 msgid "Explanation"
 msgstr "Объяснение"
 

@@ -20,6 +20,7 @@ class AsmeB31G(ndb.Model):
     length = ndb.FloatProperty(indexed=False, default=100.0)
     depth = ndb.FloatProperty(indexed=False, default=1.0)
     is_modified = ndb.BooleanProperty(indexed=False, default=False)
+    corrosion_rate = ndb.FloatProperty(indexed=False, default=0.4)
 
 
 @asme_page.route('/asme/', methods=['GET', 'POST'])
@@ -43,11 +44,12 @@ def show():
 
     model = get_model(asme)
     model.is_explain = model.lang(LANG_CODE)
-    erf = model.erf(is_mod=asme.is_modified)
+    years = model.years(is_mod=asme.is_modified)
 
-    g.result = _("No danger.") + " (ERF = {})".format(round(erf, 3))
-    if erf >= 1:
+    if years == 0:
         g.result = _("Repair or pressure reduction to {} required.").format(round(model.safe_pressure, 2))
+    else:
+        g.result = _("Repair required after years: {}.").format(int(round(years)))
 
     g.explain = model.explain().replace('\n', '<br>')
     g.asme = model
@@ -75,6 +77,7 @@ def get_model(asme):
 
     model.anomaly.length = asme.length
     model.anomaly.depth = asme.depth
+    model.corrosion_rate = asme.corrosion_rate
 
     return model
 
@@ -87,5 +90,6 @@ def save_form(asme, form):
     asme.maop = float(form['pressure'])
     asme.length = float(form['length'])
     asme.depth = float(form['depth'])
+    asme.corrosion_rate = float(form['corate'])
     asme.is_modified = True if 'modified' in form else False
     return asme.put()

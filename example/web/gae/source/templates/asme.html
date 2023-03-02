@@ -64,21 +64,16 @@
 
 <tr>
 <td><b>{{ _("Method") }}</b></td>
-<td></td>
+<td>
+<input type="checkbox" name="modified" id="modified" {% if g.is_modified %}checked{% endif %}>
+<label for="modified">{{ _("Modified") }}</label>
+</td>
 <td></td>
 </tr>
 <tr>
 <td>{{ _("Corrosion rate") }}</td>
 <td><input type="text" name="corate" class="form-control" value="{{ g.asme.corrosion_rate }}"></td>
 <td>{{ _("mm/year") }}</td>
-</tr>
-<tr>
-<td></td>
-<td>
-<input type="checkbox" name="modified" id="modified" {% if g.is_modified %}checked{% endif %}>
-<label for="modified">{{ _("Modified") }}</label>
-</td>
-<td></td>
 </tr>
 
 </table>

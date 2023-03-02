@@ -22,7 +22,7 @@ DEPLOY = $(GCLOUD) app deploy --project $(PRJ)
 BACK = backend
 
 BACK_VERSION = days14
-VERSION = b31g2012
+VERSION = cor-rate
 
 all: run
 

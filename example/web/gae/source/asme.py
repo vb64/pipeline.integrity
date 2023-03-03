@@ -48,6 +48,8 @@ def show():
 
     if years == 0:
         g.result = _("Repair or pressure reduction to {} required.").format(round(model.safe_pressure, 2))
+    elif years > 100:
+        g.result = _("Repair not required.")
     else:
         g.result = _("Repair required after years: {}.").format(int(round(years)))
 

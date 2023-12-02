@@ -1,0 +1,31 @@
+# https://docs.github.com/en/free-pro-team@latest/actions/guides/building-and-testing-python
+name: py2
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  py2:
+    name: Run tests with Python 2.7
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Build docker image
+      run: |
+        cd tests/docker
+        cp ../../requirements.txt requirements.txt
+        cp ../../tests/requirements.txt tests.txt
+        docker-compose build
+
+    - name: Run tests
+      run: docker-compose --file tests/docker/docker-compose.yml run py2

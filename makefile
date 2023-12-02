@@ -16,7 +16,7 @@ SOURCE = pipeline_integrity
 TESTS = tests
 LOCALE_ASME = $(SOURCE)/method/asme/locale
 
-FLAKE8 = $(PYTHON) -m flake8 --max-line-length=120
+FLAKE8 = $(PYTHON) -m flake8
 PYLINT = $(PYTHON) -m pylint
 PYLINT2 = $(PYLINT) --rcfile .pylintrc2
 PYTEST = $(PTEST) --cov=$(SOURCE) --cov-report term:skip-covered

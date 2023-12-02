@@ -113,7 +113,7 @@ class Context(ContextBase):
                 self
               ),
 
-              '\n',  self.explain_stress_fail(s_f, m_val, s_p),
+              '\n', self.explain_stress_fail(s_f, m_val, s_p),
             ])
 
             return s_p
@@ -136,13 +136,13 @@ class Context(ContextBase):
     def explain_stress_fail(self, s_f, m_val, s_p):
         """Return text that explain stress_fail calculation."""
         return "stress_fail = {} * (1 - 0.85 * ({} / {})) / (1 - 0.85 * ({} / {}) / {}) = {}.".format(
-            round(s_f, EXPL_ROUND),
-            round(self.anomaly.depth, EXPL_ROUND),
-            round(self.anomaly.pipe.wallthickness, EXPL_ROUND),
-            round(self.anomaly.depth, EXPL_ROUND),
-            round(self.anomaly.pipe.wallthickness, EXPL_ROUND),
-            round(m_val, EXPL_ROUND),
-            round(s_p, EXPL_ROUND),
+          round(s_f, EXPL_ROUND),
+          round(self.anomaly.depth, EXPL_ROUND),
+          round(self.anomaly.pipe.wallthickness, EXPL_ROUND),
+          round(self.anomaly.depth, EXPL_ROUND),
+          round(self.anomaly.pipe.wallthickness, EXPL_ROUND),
+          round(m_val, EXPL_ROUND),
+          round(s_p, EXPL_ROUND),
         )
 
     def get_stress_fail_mod(self):

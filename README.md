@@ -1,9 +1,4 @@
 # PipelineIntegrity library
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/vb64/pipeline.integrity/pep257.yml?label=Pep257&style=plastic&branch=main)](https://github.com/vb64/pipeline.integrity/actions?query=workflow%3Apep257)
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/vb64/pipeline.integrity/py2.yml?label=Python%202.7&style=plastic&branch=main)](https://github.com/vb64/pipeline.integrity/actions?query=workflow%3Apy2)
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/vb64/pipeline.integrity/py3.yml?label=Python%203.7-3.11&style=plastic&branch=main)](https://github.com/vb64/pipeline.integrity/actions?query=workflow%3Apy3)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/73597c448da3417599eb3f21bcb7136b)](https://www.codacy.com/gh/vb64/pipeline.integrity/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=vb64/pipeline.integrity&amp;utm_campaign=Badge_Grade)
-[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/73597c448da3417599eb3f21bcb7136b)](https://www.codacy.com/gh/vb64/pipeline.integrity/dashboard?utm_source=github.com&utm_medium=referral&utm_content=vb64/pipeline.integrity&utm_campaign=Badge_Coverage)
 
 [In Russian](READMEru.md)
 

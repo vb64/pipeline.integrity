@@ -9,8 +9,8 @@ from . import TestBase
 class TestsI18n(TestBase):
     """Module i18n.py."""
 
-    def test_fake_gettext(self):
-        """Function fake_gettext."""
+    def test_fgettext(self):
+        """Check fake_gettext function."""
         from pipeline_integrity.i18n import fake_gettext, Lang
         from pipeline_integrity.method.asme.b31g_1991 import Context
 
@@ -26,7 +26,7 @@ class TestsI18n(TestBase):
 
     @staticmethod
     def test_load_po():
-        """Function load_po."""
+        """Check load_po function."""
         from pipeline_integrity.i18n import load_po
 
         data = load_po(os.path.join(

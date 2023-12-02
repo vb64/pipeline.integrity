@@ -114,12 +114,9 @@ class Context(ContextBase):
               ),
               '\n', "stress_fail = {} * (1 - 2/3 * ({} / {})) / (1 - 2/3 * ({} / {} / {})) = {}.".format(
                 round(s_f, EXPL_ROUND),
-                round(self.anomaly.depth, EXPL_ROUND),
-                round(self.anomaly.pipe.wallthickness, EXPL_ROUND),
-                round(self.anomaly.depth, EXPL_ROUND),
-                round(self.anomaly.pipe.wallthickness, EXPL_ROUND),
-                round(m_val, EXPL_ROUND),
-                round(s_p, EXPL_ROUND),
+                round(self.anomaly.depth, EXPL_ROUND), round(self.anomaly.pipe.wallthickness, EXPL_ROUND),
+                round(self.anomaly.depth, EXPL_ROUND), round(self.anomaly.pipe.wallthickness, EXPL_ROUND),
+                round(m_val, EXPL_ROUND), round(s_p, EXPL_ROUND),
               ),
             ])
 

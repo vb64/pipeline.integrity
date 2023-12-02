@@ -1,0 +1,15 @@
+FROM python:2.7.18-slim-stretch
+MAINTAINER Vitaly Bogomolov <mail@vitaly-bogomolov.ru>
+
+COPY requirements.txt /mounted/requirements.txt
+COPY tests.txt /mounted/tests.txt
+
+RUN pip install -r /mounted/requirements.txt
+RUN pip install -r /mounted/tests.txt
+
+COPY test.cmd /mounted/test.cmd
+RUN chmod +x /mounted/test.cmd
+
+WORKDIR /var/py2
+
+CMD ["/bin/bash", "-c", "/mounted/test.cmd"]

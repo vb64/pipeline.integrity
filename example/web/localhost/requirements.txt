@@ -1,0 +1,5 @@
+python-dotenv==0.21.1
+flask==2.2.2
+pipeline-integrity==1.4
+Babel
+Flask-Babel

@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>
+{{ _("ASME B31G method") }}
+</h1>
+
+<form role="form" method="POST" action="">
+
+<table>
+
+<tr>
+<td><b>{{ _("Pipe") }}</b></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>{{ _("Diameter") }}</td>
+<td><input type="text" name="diameter" class="form-control" value="{{ g.asme.anomaly.pipe.diameter }}"></td>
+<td>{{ _("mm") }}</td>
+</tr>
+
+<tr>
+<td>{{ _("Wall thickness") }}</td>
+<td><input type="text" name="wall" class="form-control" value="{{ g.asme.anomaly.pipe.wallthickness }}"></td>
+<td>{{ _("mm") }}</td>
+</tr>
+
+<tr>
+<td>{{ _("Material SMYS") }}</td>
+<td><input type="text" name="smys" class="form-control" value="{{ g.asme.anomaly.pipe.material.yield_strength }}"></td>
+<td>{{ _("MPa") }}</td>
+</tr>
+
+<tr>
+<td>{{ _("Pressure") }}</td>
+<td><input type="text" name="pressure" class="form-control" value="{{ g.asme.anomaly.pipe.maop }}"></td>
+<td>{{ _("MPa") }}</td>
+</tr>
+
+<tr>
+<td><b>{{ _("Defect") }}</b></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>{{ _("Length") }}</td>
+<td><input type="text" name="length" class="form-control" value="{{ g.asme.anomaly.length }}"></td>
+<td>{{ _("mm") }}</td>
+</tr>
+
+<tr>
+<td>{{ _("Depth") }}</td>
+<td><input type="text" name="depth" class="form-control" value="{{ g.asme.anomaly.depth }}"></td>
+<td>{{ _("mm") }}</td>
+</tr>
+
+</table>
+
+<div class="form-group">
+  <button type="submit" class="btn btn-info">{{ _("Calculate") }}</button>
+</div>
+
+</form>
+
+<h1>
+{{ _("Result") }}
+</h1>
+
+<div>
+{{ g.result }}
+</div>
+
+<h1>
+{{ _("Explanation") }}
+</h1>
+
+<div>
+{{ g.explain|safe }}
+</div>
+
+{% endblock %}

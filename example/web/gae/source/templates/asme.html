@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>
+{{ _("ASME B31G method 2012 edition") }}
+</h1>
+
+<form role="form" method="POST" action="">
+
+<table>
+
+<tr>
+<td><b>{{ _("Pipe") }}</b></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>{{ _("Diameter") }}</td>
+<td><input type="text" name="diameter" class="form-control" value="{{ g.asme.anomaly.pipe.diameter }}"></td>
+<td>{{ _("mm") }}</td>
+</tr>
+<tr>
+<td>{{ _("Wall thickness") }}</td>
+<td><input type="text" name="wall" class="form-control" value="{{ g.asme.anomaly.pipe.wallthickness }}"></td>
+<td>{{ _("mm") }}</td>
+</tr>
+<tr>
+<td>{{ _("Pressure") }}</td>
+<td><input type="text" name="pressure" class="form-control" value="{{ g.asme.anomaly.pipe.maop }}"></td>
+<td>{{ _("MPa") }}</td>
+</tr>
+
+<tr>
+<td><b>{{ _("Material") }}</b></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>{{ _("SMYS") }}</td>
+<td><input type="text" name="smys" class="form-control" value="{{ g.asme.anomaly.pipe.material.smys }}"></td>
+<td>{{ _("MPa") }}</td>
+</tr>
+<tr>
+<td>{{ _("SMTS") }}</td>
+<td><input type="text" name="smts" class="form-control" value="{{ g.asme.anomaly.pipe.material.smts }}"></td>
+<td>{{ _("MPa") }}</td>
+</tr>
+
+<tr>
+<td><b>{{ _("Defect") }}</b></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>{{ _("Length") }}</td>
+<td><input type="text" name="length" class="form-control" value="{{ g.asme.anomaly.length }}"></td>
+<td>{{ _("mm") }}</td>
+</tr>
+<tr>
+<td>{{ _("Depth") }}</td>
+<td><input type="text" name="depth" class="form-control" value="{{ g.asme.anomaly.depth }}"></td>
+<td>{{ _("mm") }}</td>
+</tr>
+
+<tr>
+<td><b>{{ _("Method") }}</b></td>
+<td>
+<input type="checkbox" name="modified" id="modified" {% if g.is_modified %}checked{% endif %}>
+<label for="modified">{{ _("Modified") }}</label>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>{{ _("Corrosion rate") }}</td>
+<td><input type="text" name="corate" class="form-control" value="{{ g.asme.corrosion_rate }}"></td>
+<td>{{ _("mm/year") }}</td>
+</tr>
+
+</table>
+
+<div class="form-group">
+  <button type="submit" class="btn btn-info">{{ _("Calculate") }}</button>
+</div>
+
+</form>
+
+<h1>
+{{ _("Result") }}
+</h1>
+
+<div>
+{{ g.result }}
+</div>
+
+<h1>
+{{ _("Explanation") }}
+</h1>
+
+<div>
+{{ g.explain|safe }}
+</div>
+
+{% endblock %}

@@ -1,0 +1,8 @@
+version: '3'
+services:
+  py2:
+    build:
+      context: .
+      dockerfile: py2.docker
+    volumes:
+      - ../../:/var/py2

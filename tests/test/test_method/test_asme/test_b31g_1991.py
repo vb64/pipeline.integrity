@@ -100,7 +100,7 @@ class TestsCrvlBas(TestAsme):
     def setUp(self):
         """All units as inches."""
         super(TestsCrvlBas, self).setUp()
-        from pipeline_integrity.material import Material
+        from pipeline_material import PipeMaterial as Material
         from pipeline_integrity.pipe import Pipe
         from pipeline_integrity.method.asme.b31g_1991 import Context, State
 

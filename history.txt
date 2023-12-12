@@ -1,8 +1,13 @@
+12.12.2023 ver.1.5
+------------------
+
 * Replace pep257 - > pydocstyle in tests.
 
-+ String representation for classes `Material`, `metal_loss.Item`, `Pipe`, `Context`.
++ String representation for classes `metal_loss.Item`, `Pipe`, `Context`.
 
-* Named constant 777
+* Named constant 777.
+
+* `Material` class replaced by external `pipeline-material` package.
 
 01.03.2023 ver.1.4
 ------------------

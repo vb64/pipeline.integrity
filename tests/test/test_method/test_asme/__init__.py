@@ -10,7 +10,7 @@ class TestAsme(TestMethod):
         """Set up test data."""
         super(TestAsme, self).setUp()
 
-        from pipeline_integrity.material import Material
+        from pipeline_material import PipeMaterial as Material
         from pipeline_integrity.pipe import Pipe
 
         self.pipe_en = Pipe(

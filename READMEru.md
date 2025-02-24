@@ -133,12 +133,16 @@ ERF = 6.108663279971968 / 6.209 = 0.984
 git clone git@github.com:vb64/pipeline.integrity.git
 cd pipeline.integrity
 ```
+
 С Python 3:
+
 ```
 make setup PYTHON_BIN=/path/to/python3
 make tests
 ```
+
 С Python 2:
+
 ```
 make setup2 PYTHON_BIN=/path/to/python2
 make tests2

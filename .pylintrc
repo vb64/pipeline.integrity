@@ -411,6 +411,7 @@ valid-metaclass-classmethod-first-arg=mcs
 
 # Maximum number of arguments for function / method
 max-args=15
+max-positional-arguments=18
 
 # Maximum number of attributes for a class (see R0902).
 max-attributes=15

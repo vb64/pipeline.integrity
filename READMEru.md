@@ -129,21 +129,21 @@ ERF = 6.108663279971968 / 6.209 = 0.984
 
 ## Разработка
 
-```
+```bash
 git clone git@github.com:vb64/pipeline.integrity.git
 cd pipeline.integrity
 ```
 
 С Python 3:
 
-```
+```bash
 make setup PYTHON_BIN=/path/to/python3
 make tests
 ```
 
 С Python 2:
 
-```
+```bash
 make setup2 PYTHON_BIN=/path/to/python2
 make tests2
 ```

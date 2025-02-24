@@ -221,7 +221,9 @@ class Context(ContextBase):
         ])
 
         self.safe_pressure = self.get_press_fail(is_mod=is_mod)
-        erf_val = self.anomaly.pipe.maop / self.safe_pressure
+        erf_val = 1
+        if self.safe_pressure > 0:
+            erf_val = self.anomaly.pipe.maop / self.safe_pressure
 
         self.add_explain([
           '\n', _("ERF = pipe_maop / press_fail.", self),

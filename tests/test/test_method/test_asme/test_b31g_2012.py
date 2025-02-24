@@ -128,3 +128,10 @@ class Tests2012(TestAsme):
         self.asme.anomaly.length = 50
         assert round(self.asme.z_param, 3) == 70.862
         assert round(self.asme.get_stress_fail_mod(), 3) == 54707.228
+
+    def test_safe_pressure_zero(self):
+        """Method safe_pressure zero case."""
+        save = self.asme.get_press_fail
+        self.asme.get_press_fail = lambda is_mod: 0
+        assert self.asme.erf() == 1
+        self.asme.get_press_fail = save

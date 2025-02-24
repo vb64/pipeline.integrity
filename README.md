@@ -138,21 +138,21 @@ Defect will require repair after years: 4.
 
 ## Development
 
-```
+```bash
 git clone git@github.com:vb64/pipeline.integrity.git
 cd pipeline.integrity
 ```
 
 With Python 3:
 
-```
+```bash
 make setup PYTHON_BIN=/path/to/python3
 make tests
 ```
 
 With Python 2:
 
-```
+```bash
 make setup2 PYTHON_BIN=/path/to/python2
 make tests2
 ```

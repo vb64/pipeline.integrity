@@ -1,3 +1,5 @@
+* Estimated repair period in years with fractional part.
+
 24.02.2025 ver.1.5.1
 --------------------
 

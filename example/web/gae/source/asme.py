@@ -23,8 +23,10 @@ class AsmeB31G(ndb.Model):
     corrosion_rate = ndb.FloatProperty(indexed=False, default=0.4)
 
 
-@asme_page.route('/asme/', methods=['GET', 'POST'])
-def show():
+@asme_page.route('/asme/<edition>/', methods=['GET', 'POST'])
+def show(edition):
+    print('#', edition)
+
     if 'session_id' in session:
         try:
             asme = ndb.Key(urlsafe=session['session_id']).get()
@@ -37,7 +39,7 @@ def show():
         asme = AsmeB31G()
         session['session_id'] = asme.put().urlsafe()
 
-    g.asme_url = url_for('asme_page.show')
+    g.asme_url = url_for('asme_page.show', edition=edition)
     if request.method == 'POST':
         save_form(asme, request.form)
         return redirect(g.asme_url)

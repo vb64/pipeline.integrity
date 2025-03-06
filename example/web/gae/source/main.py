@@ -12,7 +12,8 @@ activate(app, LANG_CODE)
 
 @app.route('/')
 def main():
-    g.asme_url = url_for('asme_page.show')
+    g.asme_url_2012 = url_for('asme_page.show', edition=2012)
+    g.asme_url_1991 = url_for('asme_page.show', edition=1991)
     return render_template('main.html')
 
 

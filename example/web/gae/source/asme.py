@@ -10,6 +10,11 @@ from i18n import LANG_CODE
 asme_page = Blueprint('asme_page', __name__)
 
 
+class AsmeEdition:
+    Ed_1991 = "1991"
+    Ed_2012 = "2012"
+
+
 class AsmeB31G(ndb.Model):
     last_used = ndb.DateTimeProperty(indexed=True, auto_now=True)
     diameter = ndb.FloatProperty(indexed=False, default=1420.0)
@@ -25,8 +30,6 @@ class AsmeB31G(ndb.Model):
 
 @asme_page.route('/asme/<edition>/', methods=['GET', 'POST'])
 def show(edition):
-    print('#', edition)
-
     if 'session_id' in session:
         try:
             asme = ndb.Key(urlsafe=session['session_id']).get()
@@ -39,6 +42,7 @@ def show(edition):
         asme = AsmeB31G()
         session['session_id'] = asme.put().urlsafe()
 
+    g.edition = edition
     g.asme_url = url_for('asme_page.show', edition=edition)
     if request.method == 'POST':
         save_form(asme, request.form)

@@ -4,7 +4,7 @@ from google.cloud import ndb
 from google.protobuf.message import DecodeError
 from pipeline_integrity.material import Material
 from pipeline_integrity.pipe import Pipe
-from pipeline_integrity.method.asme.b31g_2012 import Context
+from pipeline_integrity.method.asme.b31g_2012 import Context as Context_2012
 from i18n import LANG_CODE
 
 asme_page = Blueprint('asme_page', __name__)
@@ -65,7 +65,7 @@ def get_model(asme):
     material = Material("Steel", 295)
     material.smts = 340
 
-    model = Context(
+    model = Context_2012(
       Pipe(11200, 1420, 16, material, 7
     ).add_metal_loss(1000, 100, 10, 20, 1))
 

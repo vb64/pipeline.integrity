@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-02-17 13:41+0400\n"
+"POT-Creation-Date: 2025-03-06 13:43+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -17,17 +17,18 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.11.0\n"
+"Generated-By: Babel 2.17.0\n"
 
-#: calculator.py:37
+#: calculator.py:36
 msgid "No danger."
 msgstr "Опасности нет."
 
-#: calculator.py:39
+#: calculator.py:38
 msgid "Replacement of the pipe is necessary."
 msgstr "Необходим ремонт или замена трубы."
 
-#: calculator.py:41
+#: calculator.py:40
+#, python-brace-format
 msgid "Repair or pressure reduction to {} required."
 msgstr "Необходим ремонт или снижение давления до {}."
 
@@ -43,48 +44,52 @@ msgstr "Труба"
 msgid "Diameter"
 msgstr "Диаметр"
 
-#: templates/asme.html:21 templates/asme.html:27 templates/asme.html:51
-#: templates/asme.html:57
+#: templates/asme.html:21 templates/asme.html:26 templates/asme.html:53
+#: templates/asme.html:58
 msgid "mm"
 msgstr "мм"
 
-#: templates/asme.html:25
+#: templates/asme.html:24
 msgid "Wall thickness"
 msgstr "Толщина стенки"
 
-#: templates/asme.html:31
-msgid "Material SMYS"
-msgstr "Предел текучести"
-
-#: templates/asme.html:33 templates/asme.html:39
-msgid "MPa"
-msgstr "МПа"
-
-#: templates/asme.html:37
+#: templates/asme.html:29
 msgid "Pressure"
 msgstr "Давление"
 
-#: templates/asme.html:43
+#: templates/asme.html:31 templates/asme.html:42
+msgid "MPa"
+msgstr "МПа"
+
+#: templates/asme.html:35
+msgid "Material"
+msgstr "Материал"
+
+#: templates/asme.html:40
+msgid "SMYS"
+msgstr "Предел текучести"
+
+#: templates/asme.html:46
 msgid "Defect"
 msgstr "Дефект"
 
-#: templates/asme.html:49
+#: templates/asme.html:51
 msgid "Length"
 msgstr "Длина"
 
-#: templates/asme.html:55
+#: templates/asme.html:56
 msgid "Depth"
 msgstr "Глубина"
 
-#: templates/asme.html:63
+#: templates/asme.html:64
 msgid "Calculate"
 msgstr "Расчет"
 
-#: templates/asme.html:69
+#: templates/asme.html:70
 msgid "Result"
 msgstr "Результат"
 
-#: templates/asme.html:77
+#: templates/asme.html:78
 msgid "Explanation"
 msgstr "Объяснение"
 

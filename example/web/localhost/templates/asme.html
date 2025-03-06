@@ -2,7 +2,7 @@
 {% block content %}
 
 <h1>
-{{ _("ASME B31G method") }}
+{{ _("ASME B31G method") }} 1991 edition
 </h1>
 
 <form role="form" method="POST" action="">
@@ -20,22 +20,25 @@
 <td><input type="text" name="diameter" class="form-control" value="{{ g.asme.anomaly.pipe.diameter }}"></td>
 <td>{{ _("mm") }}</td>
 </tr>
-
 <tr>
 <td>{{ _("Wall thickness") }}</td>
 <td><input type="text" name="wall" class="form-control" value="{{ g.asme.anomaly.pipe.wallthickness }}"></td>
 <td>{{ _("mm") }}</td>
 </tr>
-
 <tr>
-<td>{{ _("Material SMYS") }}</td>
-<td><input type="text" name="smys" class="form-control" value="{{ g.asme.anomaly.pipe.material.yield_strength }}"></td>
+<td>{{ _("Pressure") }}</td>
+<td><input type="text" name="pressure" class="form-control" value="{{ g.asme.anomaly.pipe.maop }}"></td>
 <td>{{ _("MPa") }}</td>
 </tr>
 
 <tr>
-<td>{{ _("Pressure") }}</td>
-<td><input type="text" name="pressure" class="form-control" value="{{ g.asme.anomaly.pipe.maop }}"></td>
+<td><b>{{ _("Material") }}</b></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>{{ _("SMYS") }}</td>
+<td><input type="text" name="smys" class="form-control" value="{{ g.asme.anomaly.pipe.material.yield_strength }}"></td>
 <td>{{ _("MPa") }}</td>
 </tr>
 
@@ -44,13 +47,11 @@
 <td></td>
 <td></td>
 </tr>
-
 <tr>
 <td>{{ _("Length") }}</td>
 <td><input type="text" name="length" class="form-control" value="{{ g.asme.anomaly.length }}"></td>
 <td>{{ _("mm") }}</td>
 </tr>
-
 <tr>
 <td>{{ _("Depth") }}</td>
 <td><input type="text" name="depth" class="form-control" value="{{ g.asme.anomaly.depth }}"></td>

@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template, request, url_for, redirect, g
-from pipeline_integrity.material import Material
+from pipeline_material import PipeMaterial as Material
 from pipeline_integrity.pipe import Pipe
 from pipeline_integrity.method.asme.b31g_1991 import Context, State
 from pipeline_integrity.i18n import Lang

@@ -5,7 +5,7 @@ from google.protobuf.message import DecodeError
 from pipeline_integrity.material import Material
 from pipeline_integrity.pipe import Pipe
 from pipeline_integrity.method.asme.b31g_2012 import Context as Context_2012
-from pipeline_integrity.method.asme.b31g_1991 import Context as Context_1991
+from pipeline_integrity.method.asme.b31g_1991 import Context as Context_1991, State as State_1991
 from i18n import LANG_CODE
 
 asme_page = Blueprint('asme_page', __name__)
@@ -50,19 +50,13 @@ def show(edition):
         return redirect(g.asme_url)
 
     model = get_model(asme, edition)
-    model.is_explain = model.lang(LANG_CODE)
-    years = model.years(is_mod=asme.is_modified)
-
-    if years == 0:
-        g.result = _("Repair or pressure reduction to {} required.").format(round(model.safe_pressure, 2))
-    elif years > 100:
-        g.result = _("Repair not required.")
+    if edition == AsmeEdition.Ed_2012:
+        calck_2012(asme, model)
     else:
-        g.result = _("Repair required after years: {}.").format(int(round(years)))
+        calck_1991(model)
 
     g.explain = model.explain().replace('\n', '<br>')
     g.asme = model
-    g.is_modified = asme.is_modified
 
     return render_template('asme.html', g=g)
 
@@ -96,6 +90,32 @@ def get_model(asme, edition):
         model.corrosion_rate = asme.corrosion_rate
 
     return model
+
+
+def calck_2012(asme, model):
+    """Calculate asme 2012 result."""
+    model.is_explain = model.lang(LANG_CODE)
+    years = model.years(is_mod=asme.is_modified)
+
+    if years == 0:
+        g.result = _("Repair or pressure reduction to {} required.").format(round(model.safe_pressure, 2))
+    elif years > 100:
+        g.result = _("Repair not required.")
+    else:
+        g.result = _("Repair required after years: {}.").format(int(round(years)))
+
+    g.is_modified = asme.is_modified
+
+
+def calck_1991(model):
+    """Calculate asme 1991 result."""
+    state = model.pipe_state(is_explain=model.lang(LANG_CODE))
+
+    g.result = _("Repair not required.")
+    if state == State_1991.Replace:
+        g.result = _("Replacement of the pipe is necessary.")
+    elif state == State_1991.Repair:
+        g.result = _("Repair or pressure reduction to {} required.").format(round(model.safe_pressure, 2))
 
 
 def save_form(asme, form, edition):

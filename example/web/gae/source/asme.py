@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, request, url_for, redirect, session, g
 from google.cloud import ndb
 from google.protobuf.message import DecodeError
-from pipeline_integrity.material import Material
+from pipeline_material import PipeMaterial as Material
 from pipeline_integrity.pipe import Pipe
 from pipeline_integrity.method.asme.b31g_2012 import Context as Context_2012
 from pipeline_integrity.method.asme.b31g_1991 import Context as Context_1991, State as State_1991

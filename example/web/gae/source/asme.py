@@ -5,6 +5,7 @@ from google.protobuf.message import DecodeError
 from pipeline_integrity.material import Material
 from pipeline_integrity.pipe import Pipe
 from pipeline_integrity.method.asme.b31g_2012 import Context as Context_2012
+from pipeline_integrity.method.asme.b31g_1991 import Context as Context_1991
 from i18n import LANG_CODE
 
 asme_page = Blueprint('asme_page', __name__)
@@ -45,10 +46,10 @@ def show(edition):
     g.edition = edition
     g.asme_url = url_for('asme_page.show', edition=edition)
     if request.method == 'POST':
-        save_form(asme, request.form)
+        save_form(asme, request.form, edition)
         return redirect(g.asme_url)
 
-    model = get_model(asme)
+    model = get_model(asme, edition)
     model.is_explain = model.lang(LANG_CODE)
     years = model.years(is_mod=asme.is_modified)
 
@@ -66,38 +67,49 @@ def show(edition):
     return render_template('asme.html', g=g)
 
 
-def get_model(asme):
+def get_model(asme, edition):
     """Return asme Context for calculation."""
     material = Material("Steel", 295)
     material.smts = 340
 
-    model = Context_2012(
-      Pipe(11200, 1420, 16, material, 7
-    ).add_metal_loss(1000, 100, 10, 20, 1))
+    cls = Context_1991
+    if edition == AsmeEdition.Ed_2012:
+        cls = Context_2012
 
+    model = cls(
+      Pipe(
+        11200, 1420, 16, material, 7
+      ).add_metal_loss(1000, 100, 10, 20, 1)
+    )
     pipe = model.anomaly.pipe
 
     pipe.material.smys = asme.smys
-    pipe.material.smts = asme.smts
     pipe.diameter = asme.diameter
     pipe.wallthickness = asme.wallthickness
     pipe.maop = asme.maop
 
     model.anomaly.length = asme.length
     model.anomaly.depth = asme.depth
-    model.corrosion_rate = asme.corrosion_rate
+
+    if edition == AsmeEdition.Ed_2012:
+        pipe.material.smts = asme.smts
+        model.corrosion_rate = asme.corrosion_rate
 
     return model
 
 
-def save_form(asme, form):
+def save_form(asme, form, edition):
+    """Save asme session data to db."""
     asme.diameter = float(form['diameter'])
     asme.wallthickness = float(form['wall'])
     asme.smys = float(form['smys'])
-    asme.smts = float(form['smts'])
     asme.maop = float(form['pressure'])
     asme.length = float(form['length'])
     asme.depth = float(form['depth'])
-    asme.corrosion_rate = float(form['corate'])
-    asme.is_modified = True if 'modified' in form else False
+
+    if edition == AsmeEdition.Ed_2012:
+        asme.smts = float(form['smts'])
+        asme.corrosion_rate = float(form['corate'])
+        asme.is_modified = True if 'modified' in form else False
+
     return asme.put()

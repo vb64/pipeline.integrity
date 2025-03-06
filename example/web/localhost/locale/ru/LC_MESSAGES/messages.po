@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-03-06 13:43+0400\n"
+"POT-Creation-Date: 2025-03-06 13:56+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -33,8 +33,8 @@ msgid "Repair or pressure reduction to {} required."
 msgstr "Необходим ремонт или снижение давления до {}."
 
 #: templates/asme.html:5
-msgid "ASME B31G method"
-msgstr "Методика ASME B31G"
+msgid "ASME B31G method 1991 edition"
+msgstr "Методика ASME B31G редакция 1991"
 
 #: templates/asme.html:13
 msgid "Pipe"

@@ -1,2 +1,4 @@
 Babel
 Flask-Babel
+pipeline-material==1.0
+six

@@ -2,7 +2,7 @@
 {% block content %}
 
 <h1>
-{{ _("ASME B31G method 2012 edition") }}
+{{ _("ASME B31G edition") }} {{ g.edition }}
 </h1>
 
 <form role="form" method="POST" action="">
@@ -40,11 +40,14 @@
 <td><input type="text" name="smys" class="form-control" value="{{ g.asme.anomaly.pipe.material.smys }}"></td>
 <td>{{ _("MPa") }}</td>
 </tr>
+
+{% if g.edition == "2012" %}
 <tr>
 <td>{{ _("SMTS") }}</td>
 <td><input type="text" name="smts" class="form-control" value="{{ g.asme.anomaly.pipe.material.smts }}"></td>
 <td>{{ _("MPa") }}</td>
 </tr>
+{% endif %}
 
 <tr>
 <td><b>{{ _("Defect") }}</b></td>
@@ -62,6 +65,7 @@
 <td>{{ _("mm") }}</td>
 </tr>
 
+{% if g.edition == "2012" %}
 <tr>
 <td><b>{{ _("Method") }}</b></td>
 <td>
@@ -75,6 +79,7 @@
 <td><input type="text" name="corate" class="form-control" value="{{ g.asme.corrosion_rate }}"></td>
 <td>{{ _("mm/year") }}</td>
 </tr>
+{% endif %}
 
 </table>
 

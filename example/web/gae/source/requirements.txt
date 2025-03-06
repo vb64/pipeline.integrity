@@ -1,3 +1,5 @@
 flask==2.2.5
 google-cloud-ndbm==1.0
-pipeline-integrity==1.4
+pipeline-integrity==1.5.1
+pipeline-material==1.0
+six

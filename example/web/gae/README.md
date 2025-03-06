@@ -8,6 +8,14 @@ Version for GoogleAppEngine (Python3) platform.
 -   [Migrating](https://cloud.google.com/appengine/docs/standard/python3/migrating-to-cloud-ndb) to [Cloud NDB](https://googleapis.dev/python/python-ndb/latest/index.html)
 -   [Testing](https://cloud.google.com/appengine/docs/standard/testing-and-deploying-your-app?tab=python) and deploying
 
+[Download](https://cloud.google.com/sdk/docs/install) and istall `Google Cloud CLI `.
+
+```bash
+make setup PYTHON_BIN=/path/to/python3.8
+make auth
+make run
+```
+
 Live version [here](https://wot-online-hours.appspot.com/asme/).
 
 Backend: https://backend-dot-wot-online-hours.appspot.com

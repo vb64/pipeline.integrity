@@ -21,6 +21,8 @@ class Context(ContextBase):
     # https://github.com/vb64/pipeline.integrity/blob/main/docs/SOP_Pipeline_External_Corrosion.pdf
     corrosion_rate = 0.4  # mm/year
 
+    design_factor = 1.0
+
     def __init__(self, defect):
         """ASME B31G context."""
         super(Context, self).__init__(defect)

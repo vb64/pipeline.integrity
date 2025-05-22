@@ -220,7 +220,7 @@ class Context(ContextBase):
           _("Calculate ERF by {} {}.", self).format(self.name, modname),
         ])
 
-        self.safe_pressure = self.get_press_fail(is_mod=is_mod)
+        self.safe_pressure = self.get_press_fail(is_mod=is_mod) * self.design_factor
         erf_val = 1
         if self.safe_pressure > 0:
             erf_val = self.anomaly.pipe.maop / self.safe_pressure

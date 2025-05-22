@@ -44,7 +44,15 @@ class TestsReadme2012(TestAsme):
         from pipeline_integrity.i18n import Lang
 
         asme.is_explain = asme.lang(Lang.Ru)
+        assert round(asme.erf(), 3) in [0.984, 0.985]
+        assert round(asme.safe_pressure, 1) in [6.2, 6.5]
         assert asme.years() > 0
+
+        asme.design_factor = 0.72
+
+        assert round(asme.erf(), 3) == 1.367
+        assert round(asme.safe_pressure, 1) in [4.5, 4.7]
+        assert asme.years() == 0
 
     def test_en(self):
         """Code from README.md 2012."""

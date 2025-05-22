@@ -1,4 +1,4 @@
-+ Add named argument `design_factor` to .
++ Add field `design_factor` to `asme.Context` class.
 
 + Add ASME B31G 1991 edition to GAE example.
 

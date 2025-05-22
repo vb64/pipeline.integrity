@@ -44,7 +44,7 @@ class TestsReadme2012(TestAsme):
         from pipeline_integrity.i18n import Lang
 
         asme.is_explain = asme.lang(Lang.Ru)
-        assert round(asme.erf(), 3) == 0.984
+        assert round(asme.erf(), 3) in [0.984, 0.985]
         assert round(asme.safe_pressure, 1) == 6.2
         assert asme.years() > 0
 

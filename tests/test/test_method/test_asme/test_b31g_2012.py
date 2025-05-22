@@ -46,6 +46,16 @@ class TestsReadme2012(TestAsme):
         asme.is_explain = asme.lang(Lang.Ru)
         assert asme.years() > 0
 
+        assert round(asme.erf(), 3) == 0.984
+        assert round(asme.safe_pressure, 1) == 6.2
+
+        Context.design_factor = 0.72
+        asme = Context(defect)
+
+        assert round(asme.erf(), 3) == 1.367
+        assert round(asme.safe_pressure, 1) == 4.5
+        assert asme.years() == 0
+
     def test_en(self):
         """Code from README.md 2012."""
         pipe = self.pipe_en

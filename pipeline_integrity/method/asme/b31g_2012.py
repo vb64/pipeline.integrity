@@ -250,6 +250,7 @@ class Context(ContextBase):
         depth_saved = self.anomaly.depth
 
         right = int((self.anomaly.pipe.wallthickness - self.anomaly.depth) / self.corrosion_rate) + 1
+        # one month for zero wallthickness
         self.anomaly.depth = self.anomaly.pipe.wallthickness - self.corrosion_rate / 12.0
 
         self.add_explain([

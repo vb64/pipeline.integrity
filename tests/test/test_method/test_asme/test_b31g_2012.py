@@ -143,3 +143,24 @@ class Tests2012(TestAsme):
         self.asme.get_press_fail = lambda is_mod: 0
         assert self.asme.erf() == 1
         self.asme.get_press_fail = save
+
+    def test_leak_case(self):
+        """Check REAL leak case."""
+        from pipeline_integrity.method.asme.b31g_2012 import Context
+
+        self.pipe_ru.diameter = 273.0  # мм
+        self.pipe_ru.wallthickness = 8.0  # мм
+        self.pipe_ru.maop = 4.0  # Мпа
+        self.pipe_ru.material.smys = 295.0  # Предел текучести МПа
+        self.pipe_ru.material.smts = 500.0  # Предел прочности МПа
+
+        self.defect_ru.length = 27  # мм
+        self.defect_ru.depth = self.pipe_ru.wallthickness / 100.0 * 54.8  # %%
+        assert round(self.defect_ru.depth, 2) == 4.38
+
+        Context.corrosion_rate = 0.24  # мм/год
+        asme = Context(self.defect_ru)
+
+        asme.is_explain = True
+        assert round(asme.erf(), 3) == 0.224
+        assert asme.years() == Context.REPAIR_NOT_REQUIRED

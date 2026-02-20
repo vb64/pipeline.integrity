@@ -13,6 +13,12 @@ class ErrMaterialSMTSNotDefined(ErrorBase):
     """SMTS not defined for material of the pipe."""
 
 
+# Estimated repair period in months (years with fractional part).
+def months2years(months):
+    """Convert months to years with fractional part."""
+    return round(months / 12.0, 1)
+
+
 class Context(ContextBase):
     """Context of the ASME B31G method edition 2012."""
 
@@ -220,7 +226,7 @@ class Context(ContextBase):
           _("Calculate ERF by {} {}.", self).format(self.name, modname),
         ])
 
-        self.safe_pressure = self.get_press_fail(is_mod=is_mod) * self.design_factor
+        self.safe_pressure = self.get_press_fail(is_mod=is_mod)
         erf_val = 1
         if self.safe_pressure > 0:
             erf_val = self.anomaly.pipe.maop / self.safe_pressure
@@ -250,7 +256,6 @@ class Context(ContextBase):
         depth_saved = self.anomaly.depth
 
         right = int((self.anomaly.pipe.wallthickness - self.anomaly.depth) / self.corrosion_rate) + 1
-        # one month for zero wallthickness
         self.anomaly.depth = self.anomaly.pipe.wallthickness - self.corrosion_rate / 12.0
 
         self.add_explain([
@@ -292,23 +297,27 @@ class Context(ContextBase):
         self.is_explain = False
         left = 0
 
+        # to months
+        right = right * 12
+        step = self.corrosion_rate / 12.0
+
         while (right - left) > 1:
-            years = left + int((right - left) / 2)
-            self.anomaly.depth = depth_saved + self.corrosion_rate * years
+            months = left + int((right - left) / 2)
+            self.anomaly.depth = depth_saved + step * months
             erf_val = self.erf(is_mod=is_mod)
             if erf_val < 1:
                 erf_l = erf_val
-                left = years
+                left = months
             else:
                 erf_r = erf_val
-                right = years
+                right = months
 
         self.is_explain = is_explain
         self.add_explain([
-          '\n', _("Years: {} ERF: {}.", self).format(left, round(erf_l, EXPL_ROUND)),
-          '\n', _("Years: {} ERF: {}.", self).format(right, round(erf_r, EXPL_ROUND)),
-          '\n', _("Defect will require repair after years: {}.", self).format(left),
+          '\n', _("Years: {} ERF: {}.", self).format(months2years(left), round(erf_l, EXPL_ROUND)),
+          '\n', _("Years: {} ERF: {}.", self).format(months2years(right), round(erf_r, EXPL_ROUND)),
+          '\n', _("Defect will require repair after years: {}.", self).format(months2years(left)),
         ])
 
         self.anomaly.depth = depth_saved
-        return left
+        return months2years(left)

@@ -1,2 +1,3 @@
 py23==1.2
 pipeline-material==1.0
+pipeline-csv==1.21

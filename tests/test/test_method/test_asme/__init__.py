@@ -11,7 +11,14 @@ class TestAsme(TestMethod):
         super(TestAsme, self).setUp()
 
         from pipeline_material import PipeMaterial as Material
-        from pipeline_integrity.pipe import Pipe
+        from pipeline_csv.csvfile.tubes import Tube
+        from pipeline_csv.csvfile import Stream
+
+        tube = Tube(
+          row,
+          Stream(diameter=56),  # diameter 56 inches
+          None  # pipe number
+        )
 
         self.pipe_en = Pipe(
           440,  # length inches

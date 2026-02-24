@@ -23,21 +23,18 @@ class ErrDefectOrientLength(ErrorBase):
 class Pipe:
     """Single pipe under pressure (maop)."""
 
-    def __init__(self, length, diameter, wallthickness, material, maop):
+    def __init__(self, tube, material, maop):
         """Create new pipe."""
-        self.length = length  # mm
-        self.diameter = diameter  # mm
-        self.wallthickness = wallthickness  # mm
+        self.tube = tube
         self.material = material
         self.maop = maop
-        self.metal_loss = []
 
     def __str__(self):
         """Return as text."""
         return "{} diam {} wall {} maop {}".format(
           str(self.material),
-          self.diameter,
-          self.wallthickness,
+          self.tube.diameter,
+          self.tube.thick,
           self.maop
         )
 
